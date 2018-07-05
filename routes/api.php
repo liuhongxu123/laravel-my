@@ -46,3 +46,15 @@ $api->version('v1', function ($api)
         $api->get('test','App\Http\Controllers\TestController@info');
     });
 });
+
+/**
+ * 测试语言包
+ */
+$api->version('v1', function ($api)
+{
+
+    $api->get('lang/en', 'App\Http\Controllers\TestController@lang_en');
+    $api->get('lang/zh-CN', 'App\Http\Controllers\TestController@lang_zh');
+
+
+});
