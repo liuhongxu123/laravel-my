@@ -9,7 +9,7 @@
 ### 克隆代码
 
 ``` bash
-git clone git@git.coding.net:xuchunyun/openfood.git
+git clone git@git.coding.net:jiyisanluoyidi/openfood-API.git
 ```
 
 ### 安装依赖
