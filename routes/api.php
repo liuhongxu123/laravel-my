@@ -57,23 +57,42 @@ $api->version('v1', function ($api)
 
 });
 
-
-/**
- * app 用户端接口
- */
-
+// app 用户端接口(非登录)
 $api->version('v1', [
     'middleware' => ['JwtCustomer'],
     'namespace' => 'App\Http\Controllers\Customer\V1'
 ], function ($api)
 {
     // 登录
-    $api->post('customer/login', 'LoginController@login');
+    $api->post('customer/login', 'CustomerController@login');
     // 注册
-    $api->post('customer/register', 'LoginController@register');
+    $api->post('customer/register', 'CustomerController@register');
     // 退出
-    $api->post('customer/logout', 'LoginController@logout');
+    $api->post('customer/logout', 'CustomerController@logout');
     // 找回密码
-    $api->post('customer/password/update', 'LoginController@updatePassword');
+    $api->post('customer/password/reset', 'CustomerController@resetPassword');
+});
+
+// app 用户端接口(登录)
+$api->version('v1', [
+    'middleware' => ['JwtCustomer', 'jwt.auth'],
+    'namespace' => 'App\Http\Controllers\Customer\V1'
+], function ($api)
+{
+    // 修改密码
+    $api->post('customer/password/update', 'CustomerController@updatePassword')->name('updatePassword');
+    // 修改手机号
+    $api->post('customer/phone/update', 'CustomerController@updatePhone')->name('updatePhone');
+    // 修改头像
+    $api->post('customer/head/update', 'CustomerController@updateHead')->name('updateHead');
+    // 修改用户名
+    $api->post('customer/name/update', 'CustomerController@updateName')->name('updateName');
+    // 账号绑定
+    $api->post('customer/bind/google', 'CustomerController@bindGoogle')->name('bindGoogle');
+    $api->post('customer/bind/twitter', 'CustomerController@bindTwitter')->name('bindTwitter');
+    $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook')->name('bindFaceBook');
+    // 获取用户信息
+    $api->get('customer/info', 'CustomerController@customerInfo')->name('binds');
+
 
 });
