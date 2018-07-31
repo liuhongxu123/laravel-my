@@ -116,8 +116,33 @@ Header部分只有一行，包括三个字段：type（必需）、scope（可�
 
 暂时省略
 
+### 目录规范
+
+### 控制器目录规范
+
+- Controllers
+    - Customer(模块名)
+        - V1(版本号)
+            - CustomerController
+            - AddressController
+        - V2(版本号)
 
 
+### 上传文件目录
+
+- 创建软连接
+
+```bash
+php artisan storage:link
+```
+
+- storage
+    - customer(模块)
+        - user_head(用户头像)
+            - @original(原图)
+            - @34\*34(裁剪之后的)
+                - 20180701(年月日)
+                    - esdijmsenkdesgd.img
 
 
 
