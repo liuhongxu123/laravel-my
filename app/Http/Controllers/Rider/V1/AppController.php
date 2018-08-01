@@ -20,7 +20,7 @@ class AppController extends Controller {
      * app基本信息
      * @Get("/api/rider/app/info")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function getInfo () {
         $data = [
@@ -34,7 +34,7 @@ class AppController extends Controller {
      * app更新
      * @Get("/api/rider/app/update")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function update () {
         return $this->returnJson(0, '已是最新版本');
@@ -44,7 +44,7 @@ class AppController extends Controller {
      * app历史版本列表
      * @Get("/api/rider/app/versions")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function versions () {
         $data = [
@@ -58,7 +58,7 @@ class AppController extends Controller {
      * app版本详情
      * @Get("/api/rider/app/version/$id")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function version ($id) {
         $data = [
@@ -69,8 +69,9 @@ class AppController extends Controller {
 
     /**
      * 获取隐私政策信息
-     * @Get("/api/rider/app/privacy_policy")
+     * @Get("/api/rider/app/privacypolicy")
      * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function getPrivacyPolicy () {
         $data = [
@@ -81,9 +82,9 @@ class AppController extends Controller {
 
     /**
      * 获取骑手协议
-     * @Get("/api/rider/app/rider_protocol")
+     * @Get("/api/rider/app/riderprotocol")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function getRiderProtocol () {
         $data = [
@@ -96,12 +97,27 @@ class AppController extends Controller {
      * 获取热线
      * @Get("/api/rider/app/hotline")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function getHotline () {
         $data = [
             ['name' => '服务热线', 'tel' => '2135131667'],
             ['name' => '客服热线', 'tel' => '1234567882']
+        ];
+        return $this->returnJson(0, 'success', $data);
+    }
+
+    /**
+     * 获取短信模板
+     * @Get("/api/rider/app/smstmpl")
+     * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function getSmsTmpl (){
+        $data = [
+            ['content' => '默认/自定义'],
+            ['content' => '货品马上送到(10分钟内)'],
+            ['content' => '由于天气原因要稍晚送到'],
         ];
         return $this->returnJson(0, 'success', $data);
     }
