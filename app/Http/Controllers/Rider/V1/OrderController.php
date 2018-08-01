@@ -10,39 +10,66 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rider\AbnormalRequest;
 
 /**
- * @Resource("Order")
+ * @Resource("骑手端订单API")
  */
 class OrderController extends Controller {
 
     /**
-     * 订单列表
+     * 获取订单列表
      * @Get("/api/rider/order/index")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": {"type": "订单类型--type = 1 待取货 type =2 待送达"}})
      */
     public function index () {
         $data = [
             'rob' => [
-                ['origin' => '广州市天河区化州糖水', 'dest' => '华景新城', 'time' => '13:30']
+                ['origin' => '广州市天河区化州糖水', 'dest' => '华景新城', 'final_time' => '13:30']
             ],
-            'take' => [
-                ['origin' => '广州市天河区化州香油鸡', 'dest' => '棠东180号', 'time' => '13:45', 'store_link' => '15622111111']
+            'untake' => [
+                [
+                    'origin' => '广州市天河区化州香油鸡',
+                    'dest' => '棠东180号',
+                    'add_time' => 1533110855,   //下单时间
+                    'current_time' => time(), //当前时间
+                    'final_time' => '13:45',
+                    'type' => 1,
+                    'price' => 2,
+                    'store_tel' => '15622111111',
+                    'store_name' => '麦当劳',
+                    'store_img' => '1.jpg',
+                    'food' => [
+                        ['name' => '西红柿炒蛋', 'count' => 2],
+                        ['name' => '薯条', 'count' => 1]
+                    ]
+                ]
             ],
-            'deliver' => [
-                ['origin' => '广州市天河区食在真湘', 'dest' => '棠东毓桂大街一巷8号','time' => '14:00'
-                    , 'store_link' => '15622111111', 'customer_link' => '13111111111']
+            'undeliver' => [
+                [
+                    'origin' => '广州市天河区食在真湘',
+                    'dest' => '棠东毓桂大街一巷8号',
+                    'final_time' => '14:00',
+                    'add_time' => 1533110855,   //下单时间
+                    'current_time' => time(), //当前时间
+                    'type' => 2,
+                    'customer_tel' => '13111111111',
+                    'store_tel' => '15622111111',
+                    'store_name' => '麦当劳',
+                    'store_img' => '1.jpg'
+                ]
             ]
         ];
         return $this->returnJson(0, 'success', $data);
     }
 
     /**
-     * 骑手已接订单；列表
-     * type = 1 待取货 type =2 待送达
+     * 骑手已接订单列表
+     *
      * @Get("/api/rider/order/took")
      * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "","data": {"type": "订单类型--type = 1 待取货 type =2 待送达"}})
      */
     public function took () {
         $data = [
@@ -55,11 +82,11 @@ class OrderController extends Controller {
     /**
      * 获取订单详情
      * type = 1 待取货 type = 2 待送达
-     * @Get("/api/rider/order/details")
+     * @Get("/api/rider/order/$id")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": {"type": "订单类型--type = 1 待取货 type =2 待送达"}})
      */
-    public function getDetails () {
+    public function getDetails ($id) {
        $data = [
            'origin' => '广州市天河区东圃镇',
            'dest' => '广州市天河区车陂地铁站',
@@ -68,7 +95,8 @@ class OrderController extends Controller {
            'time2' => '2018.03.03 11:12:00', //接单时间,
            'time3' => '2018.03.03 11:12:00', //到店时间,
            'time4' => '2018.03.03 11:12:00', //取货时间,
-           'time5' => '2018.03.03 11:12:00', //送达时间
+           'time5' => '2018.03.03 11:12:00', //送达时间,
+           'type' => 1,
            'deliver_money' => 3,
            'remark' => '您好，麻烦多备一份餐具，谢谢',
            'store_name' => '麦当劳',
@@ -92,10 +120,20 @@ class OrderController extends Controller {
     }
 
     /**
-     * 骑手到店上报
-     * @Post("/api/rider/order/reach_store")
+     * 骑手确认接单
+     * @Post("/api/rider/order/taking")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function taking () {
+        return $this->returnJson(0, '接单成功');
+    }
+
+    /**
+     * 骑手到店上报
+     * @Post("/api/rider/order/reachstore")
+     * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function reachStore () {
         return $this->returnJson(0, '上报门店成功');
@@ -103,40 +141,46 @@ class OrderController extends Controller {
 
     /**
      * 骑手确认收货
-     * @Post("/api/rider/order/confirm")
+     * @Post("/api/rider/order/takegoods")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function confirm () {
+    public function takeGoods () {
         return $this->returnJson(0, '收货成功');
     }
 
     /**
-     * 获取订单菜品
-     * @Get("/api/rider/order/foods")
+     * 骑手确认送达
+     * @Post("/api/rider/order/finish")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function getFood () {
-        $data = [
-            ['name' => '西红柿炒蛋', 'count' => 2],
-            ['name' => '薯条', 'count' => 1]
-        ];
-        return $this->returnJson(0,'success', $data);
+    public function finish () {
+        return $this->returnJson(0, '确认送达成功');
     }
 
     /**
-     * 获取短信模板
-     * @Get("/api/rider/order/sms_tmpl")
+     * 确认转交订单
+     * @Post("/api/rider/order/slip")
      * @Version({"v1"})
-     * @Request({})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function getSmsTmpl (){
-        $data = [
-            ['content' => '默认/自定义'],
-            ['content' => '货品马上送到(10分钟内)'],
-            ['content' => '由于天气原因要稍晚送到'],
-        ];
-        return $this->returnJson(0, 'success', $data);
+    public function slip () {
+        return $this->returnJson(0, '转单成功');
+    }
+
+    /**
+     * 订单异常报备
+     * @Post("/api/rider/order/abnormalpost")
+     * @Version({"v1"})
+     * @Parameters({
+     *      @Parameter("type", description="异常类型", required=true, type="integer"),
+     *      @Parameter("content", description="异常描述", required=true, type="string"),
+     *      @Parameter("phote", description="异常图片", required=true)
+     *})
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function abnormalPost (AbnormalRequest $request) {
+        return $this->returnJson(0, '订单异常上报成功');
     }
 }
