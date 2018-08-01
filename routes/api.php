@@ -120,33 +120,31 @@ $api->version('v1', [
         //更换绑定手机
         $api->post('rider/phone/reset', 'UserController@resetPhone');
         //骑手基本信息
-        $api->get('rider/basic_info', 'UserController@getBasicInfo');
+        $api->get('rider/basicinfo', 'UserController@getBasicInfo');
         //骑手本月战绩
-        $api->get('rider/month_score', 'UserController@getMonthScore');
-        //骑手订单信息
-        $api->get('rider/orders/{status}', 'UserController@orders');
+        $api->get('rider/monthscore', 'UserController@getMonthScore');
         //骑手实名认证
         $api->post('rider/certificate', 'UserController@certificate');
         //骑手实名信息
-        $api->get('rider/certificate_info', 'UserController@getCertificateInfo');
-        //骑手余额信息
-        $api->get('rider/balance', 'UserController@balance');
+        $api->get('rider/certificateinfo', 'UserController@getCertificateInfo');
+        //骑手余额基本信息
+        $api->get('rider/balance', 'UserController@getBalance');
         //骑手余额明细
-        $api->get('rider/balance_details', 'UserController@balanceDetails');
+        $api->get('rider/balance/details', 'UserController@getBalanceDetails');
         //骑手收款账户信息
-        $api->get('rider/account_info', 'UserController@accountInfo');
-        //骑手账户设置
+        $api->get('rider/account', 'UserController@getAccountInfo');
+        //骑手收款账户设置
         $api->post('rider/account/set', 'UserController@accountSet');
         //骑手评价信息
-        $api->get('rider/evaluate/{type?}', 'UserController@evaluate');
+        $api->get('rider/evaluate', 'UserController@evaluate');
 
         //************************  骑手意见相关Api  ***************************************
         //骑手意见列表
-        $api->get('rider/suggestion', 'UserController@suggestions');
+        $api->get('rider/suggestion', 'SuggestionController@getSuggestion');
         //骑手意见详情
-        $api->get('rider/suggestion/{id}', 'UserController@suggestion');
+        $api->get('rider/suggestion/{id}', 'SuggestionController@getSuggestionDetails');
         //骑手提交意见
-        $api->post('rider/suggestion/post', 'UserController@suggestionPost');
+        $api->post('rider/suggestion/post', 'SuggestionController@suggestionPost');
 
         //************************  App相关Api  ***************************************
         //获取app基本信息
@@ -158,28 +156,46 @@ $api->version('v1', [
         //app版本详情
         $api->get('rider/app/version/{id}', 'AppController@version');
         //获取骑手协议
-        $api->get('rider/app/rider_protocol', 'AppController@getRiderProtocol');
+        $api->get('rider/app/riderprotocol', 'AppController@getRiderProtocol');
         //获取隐私政策信息
-        $api->get('rider/app/privacy_policy', 'AppController@getPrivacyPolicy');
+        $api->get('rider/app/privacypolicy', 'AppController@getPrivacyPolicy');
         //获取客服热线
         $api->get('rider/app/hotline', 'AppController@getHotline');
+        //获取短信模板
+        $api->get('rider/app/smstmpl', 'AppController@getSmsTmpl');
 
         //************************  订单相关Api  ***************************************
         //订单列表
         $api->get('rider/order/index', 'OrderController@index');
         //骑手已接订单
         $api->get('rider/order/took', 'OrderController@took');
-        //获取短信模板
-        $api->get('rider/order/sms_tmpl', 'OrderController@getSmsTmpl');
-        //骑手到店上报
-        $api->post('rider/order/reach_store', 'OrderController@reachStore');
-        //骑手确认收货
-        $api->post('rider/order/confirm', 'OrderController@confirm');
-        //获取订单菜品
-        $api->get('rider/order/foods', 'OrderController@getFood');
         //获取订单详情
-        $api->get('rider/order/details', 'OrderController@getDetails');
+        $api->get('rider/order/{id}', 'OrderController@getDetails');
+        //骑手确认接单
+        $api->post('rider/order/taking', 'OrderController@taking');
+        //骑手到店上报
+        $api->post('rider/order/reachstore', 'OrderController@reachStore');
+        //骑手确认收货
+        $api->post('rider/order/takegoods', 'OrderController@takeGoods');
+        //骑手确认送达
+        $api->post('rider/order/finish', 'OrderController@finish');
+        //确认转交订单
+        $api->post('rider/order/slip', 'OrderController@slip');
+        //订单异常报备
+        $api->post('rider/order/abnormalpost', 'OrderController@abnormalPost');
 
+        //************************  消息相关Api  ***************************************
+        //获取订单消息
+        $api->get('rider/ordermsg', 'MsgController@getOrdersMsg');
+        //获取系统消息
+        $api->get('rider/sysmsg', 'MsgController@getSysMsg');
+        //获取系统消息详情
+        $api->get('rider/sysmsg/{id}', 'MsgController@getSysMsgDetails');
+        //获取短信验证码
+        $api->post('rider/getsmscode', 'MsgController@getSmsCode');
+
+        //************************  测试控制器  ***************************************
+        $api->post('test/index', 'TestController@index');
     });
 
 });
