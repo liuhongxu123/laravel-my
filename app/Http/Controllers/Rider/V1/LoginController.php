@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Rider\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rider\LoginRequest;
 use App\Http\Requests\Rider\PasswordResetRequest;
 use App\Http\Requests\Rider\RegRequest;
 use App\V1\Rider;
@@ -27,8 +28,9 @@ class LoginController extends Controller {
      * @Post("/api/rider/login")
      * @Version({"v1"})
      * @Request({"account":"15611111111","password":"123456"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function login (Request $request) {
+    public function login (LoginRequest $request) {
         $account = '15611111111';
         $password = '123456';
         $params = $request->all();
@@ -44,6 +46,7 @@ class LoginController extends Controller {
      * 骑手退出登录
      * @Post("/api/rider/logout")
      * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function logout () {
         return $this->returnJson(0, '退出成功');
@@ -53,10 +56,11 @@ class LoginController extends Controller {
      * 骑手注册
      * @Post("/api/rider/reg")
      * @Version({"v1"})
-     * @Request({"name":"aa","mobile":"15611111111","password":"密码","verify_code":"验证码","email":"aa@qq.com","desc":"自我介绍","avatar":"my.jpg"})
+     * @Request({"name":"aa","mobile":"15611111111","password":"密码","verify_code":"验证码"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function reg (RegRequest $request) {
-        return $this->returnJson(0,'提交成功，请耐心等待审核');
+        return $this->returnJson(0,'注册成功');
     }
 
     /**
@@ -65,6 +69,7 @@ class LoginController extends Controller {
      * @Version({"v1"})
      * @Request({"account":"15611111111","verify_code":"1234","new_password":"123456","is_verify_code":"是否为验证码方式(默认为false)"})
      * @Request({"old_password":"旧密码","new_password":"新密码","new_password_confirmation":"重复新密码"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPassword (PasswordResetRequest $request) {
         $params = $request->all();
