@@ -11,7 +11,9 @@ namespace App\Http\Controllers\Rider\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\AccountSetRequest;
 use App\Http\Requests\Rider\CertificateRequest;
+use App\Http\Requests\Rider\JoinRequest;
 use App\Http\Requests\Rider\PhoneResetRequest;
+use App\Http\Services\Rider\V1\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -76,6 +78,26 @@ class UserController extends Controller {
     }
 
     /**
+     * 骑手入驻
+     * @Get("/api/rider/join")
+     * @Version({"v1"})
+     * @Request("name=姓名&mobile=手机号&email=邮箱&desc=简介&read_and_confirm=接受协议&avatar=头像", contentType="multipart/form-data")
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function join (JoinRequest $request) {
+        $origin_path = 'rider/user_head/@origin/'.date('Ymd', time());
+        $cut_path = storage_path('app/public/rider/user_head/@34_34/').date('Ymd',time());  //剪切图保存位置
+        $file = $request->file('avatar');
+        if (($fres = UploadService::uploadOne($file, $origin_path, true, $cut_path))['err'] === 1) {
+            return $this->returnJson(0, $fres['msg']);
+        }
+        $data = [
+            'avatar' => $fres['file']
+        ];
+        return $this->returnJson(0, '申请提交成功，请耐心等待审核', $data);
+    }
+
+    /**
      * 骑手实名认证
      * @Post("/api/rider/certificate")
      * @Version({"v1"})
@@ -85,6 +107,20 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function certificate (CertificateRequest $request) {
+        $origin_path = 'rider/certificate/@origin/'.date('Ymd',time());
+        //$cut_path = storage_path('app/public/rider/certificate/@cut/').date('Ymd',time());  //剪切图保存位置
+        $file = $request->file('driver_permit');
+        if (($fres = UploadService::uploadOne($file, $origin_path))['err'] === 1) {
+            return $this->returnJson(1, '驾驶证 '.$fres['msg']);
+        }
+        $file = $request->file('address_permit');
+        if (($fres = UploadService::uploadOne($file, $origin_path))['err'] === 1) {
+            return $this->returnJson(1, '地址证明 '.$fres['msg']);
+        }
+        $file = $request->file('car_insurance');
+        if (($fres = UploadService::uploadOne($file, $origin_path))['err'] === 1) {
+            return $this->returnJson(1, '汽车保险证明 '.$fres['msg']);
+        }
         return $this->returnJson(0, '提交成功，等待审核');
     }
 
@@ -101,9 +137,9 @@ class UserController extends Controller {
             'email' => 'qq@qq.com',
             'address' => '广州',
             'safe_code' => '222xxx',
-            'driver_permit' => '1.jpg',
-            'address_permit' => '2.jpg',
-            'car_insurance' => '3.jpg'
+            'driver_permit' => asset('storage/rider/certificate/@origin/20180802/HPPx5gNMp10LNeFgCFPplOk9amw4fI1SbQHJnQ9H.jpeg'),
+            'address_permit' => asset('storage/rider/certificate/@origin/20180802/NphqNb3eoHRkLmiLLleyVTAAUniZl47YjfvxmXPX.jpeg'),
+            'car_insurance' => asset('storage/rider/certificate/@origin/20180802/ogfBPJlCAzHKAvv1pP8sJEK3ZcyoDWK6OcneWoSn.jpeg')
         ];
         return $this->returnJson(0, 'success', $data);
     }
