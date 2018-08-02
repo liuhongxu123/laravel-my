@@ -123,6 +123,8 @@ $api->version('v1', [
         $api->get('rider/basicinfo', 'UserController@getBasicInfo');
         //骑手本月战绩
         $api->get('rider/monthscore', 'UserController@getMonthScore');
+        //骑手入驻
+        $api->post('rider/join', 'UserController@join');
         //骑手实名认证
         $api->post('rider/certificate', 'UserController@certificate');
         //骑手实名信息
