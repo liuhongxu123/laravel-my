@@ -12,7 +12,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\AccountSetRequest;
 use App\Http\Requests\Rider\CertificateRequest;
 use App\Http\Requests\Rider\JoinRequest;
+use App\Http\Requests\Rider\PasswordForgetRequest;
+use App\Http\Requests\Rider\PasswordResetRequest;
 use App\Http\Requests\Rider\PhoneResetRequest;
+use App\Http\Requests\Rider\SetWorkStatusRequest;
 use App\Http\Services\Rider\V1\UploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -24,7 +27,7 @@ class UserController extends Controller {
 
     /**
      * 骑手基本信息
-     * @Get("/api/rider/basicinfo")
+     * @Get("/api/rider/basic_info")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
@@ -38,6 +41,22 @@ class UserController extends Controller {
             'avatar' => 'my.jpg',
         ];
         return $this->returnJson(0,'success', $data);
+    }
+
+    /**
+     * 骑手修改密码
+     * @Post("/api/rider/password/reset")
+     * @Version({"v1"})
+     * @Request({"old_password":"旧密码","new_password":"新密码","new_password_confirmation":"重复新密码"})
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function resetPassword (PasswordResetRequest $request) {
+        $params = $request->all();
+        $old_password = '123456a';
+        if($params['old_password'] != $old_password){
+            return $this->returnJson(1, '原密码输入错误');
+        }
+        return $this->returnJson(0, '密码修改成功');
     }
 
     /**
@@ -61,8 +80,20 @@ class UserController extends Controller {
     }
 
     /**
+     * 骑手设置工作状态
+     * @Post("/api/rider/set_work_status")
+     * @Parameters({
+     *      @Parameter("work_status", description="工作状态 work_status=1 开工，work_status=0 休息状态")
+     * })
+     * @Response(200, body={"code":0, "message": "","data": ""})
+     */
+    public function setWorkStatus (SetWorkStatusRequest $request) {
+        return $this->returnJson(0, '设置成功');
+    }
+
+    /**
      * 骑手本月战绩
-     * @Get("/api/rider/monthscore")
+     * @Get("/api/rider/month_score")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
@@ -79,7 +110,7 @@ class UserController extends Controller {
 
     /**
      * 骑手入驻
-     * @Get("/api/rider/join")
+     * @Post("/api/rider/join")
      * @Version({"v1"})
      * @Request("name=姓名&mobile=手机号&email=邮箱&desc=简介&read_and_confirm=接受协议&avatar=头像", contentType="multipart/form-data")
      * @Response(200, body={"code":0, "message": "","data": ""})
@@ -103,7 +134,7 @@ class UserController extends Controller {
      * @Version({"v1"})
      * @Request({"name":"ling","mobile":"15611111111","email":"aa@qq.com","address":"东圃米研","safe_code":"222xx",
      *          "driver_permit":"1.jpg","address_permit":"2.jpg","car_insurance":"3.jpg",
-     *          "bank_code":"银行代码","band_account":"银行账号","cardholder":"持卡人姓名","card_type":"银行卡类型"})
+     *          "bank_code":"银行代码","bank_account":"银行账号","cardholder":"持卡人姓名","card_type":"银行卡类型"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function certificate (CertificateRequest $request) {
@@ -126,7 +157,7 @@ class UserController extends Controller {
 
     /**
      * 骑手实名信息
-     * @Get("/api/rider/certificateinfo")
+     * @Get("/api/rider/certificate_info")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */

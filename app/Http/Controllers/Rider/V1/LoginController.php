@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Rider\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\LoginRequest;
+use App\Http\Requests\Rider\PasswordForgetRequest;
 use App\Http\Requests\Rider\PasswordResetRequest;
 use App\Http\Requests\Rider\RegRequest;
 use App\V1\Rider;
@@ -64,27 +65,19 @@ class LoginController extends Controller {
     }
 
     /**
-     * 骑手登录密码重置（忘记密码|更换密码）
-     * @Post("/api/rider/password/reset")
+     * 骑手忘记密码
+     * @Post("/api/rider/password/forget")
      * @Version({"v1"})
-     * @Request({"account":"15611111111","verify_code":"1234","new_password":"123456","is_verify_code":"是否为验证码方式(默认为false)"})
-     * @Request({"old_password":"旧密码","new_password":"新密码","new_password_confirmation":"重复新密码"})
+     * @Request({"account":"15611111111","verify_code":"1234","new_password":"123456"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function resetPassword (PasswordResetRequest $request) {
+    public function forgetPassword (PasswordForgetRequest $request) {
         $params = $request->all();
-        if ($request->input('is_verify_code', false)) {
-            $verify_code = "1234";
-            if($verify_code != $params['verify_code']){
-                return $this->returnJson(1,'验证码输入错误');
-            }
-        }else{
-            $old_password = '123456';
-            if($params['old_password'] != $old_password){
-                return $this->returnJson(1, '原密码输入错误');
-            }
+        $verify_code = "1234";
+        if($verify_code != $params['verify_code']){
+            return $this->returnJson(1,'验证码输入错误');
         }
-        return $this->returnJson(0,'密码重置成功');
+        return $this->returnJson(0, '密码重置成功');
     }
 
 }

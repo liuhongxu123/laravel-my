@@ -20,7 +20,11 @@ class AppController extends Controller {
      * app基本信息
      * @Get("/api/rider/app/info")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *     "photo": "图片路径",
+     *     "version": "版本号"
+     *
+     * }})
      */
     public function getInfo () {
         $data = [
@@ -44,7 +48,10 @@ class AppController extends Controller {
      * app历史版本列表
      * @Get("/api/rider/app/versions")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *      "title": "标题",
+     *      "date": "版本更新日期"
+     * }})
      */
     public function versions () {
         $data = [
@@ -69,7 +76,7 @@ class AppController extends Controller {
 
     /**
      * 获取隐私政策信息
-     * @Get("/api/rider/app/privacypolicy")
+     * @Get("/api/rider/app/privacy_policy")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
@@ -82,7 +89,7 @@ class AppController extends Controller {
 
     /**
      * 获取骑手协议
-     * @Get("/api/rider/app/riderprotocol")
+     * @Get("/api/rider/app/rider_protocol")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */

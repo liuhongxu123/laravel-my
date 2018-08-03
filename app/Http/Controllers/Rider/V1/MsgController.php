@@ -60,7 +60,7 @@ class MsgController extends Controller {
 
     /**
      * 获取短息验证码
-     * @Post("/api/rider/getsmscode")
+     * @Post("/api/rider/get_sms_code")
      * @Version({"v1"});
      * @Parameters({
      *      @Parameter("mobile", description="手机号码", required=true)
@@ -69,7 +69,8 @@ class MsgController extends Controller {
      */
     public function getSmsCode (SmsRequest $request) {
         $data = [
-            'code' => '123456'
+            'code' => '123456',
+            'expire' => 60
         ];
         return $this->returnJson(0, 'success', $data);
     }
