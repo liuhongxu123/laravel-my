@@ -64,24 +64,24 @@ $api->version('v1', [
 ], function ($api)
 {
     // 登录
-    $api->post('customer/login', 'CustomerController@login')->name('登录');
+    $api->post('customer/login', 'CustomerController@login');
     // 注册
-    $api->post('customer/register', 'CustomerController@register')->name('注册');
+    $api->post('customer/register', 'CustomerController@register');
     // 找回密码
-    $api->post('customer/password/reset', 'CustomerController@resetPassword')->name('找回密码');
+    $api->post('customer/password/reset', 'CustomerController@resetPassword');
 
     //************************  附近商家  *******************************
 
     // 附近商家列表
-    $api->get('customer/near/stores', 'NearController@stores')->name('附近商家列表');
+    $api->get('customer/near/stores', 'NearController@stores');
     // 附近商家主页
-    $api->get('customer/near/store/info', 'NearController@storeInfo')->name('附近商家主页');
+    $api->get('customer/near/store/info', 'NearController@storeInfo');
     // 附近商家主页评论列表
-    $api->get('customer/near/store/comments', 'NearController@storeComments')->name('附近商家主页评论列表');
+    $api->get('customer/near/store/comments', 'NearController@storeComments');
     // 附近商家主页添加评论
-    $api->post('customer/near/store/comments', 'NearController@createStoreComment')->name('附近商家主页添加评论');
+    $api->post('customer/near/store/comments', 'NearController@createStoreComment');
     // 附近商家推荐菜品
-    $api->get('customer/near/store/recommend/goods', 'NearController@storeGoodsRecommend')->name('附近商家推荐菜品');
+    $api->get('customer/near/store/recommend/goods', 'NearController@storeGoodsRecommend');
 
     //************************  店取  *******************************
 
@@ -94,26 +94,23 @@ $api->version('v1', [
 
     //************************  订单  *******************************
     // 订单列表(外卖, 堂食, 店取)
-    $api->get('customer/orders', 'OrderController@orders')->name('订单列表');
+    $api->get('customer/orders', 'OrderController@orders');
 
     //************************  扫码  *******************************
 
     // 商家信息
-    $api->get('customer/dine/store/info', 'StoreController@dineStoreInfo')->name('商家信息');
+    $api->get('customer/dine/store/info', 'StoreController@dineStoreInfo');
     // 菜品分类列表
-    $api->get('customer/dine/store/menus', 'StoreController@dineStoreMenu')->name('菜品分类列表');
+    $api->get('customer/dine/store/menus', 'StoreController@dineStoreMenu');
     // 菜品列表
-    $api->get('customer/dine/store/menu/goods', 'StoreController@dineStoreMenuGoods')->name('菜品列表');
+    $api->get('customer/dine/store/menu/goods', 'StoreController@dineStoreMenuGoods');
     // 菜品详情
-    $api->get('customer/dine/store/goods/info', 'StoreController@dineGoodsInfo')->name('菜品详情');
+    $api->get('customer/dine/store/goods/info', 'StoreController@dineGoodsInfo');
     // 菜品评价
-    $api->get('customer/dine/store/goods/comments', 'StoreController@dineGoodsComments')->name('菜品评价');
+    $api->get('customer/dine/store/goods/comments', 'StoreController@dineGoodsComments');
     // 提交订单
-    $api->post('customer/dine/order', 'StoreController@dineOrder')->name('提交订单');
+    $api->post('customer/dine/order', 'StoreController@dineOrder');
     
-
-
-
 });
 
 // app 用户端接口(登录)
@@ -123,22 +120,64 @@ $api->version('v1', [
 ], function ($api)
 {
     // 退出
-    $api->post('customer/logout', 'CustomerController@logout')->name('退出');
+    $api->post('customer/logout', 'CustomerController@logout');
     // 修改密码
-    $api->post('customer/password/update', 'CustomerController@updatePassword')->name('updatePassword')->name('修改密码');
+    $api->post('customer/password/update', 'CustomerController@updatePassword');
     // 修改手机号
-    $api->post('customer/phone/update', 'CustomerController@updatePhone')->name('updatePhone')->name('修改手机号');
+    $api->post('customer/phone/update', 'CustomerController@updatePhone');
     // 修改头像
-    $api->post('customer/head/update', 'CustomerController@updateHead')->name('updateHead')->name('修改头像');
+    $api->post('customer/head/update', 'CustomerController@updateHead');
     // 修改用户名
-    $api->post('customer/name/update', 'CustomerController@updateName')->name('updateName')->name('修改用户名');
+    $api->post('customer/name/update', 'CustomerController@updateName');
     // 获取用户信息
-    $api->get('customer/info', 'CustomerController@customerInfo')->name('获取用户信息');
+    $api->get('customer/info', 'CustomerController@customerInfo');
     // 账号绑定
-    $api->post('customer/bind/google', 'CustomerController@bindGoogle')->name('bindGoogle')->name('');
-    $api->post('customer/bind/twitter', 'CustomerController@bindTwitter')->name('bindTwitter')->name('');
-    $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook')->name('bindFaceBook')->name('');
-    
+    $api->post('customer/bind/google', 'CustomerController@bindGoogle');
+    $api->post('customer/bind/twitter', 'CustomerController@bindTwitter');
+    $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook');
+
+    /*-----------------------  地址  -----------------------*/
+    // 收货地址列表
+    $api->get('customer/addreses', 'CustomerController@index');
+    // 删除收货地址
+    $api->post('customer/address/destroy', 'CustomerController@destroy');
+    // 添加收货地址
+    $api->post('customer/addreses/create', 'CustomerController@store');
+    // 编辑收货地址
+    $api->post('customer/addreses/update', 'CustomerController@update');
+    // 收货地址详情
+    $api->post('customer/addreses/detail', 'CustomerController@detail');
+
+
+
+
+    /*-----------------------  电子钱包  -----------------------*/
+    // 卡列表
+    $api->get('customer/wallet/cards', 'WalletController@cards');
+    // 添加借记卡
+    $api->post('customer/wallet/debit/card', 'WalletController@createDebitCard');
+    // 添加信用卡
+    $api->post('customer/wallet/credit/card', 'WalletController@createCreditCard');
+    // 常见问题列表
+    $api->get('customer/wallet/questions', 'WalletController@questions');
+    // 问题详情
+    $api->get('customer/wallet/question/detail', 'WalletController@questionDetail');
+
+
+
+    /*-----------------------  消息列表  -----------------------*/
+    // 订单消息
+    $api->get('customer/news/orders', 'NewsController@orderNews');
+    // 系统消息
+    $api->get('customer/news/system', 'NewsController@systemNews');
+    // 系统消息详情
+    $api->get('customer/news/system/detail', 'NewsController@systemDetail');
+
+    /*-----------------------  意见反馈  -----------------------*/
+    // 提交意见反馈
+    $api->post('customer/suggest/create', 'SuggestController@store');
+    // 意见反馈列表
+    $api->post('customer/suggests', 'SuggestController@index');
 
 
 });

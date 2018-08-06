@@ -336,4 +336,18 @@ class CustomerController extends Controller
         return $this->returnJson(0, 'success');
     }
 
+    /**
+     * 查新新人红包
+     *
+     * 用户端APP绑定 Twitter(需要token)
+     *
+     * @Post("/api/customer/bind/twitter")
+     * @Version({"v1"})
+     * @Response(200, body={"code":0, "message": "", "data"=""})
+     */
+    public function redredEnvelope()
+    {
+        
+    }
+
 }
