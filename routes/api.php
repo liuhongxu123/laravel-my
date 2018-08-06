@@ -64,35 +64,81 @@ $api->version('v1', [
 ], function ($api)
 {
     // 登录
-    $api->post('customer/login', 'CustomerController@login');
+    $api->post('customer/login', 'CustomerController@login')->name('登录');
     // 注册
-    $api->post('customer/register', 'CustomerController@register');
-    // 退出
-    $api->post('customer/logout', 'CustomerController@logout');
+    $api->post('customer/register', 'CustomerController@register')->name('注册');
     // 找回密码
-    $api->post('customer/password/reset', 'CustomerController@resetPassword');
+    $api->post('customer/password/reset', 'CustomerController@resetPassword')->name('找回密码');
+
+    //************************  附近商家  *******************************
+
+    // 附近商家列表
+    $api->get('customer/near/stores', 'NearController@stores')->name('附近商家列表');
+    // 附近商家主页
+    $api->get('customer/near/store/info', 'NearController@storeInfo')->name('附近商家主页');
+    // 附近商家主页评论列表
+    $api->get('customer/near/store/comments', 'NearController@storeComments')->name('附近商家主页评论列表');
+    // 附近商家主页添加评论
+    $api->post('customer/near/store/comments', 'NearController@createStoreComment')->name('附近商家主页添加评论');
+    // 附近商家推荐菜品
+    $api->get('customer/near/store/recommend/goods', 'NearController@storeGoodsRecommend')->name('附近商家推荐菜品');
+
+    //************************  店取  *******************************
+
+
+
+
+    //************************  外卖  *******************************
+
+
+
+    //************************  订单  *******************************
+    // 订单列表(外卖, 堂食, 店取)
+    $api->get('customer/orders', 'OrderController@orders')->name('订单列表');
+
+    //************************  扫码  *******************************
+
+    // 商家信息
+    $api->get('customer/dine/store/info', 'StoreController@dineStoreInfo')->name('商家信息');
+    // 菜品分类列表
+    $api->get('customer/dine/store/menus', 'StoreController@dineStoreMenu')->name('菜品分类列表');
+    // 菜品列表
+    $api->get('customer/dine/store/menu/goods', 'StoreController@dineStoreMenuGoods')->name('菜品列表');
+    // 菜品详情
+    $api->get('customer/dine/store/goods/info', 'StoreController@dineGoodsInfo')->name('菜品详情');
+    // 菜品评价
+    $api->get('customer/dine/store/goods/comments', 'StoreController@dineGoodsComments')->name('菜品评价');
+    // 提交订单
+    $api->post('customer/dine/order', 'StoreController@dineOrder')->name('提交订单');
+    
+
+
+
 });
 
 // app 用户端接口(登录)
 $api->version('v1', [
-    'middleware' => ['JwtCustomer', 'jwt.auth'],
+//    'middleware' => ['JwtCustomer', 'jwt.auth'],
     'namespace' => 'App\Http\Controllers\Customer\V1'
 ], function ($api)
 {
+    // 退出
+    $api->post('customer/logout', 'CustomerController@logout')->name('退出');
     // 修改密码
-    $api->post('customer/password/update', 'CustomerController@updatePassword')->name('updatePassword');
+    $api->post('customer/password/update', 'CustomerController@updatePassword')->name('updatePassword')->name('修改密码');
     // 修改手机号
-    $api->post('customer/phone/update', 'CustomerController@updatePhone')->name('updatePhone');
+    $api->post('customer/phone/update', 'CustomerController@updatePhone')->name('updatePhone')->name('修改手机号');
     // 修改头像
-    $api->post('customer/head/update', 'CustomerController@updateHead')->name('updateHead');
+    $api->post('customer/head/update', 'CustomerController@updateHead')->name('updateHead')->name('修改头像');
     // 修改用户名
-    $api->post('customer/name/update', 'CustomerController@updateName')->name('updateName');
-    // 账号绑定
-    $api->post('customer/bind/google', 'CustomerController@bindGoogle')->name('bindGoogle');
-    $api->post('customer/bind/twitter', 'CustomerController@bindTwitter')->name('bindTwitter');
-    $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook')->name('bindFaceBook');
+    $api->post('customer/name/update', 'CustomerController@updateName')->name('updateName')->name('修改用户名');
     // 获取用户信息
-    $api->get('customer/info', 'CustomerController@customerInfo')->name('binds');
+    $api->get('customer/info', 'CustomerController@customerInfo')->name('获取用户信息');
+    // 账号绑定
+    $api->post('customer/bind/google', 'CustomerController@bindGoogle')->name('bindGoogle')->name('');
+    $api->post('customer/bind/twitter', 'CustomerController@bindTwitter')->name('bindTwitter')->name('');
+    $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook')->name('bindFaceBook')->name('');
+    
 
 
 });

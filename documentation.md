@@ -1,6 +1,6 @@
 FORMAT: 1A
 
-# openfood_api_v1
+# 欧本富API文档
 
 # customers
 
@@ -197,3 +197,262 @@ FORMAT: 1A
                 "message": "",
                 "data": ""
             }
+
+# customers
+
+## 附近商家 [POST /api/customer/store/near]
+用户端APP附近商家列表
+
++ Parameters
+    + store_longitude: (string, required) - 用户当前位置的经度
+        + Default: test
+    + store_latitude: (string, required) - 用户当前位置的经度
+        + Default: test
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "code": 0,
+                "message": "",
+                "data": ""
+            }
+
+# Login
+
+## 骑手登录 [POST /api/rider/login]
+
+
++ Request (application/json)
+    + Body
+
+            {
+                "account": "15611111111",
+                "password": "123456"
+            }
+
+## 骑手退出登录 [POST /api/rider/logout]
+
+
+## 骑手注册 [POST /api/rider/reg]
+
+
++ Request (application/json)
+    + Body
+
+            {
+                "name": "aa",
+                "mobile": "15611111111",
+                "password": "密码",
+                "verify_code": "验证码",
+                "email": "aa@qq.com",
+                "desc": "自我介绍",
+                "avatar": "my.jpg"
+            }
+
+## 骑手登录密码重置（忘记密码|更换密码） [POST /api/rider/password/reset]
+
+
++ Request (application/json)
+    + Body
+
+            {
+                "account": "15611111111",
+                "verify_code": "1234",
+                "new_password": "123456",
+                "is_verify_code": "是否为验证码方式(默认为false)"
+            }
+
+# User
+
+## 骑手基本信息 [GET /api/rider/basic_info]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 更换绑定手机 [POST /api/rider/phone/reset]
+
+
++ Request (application/json)
+    + Body
+
+            {
+                "old_mobile": "旧手机号",
+                "new_mobile": "新手机号",
+                "verify_code": "验证码"
+            }
+
+## 骑手本月战绩 [GET /api/rider/month_score]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 骑手实名认证 [POST /api/rider/certificate]
+
+
++ Request (application/json)
+    + Body
+
+            {
+                "name": "ling",
+                "mobile": "15611111111",
+                "email": "aa@qq.com",
+                "address": "东圃米研",
+                "safe_code": "222xx",
+                "driver_permit": "1.jpg",
+                "address_permit": "2.jpg",
+                "car_insurance": "3.jpg",
+                "bank_code": "银行代码",
+                "band_account": "银行账号",
+                "cardholder": "持卡人姓名",
+                "card_type": "银行卡类型"
+            }
+
+## 骑手实名信息 [GET /api/rider/certificate_info]
+
+
+## 骑手余额信息 [GET /api/rider/balance]
+
+
+## 骑手余额明细 [GET /api/rider/balance_details]
+
+
+## 骑手账户信息
+type = 1 支票 type = 2 存储 [GET /api/rider/account_info]
+
+
+## 骑手账户设置
+type = 1 支票 type = 2 存储 [POST /api/rider/account/set]
+
+
+## 骑手评价信息
+type = 1 满意 type =2 不满意 [GET /api/rider/evaluate]
+
+
+## 骑手意见列表 [GET /api/rider/suggestion]
+
+
+## 骑手意见详情 [GET /api/rider/suggestion/$id]
+
+
+## 骑手意见提交 [POST /api/rider/suggestion/post]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+# App
+
+## app基本信息 [GET /api/rider/app/info]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## app更新 [GET /api/rider/app/update]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## app历史版本列表 [GET /api/rider/app/versions]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## app版本详情 [GET /api/rider/app/version/$id]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 获取隐私政策信息 [GET /api/rider/app/privacy_policy]
+
+
+## 获取骑手协议 [GET /api/rider/app/rider_protocol]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 获取热线 [GET /api/rider/app/hotline]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+# Order
+
+## 订单列表 [GET /api/rider/order/index]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 骑手已接订单；列表
+type = 1 待取货 type =2 待送达 [GET /api/rider/order/took]
+
+
+## 获取订单详情
+type = 1 待取货 type = 2 待送达 [GET /api/rider/order/details]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 骑手到店上报 [POST /api/rider/order/reach_store]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 骑手确认收货 [POST /api/rider/order/confirm]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 获取订单菜品 [GET /api/rider/order/foods]
+
+
++ Request (application/json)
+    + Body
+
+            []
+
+## 获取短信模板 [GET /api/rider/order/sms_tmpl]
+
+
++ Request (application/json)
+    + Body
+
+            []

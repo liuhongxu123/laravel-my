@@ -27,7 +27,7 @@ class CustomerController extends Controller
      *         description="用户名(手机号)", 
      *         type="string",
      *         required=true,
-     *         default="test"
+     *         default="13800138001"
      *     ),
      *     @Parameter(
      *         "customer_password", 
@@ -43,8 +43,11 @@ class CustomerController extends Controller
     public function login(Request $request)
     {
         $Customer = new Customer();
+        $Customer->customer_phone = '13800138001';
+        $Customer->customer_password = 'test';
 
-        $token = auth()->login($Customer->find(1));
+        // $token = auth()->login($Customer->find(1));
+        $token = auth()->login($Customer);
 
         return $this->returnJson(0, 'success', ['token' => $token]);
 
