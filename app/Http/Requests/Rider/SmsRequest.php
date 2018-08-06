@@ -19,7 +19,8 @@ class SmsRequest extends FormRequest {
 
     public function rules () {
         return [
-            'mobile' => 'required|regex:/^\d{10,11}$/'
+            'mobile' => 'required|regex:/^\d{10,11}$/',
+            'sms_type' => 'required|integer'
         ];
     }
 }

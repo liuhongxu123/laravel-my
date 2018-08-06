@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
- * @Resource("Login")
+ * @Resource("骑手登录授权API")
  */
 class LoginController extends Controller {
 

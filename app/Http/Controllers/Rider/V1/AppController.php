@@ -10,9 +10,10 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Rider\GetVersionDetailsRequest;
 
 /**
- * @Resource("App")
+ * @Resource("骑手APP相关API")
  */
 class AppController extends Controller {
 
@@ -21,14 +22,14 @@ class AppController extends Controller {
      * @Get("/api/rider/app/info")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
-     *     "photo": "图片路径",
+     *     "photo": "app缩略图",
      *     "version": "版本号"
      *
      * }})
      */
     public function getInfo () {
         $data = [
-            'photo' => '1.jpg',
+            'photo' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg'),
             'version' => 'v1.1.0'
         ];
         return $this->returnJson(0, 'success', $data);
@@ -46,30 +47,33 @@ class AppController extends Controller {
 
     /**
      * app历史版本列表
-     * @Get("/api/rider/app/versions")
+     * @Get("/api/rider/app/version")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
-     *      "title": "标题",
+     *      "id": "版本id",
+     *      "title": "版本更新标题信息",
      *      "date": "版本更新日期"
      * }})
      */
-    public function versions () {
+    public function getVersionList () {
         $data = [
-            ['title' => 'v2.1.1版本主要更新', 'date' => '06.12'],
-            ['title' => 'v2.1.6版本主要更新', 'date' => '10.08']
+            ['id' => 1, 'title' => 'v2.1.1版本主要更新', 'date' => '2018-06-06 14:14:12'],
+            ['id' => 2, 'title' => 'v2.1.6版本主要更新', 'date' => '2018-06-06 14:14:12']
         ];
         return $this->returnJson(0, 'success', $data);
     }
 
     /**
-     * app版本详情
-     * @Get("/api/rider/app/version/$id")
+     * app历史版本详情
+     * @Get("/api/rider/app/version/details")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *          "content": "更新内容"
+     *     }})
      */
-    public function version ($id) {
+    public function getVersionDetails (GetVersionDetailsRequest $request) {
         $data = [
-            'content' => '1.jpg'
+            'content' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg')
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -78,11 +82,13 @@ class AppController extends Controller {
      * 获取隐私政策信息
      * @Get("/api/rider/app/privacy_policy")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *          "content": "政策内容"
+     *     }})
      */
     public function getPrivacyPolicy () {
         $data = [
-            'content' => '这是隐私政策信息'
+            'content' => '这是隐私政策的内容'
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -91,7 +97,9 @@ class AppController extends Controller {
      * 获取骑手协议
      * @Get("/api/rider/app/rider_protocol")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *          "content": "骑手协议内容"
+     *     }})
      */
     public function getRiderProtocol () {
         $data = [
@@ -104,7 +112,10 @@ class AppController extends Controller {
      * 获取热线
      * @Get("/api/rider/app/hotline")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {{
+     *          "name": "热线名称",
+     *          "tel": "热线电话"
+     *     }}})
      */
     public function getHotline () {
         $data = [
@@ -118,7 +129,9 @@ class AppController extends Controller {
      * 获取短信模板
      * @Get("/api/rider/app/smstmpl")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {{
+     *          "content": "短信模板内容"
+     *     }}})
      */
     public function getSmsTmpl (){
         $data = [

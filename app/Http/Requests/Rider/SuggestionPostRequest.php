@@ -19,9 +19,9 @@ class SuggestionPostRequest extends FormRequest {
 
     public function rules () {
         return [
-            'type' => 'required',
+            'cat_id' => 'required',
             'content' => 'required|max:500',
-            'photo' => 'required'
+            'photo.*' => 'required|file|image'
         ];
     }
 }
