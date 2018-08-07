@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// 将所有的 Exception 全部交给 App\Exceptions\Handler 来处理
+app('api.exception')->register(function (Exception $exception) {
+    $request = Illuminate\Http\Request::capture();
+    return app('App\Exceptions\Handler')->render($request, $exception);
+});
+
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function($api){
     $api->get('hello', 'App\Http\Controllers\TestController@hello');

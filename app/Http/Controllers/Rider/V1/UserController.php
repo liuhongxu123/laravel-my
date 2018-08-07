@@ -131,11 +131,11 @@ class UserController extends Controller {
         $origin_path = 'rider/user_head/@origin/'.date('Ymd', time());
         $cut_path = storage_path('app/public/rider/user_head/@34_34/').date('Ymd',time());  //剪切图保存位置
         $file = $request->file('avatar');
-        if (($fres = UploadService::uploadOne($file, $origin_path, true, $cut_path))['err'] === 1) {
+        if (($fres = UploadService::saveOne($file, $origin_path, true, $cut_path))['err'] === 1) {
             return $this->returnJson(0, $fres['msg']);
         }
         $data = [
-            'avatar' => $fres['file']
+            'avatar' => $fres['path']
         ];
         return $this->returnJson(0, '申请提交成功，请耐心等待审核', $data);
     }
