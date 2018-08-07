@@ -10,14 +10,10 @@
 namespace App\Http\Controllers\Rider\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\LoginRequest;
-use App\Http\Requests\Rider\PasswordForgetRequest;
-use App\Http\Requests\Rider\PasswordResetRequest;
-use App\Http\Requests\Rider\RegRequest;
+use App\Http\Requests\Rider\V1\LoginRequest;
+use App\Http\Requests\Rider\V1\PasswordForgetRequest;
+use App\Http\Requests\Rider\V1\RegRequest;
 use App\V1\Rider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * @Resource("骑手登录授权API")

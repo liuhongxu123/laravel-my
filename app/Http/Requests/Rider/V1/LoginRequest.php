@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/6
- * Time: 11:14
+ * Date: 2018/7/31
+ * Time: 13:38
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
 
 
 use Dingo\Api\Http\FormRequest;
 
-class GetSysmsgDetailsRequest extends FormRequest {
+class LoginRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,7 +19,8 @@ class GetSysmsgDetailsRequest extends FormRequest {
 
     public function rules () {
         return [
-            'id' => 'required'
+            'account' => 'required|regex:/^\d{10,11}$/',
+            'password' => 'required'
         ];
     }
 }

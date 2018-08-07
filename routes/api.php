@@ -205,7 +205,7 @@ $api->version('v1', [
     $api->post('rider/password/forget', 'LoginController@forgetPassword');
 
     $api->group([
-        'middleware' => ['jwt.rider.auth']
+        'middleware' => ['jwt.auth.and.refresh']
     ], function ($api) {
         //************************  用户相关Api  *******************************
         //修改密码
@@ -304,4 +304,47 @@ $api->version('v1', [
     });
 
 });
+
+/**
+ * **********************************商家后台APP API*****************************************
+ * 登录验证待修改
+ */
+
+$api->version('v1',[
+    'namespace' => 'App\Http\Controllers\BusinessApp\V1',
+    //'middleware' => 'JwtRider',
+], function ($api) {
+    $api->group(['prefix' => 'business'], function ($api) {
+        //获取验证码
+        $api->post('get_sms_code', 'MsgController@getSmsCode');
+
+
+    });
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

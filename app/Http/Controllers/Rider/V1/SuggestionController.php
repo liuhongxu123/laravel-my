@@ -10,8 +10,8 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\GetSuggestionDetailsRequest;
-use App\Http\Requests\Rider\SuggestionPostRequest;
+use App\Http\Requests\Rider\V1\GetSuggestionDetailsRequest;
+use App\Http\Requests\Rider\V1\SuggestionPostRequest;
 use App\Http\Services\Rider\V1\UploadService;
 
 /**

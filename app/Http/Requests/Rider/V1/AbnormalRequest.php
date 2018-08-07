@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: dev-t
  * Date: 2018/8/1
- * Time: 17:54
+ * Time: 17:34
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
 
 
 use Dingo\Api\Http\FormRequest;
 
-class SmsRequest extends FormRequest {
+class AbnormalRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,8 +19,9 @@ class SmsRequest extends FormRequest {
 
     public function rules () {
         return [
-            'mobile' => 'required|regex:/^\d{10,11}$/',
-            'sms_type' => 'required|integer'
+            'cat_id' => 'required',
+            'content' => 'required|max:300',
+            'photo.*' => 'required|file|image'
         ];
     }
 }

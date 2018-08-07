@@ -7,7 +7,7 @@
  * Time: 14:54
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
 
 
 use Dingo\Api\Http\FormRequest;

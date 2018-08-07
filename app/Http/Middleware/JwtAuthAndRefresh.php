@@ -19,7 +19,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Closure;
 
 
-class JwtRiderAuth extends BaseMiddleware {
+class JwtAuthAndRefresh extends BaseMiddleware {
 
     public function handle(Request $request, Closure $next){
         $this->checkForToken($request);

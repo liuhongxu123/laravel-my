@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/1
- * Time: 17:34
+ * Date: 2018/7/30
+ * Time: 14:03
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
 
 
 use Dingo\Api\Http\FormRequest;
 
-class AbnormalRequest extends FormRequest {
+class SuggestionPostRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -20,7 +20,7 @@ class AbnormalRequest extends FormRequest {
     public function rules () {
         return [
             'cat_id' => 'required',
-            'content' => 'required|max:300',
+            'content' => 'required|max:500',
             'photo.*' => 'required|file|image'
         ];
     }

@@ -10,7 +10,7 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\GetVersionDetailsRequest;
+use App\Http\Requests\Rider\V1\GetVersionDetailsRequest;
 
 /**
  * @Resource("骑手APP相关API")

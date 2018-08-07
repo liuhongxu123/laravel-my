@@ -9,16 +9,14 @@
 namespace App\Http\Controllers\Rider\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\AccountSetRequest;
-use App\Http\Requests\Rider\CertificateRequest;
-use App\Http\Requests\Rider\JoinRequest;
-use App\Http\Requests\Rider\PasswordForgetRequest;
-use App\Http\Requests\Rider\PasswordResetRequest;
-use App\Http\Requests\Rider\PhoneResetRequest;
-use App\Http\Requests\Rider\SetWorkStatusRequest;
+use App\Http\Requests\Rider\V1\AccountSetRequest;
+use App\Http\Requests\Rider\V1\CertificateRequest;
+use App\Http\Requests\Rider\V1\JoinRequest;
+use App\Http\Requests\Rider\V1\PasswordResetRequest;
+use App\Http\Requests\Rider\V1\PhoneResetRequest;
+use App\Http\Requests\Rider\V1\SetWorkStatusRequest;
 use App\Http\Services\Rider\V1\UploadService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @Resource("骑手端用户API")

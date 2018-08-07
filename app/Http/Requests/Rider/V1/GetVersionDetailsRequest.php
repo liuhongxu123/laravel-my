@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/3
- * Time: 16:46
+ * Date: 2018/8/6
+ * Time: 11:35
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
 
 
 use Dingo\Api\Http\FormRequest;
 
-class SetWorkStatusRequest extends FormRequest {
+class GetVersionDetailsRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,7 +19,7 @@ class SetWorkStatusRequest extends FormRequest {
 
     public function rules () {
         return [
-            'work_status' => 'required'
+            'id' => 'required'
         ];
     }
 }

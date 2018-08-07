@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Dingo\Api\Contract\Debug\MessageBagErrors;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 
 class Handler extends ExceptionHandler
@@ -52,8 +53,10 @@ class Handler extends ExceptionHandler
     {
         if ($request->server->get('API_PREFIX')) {
 
+            $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500;
+
             if (! $message = $exception->getMessage()) {
-                $message = $exception->getMessage();
+                $message = sprintf('%s', Response::$statusTexts[$statusCode]);
             }
 
             if ($exception instanceof MessageBagErrors && $exception->hasErrors()) {
@@ -61,7 +64,7 @@ class Handler extends ExceptionHandler
             }
 
             return response()->json([
-                'code' => $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : 500,
+                'code' => $statusCode,
                 'message' => $message,
                 'data' => []
             ]);

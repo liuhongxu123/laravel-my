@@ -59,6 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'JwtCustomer' => \App\Http\Middleware\JwtCustomer::class,
         'JwtRider' => \App\Http\Middleware\JwtRider::class,
-        'jwt.rider.auth' => \App\Http\Middleware\JwtRiderAuth::class
+        'jwt.auth.and.refresh' => \App\Http\Middleware\JwtAuthAndRefresh::class
     ];
 }

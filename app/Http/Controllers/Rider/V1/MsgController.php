@@ -10,8 +10,8 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\GetSysmsgDetailsRequest;
-use App\Http\Requests\Rider\SmsRequest;
+use App\Http\Requests\Rider\V1\GetSysmsgDetailsRequest;
+use App\Http\Requests\Rider\V1\SmsRequest;
 
 /**
  * @Resource("骑手端消息API")

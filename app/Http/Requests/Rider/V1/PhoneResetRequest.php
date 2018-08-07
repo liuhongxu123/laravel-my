@@ -3,14 +3,15 @@
  * Created by PhpStorm.
  * User: dev-t
  * Date: 2018/7/30
- * Time: 9:39
+ * Time: 9:50
  */
 
-namespace App\Http\Requests\Rider;
+namespace App\Http\Requests\Rider\V1;
+
 
 use Dingo\Api\Http\FormRequest;
 
-class RegRequest extends FormRequest {
+class PhoneResetRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -18,9 +19,8 @@ class RegRequest extends FormRequest {
 
     public function rules () {
         return [
-            'name' => 'required',
-            'mobile' => 'required|regex:/^\d{10,11}$/',
-            'password' => 'required|regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,32}$/',
+            'old_mobile' => 'required|regex:/^\d{10,11}$/',
+            'new_mobile' => 'required|regex:/^\d{10,11}$/',
             'verify_code' => 'required'
         ];
     }

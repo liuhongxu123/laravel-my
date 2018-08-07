@@ -10,11 +10,10 @@ namespace App\Http\Controllers\Rider\V1;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Rider\AbnormalRequest;
-use App\Http\Requests\Rider\GetOrderDetailsRequest;
-use App\Http\Requests\Rider\GetOrderListRequest;
+use App\Http\Requests\Rider\V1\AbnormalRequest;
+use App\Http\Requests\Rider\V1\GetOrderDetailsRequest;
+use App\Http\Requests\Rider\V1\GetOrderListRequest;
 use App\Http\Services\Rider\V1\UploadService;
-use Illuminate\Validation\Validator;
 
 /**
  * @Resource("骑手端订单API")
