@@ -5,10 +5,20 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * @Resource("电子钱包")
+ */
 class WalletController extends Controller
 {
-    // 1. 信用卡
-    // 2. 借记卡
+
+    /**
+     * 卡列表
+     *
+     * 1/信用卡; 2/借记卡
+     *
+     * @Get("api/customer/wallet/cards")
+     * @Version("v1")
+     */
     public function cards()
     {
         $data = [
@@ -41,20 +51,90 @@ class WalletController extends Controller
 
     /**
      * 添加借记卡
-     * [createDebitCard description]
-     * @return [type] [description]
+     *
+     * @Post("api/customer/wallet/debit/card")
+     * @Version("v1")
+     * @Parameters({
+     *     @Parameter(
+     *         "card_type",
+     *         description="卡类型",
+     *         type="int",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_host_name",
+     *         description="持卡人姓名",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_num",
+     *         description="卡号",
+     *         type="array",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_host_phone",
+     *         description="预留手机号",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "phone_code",
+     *         description="验证码",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     * })
+     * 
      */
     public function createDebitCard()
     {
         return $this->returnJson(0, 'success', $data);
-        
     }
 
 
     /**
      * 添加信用卡
-     * [createCreditCard description]
-     * @return [type] [description]
+     *
+     * @Post("api/customer/wallet/credit/card")
+     * @Version("v1")
+     * @Parameters({
+     *     @Parameter(
+     *         "card_type",
+     *         description="卡类型",
+     *         type="int",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_host_name",
+     *         description="持卡人姓名",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_num",
+     *         description="卡号",
+     *         type="array",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "card_validity_time",
+     *         description="卡有效期",
+     *         type="string",
+     *         required=true,
+     *         default="2018-12-25 12:32:12"
+     *     ),
+     * })
+     * 
      */
     public function createCreditCard()
     {
@@ -64,8 +144,9 @@ class WalletController extends Controller
 
     /**
      * 常见问题列表
-     * [questions description]
-     * @return [type] [description]
+     * 
+     * @Get("api/customer/wallet/questions")
+     * @Version("v1")
      */
     public function questions()
     {
@@ -93,8 +174,18 @@ class WalletController extends Controller
 
     /**
      * 问题详情
-     * [questionDetail description]
-     * @return [type] [description]
+     *
+     * @Get("api/customer/wallet/question/detail")
+     * @Version("v1")
+     * @Parameters({
+     *     @Parameter(
+     *         "question_id",
+     *         description="问题ID",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     )
+     * })
      */
     public function questionDetail()
     {
@@ -106,8 +197,4 @@ class WalletController extends Controller
         ];
         return $this->returnJson(0, 'success', $data);
     }
-
-    
-
-
 }

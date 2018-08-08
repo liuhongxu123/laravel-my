@@ -5,8 +5,17 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * @Resource("消息通知")
+ */
 class NewsController extends Controller
 {
+    /**
+     * 订单消息(token)
+     *
+     * @Get("/api/customer/news/orders")
+     * @Version("v1")
+     */
     public function orderNews()
     {
         $data = [
@@ -38,6 +47,12 @@ class NewsController extends Controller
         return $this->returnJson(0, 'success', $data);
     }
 
+    /**
+     * 系统消息(token)
+     *
+     * @Get("/api/customer/news/system")
+     * @Version("v1")
+     */
     public function systemNews()
     {
         $data = [
@@ -69,6 +84,22 @@ class NewsController extends Controller
         return $this->returnJson(0, 'success', $data);
     }
 
+    /**
+     * 系统详情
+     *
+     * @Post("api/customer/news/system/detail")
+     * @Version("v1")
+     * @Parameters({
+     *     @Parameter(
+     *         "news_id",
+     *         description="消息ID",
+     *         type="int",
+     *         required=true,
+     *         default=""
+     *     )
+     * })
+     * @return [type] [description]
+     */
     public function systemDetail()
     {
          $data = [
