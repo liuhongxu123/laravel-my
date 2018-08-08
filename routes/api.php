@@ -102,6 +102,22 @@ $api->version('v1', [
     // 订单列表(外卖, 堂食, 店取)
     $api->get('customer/orders', 'OrderController@orders');
 
+    //************************  版本  *******************************
+    // 获取最新版本
+    $api->get('customer/version/latest', 'VersionController@versionLatest');
+    // 获取版本列表
+    $api->get('customer/versions', 'VersionController@versions');
+    // 获取版本详情
+    $api->get('customer/version/info', 'VersionController@versionInfo');
+    
+    //************************  协议  *******************************
+    
+    $api->get('customer/protocols', 'ProtocolController@protocols');
+    $api->get('customer/protocolInfo', 'ProtocolController@protocolInfo');
+
+    
+
+
     //************************  扫码  *******************************
 
     // 商家信息
@@ -142,22 +158,44 @@ $api->version('v1', [
     $api->post('customer/bind/twitter', 'CustomerController@bindTwitter');
     $api->post('customer/bind/facebook', 'CustomerController@bindFaceBook');
 
+    /*-----------------------  收藏  -----------------------*/
+    // 收藏列表
+    $api->get('customer/collects', 'CollectController@collects');
+    // 取消收藏
+    $api->post('customer/collect/delete', 'CollectController@destroy');
+    
+
+
+    /*-----------------------  我的评价  -----------------------*/
+    // 大众评价
+    
+
+    // 订单评价
+    
+
+
+
     /*-----------------------  地址  -----------------------*/
     // 收货地址列表
-    $api->get('customer/addreses', 'CustomerController@index');
+    $api->get('customer/addreses', 'AdressController@index');
     // 删除收货地址
-    $api->post('customer/address/destroy', 'CustomerController@destroy');
+    $api->post('customer/address/destroy', 'AdressController@destroy');
     // 添加收货地址
-    $api->post('customer/addreses/create', 'CustomerController@store');
+    $api->post('customer/addreses/create', 'AdressController@store');
     // 编辑收货地址
-    $api->post('customer/addreses/update', 'CustomerController@update');
+    $api->post('customer/addreses/update', 'AdressController@update');
     // 收货地址详情
-    $api->post('customer/addreses/detail', 'CustomerController@detail');
+    $api->get('customer/addreses/detail', 'AdressController@detail');
+
+    /*-----------------------  红包  -----------------------*/
+    // 红包列表; 1: 表示正常红包, 0 过期红包
+    $api->get('customer/redpackages', 'RedPackageController@packages');
 
 
 
 
     /*-----------------------  电子钱包  -----------------------*/
+
     // 卡列表
     $api->get('customer/wallet/cards', 'WalletController@cards');
     // 添加借记卡
@@ -183,7 +221,7 @@ $api->version('v1', [
     // 提交意见反馈
     $api->post('customer/suggest/create', 'SuggestController@store');
     // 意见反馈列表
-    $api->post('customer/suggests', 'SuggestController@index');
+    $api->get('customer/suggests', 'SuggestController@index');
 
 
 });

@@ -5,10 +5,17 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * @Resource("建议")
+ */
 class SuggestController extends Controller
 {
-
-
+    /**
+     * 我的反馈列表(token)
+     *
+     * @Get("/api/customer/suggests")
+     * @Version("v1")
+     */
     public function index()
     {
         $data = [
@@ -41,10 +48,33 @@ class SuggestController extends Controller
     }
 
     /**
-     * suggest_type string 建议类型
-     * suggest_desc string 问题描述
-     * suggest_img  arr  截图  
-     * @return [type] [description]
+     * 添加反馈
+     *
+     * @Post("api/customer/suggest/create")
+     * @Version("v1")
+     * @Parameters({
+     *     @Parameter(
+     *         "suggest_type",
+     *         description="建议类型",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "suggest_desc",
+     *         description="问题描述",
+     *         type="string",
+     *         required=true,
+     *         default=""
+     *     ),
+     *     @Parameter(
+     *         "suggest_img",
+     *         description="截图",
+     *         type="array",
+     *         required=true,
+     *         default=""
+     *     ),
+     * })
      */
     public function store()
     {
