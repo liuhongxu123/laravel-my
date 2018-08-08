@@ -1,7 +1,4 @@
 <?php
-
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,11 +14,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// 将所有的 Exception 全部交给 App\Exceptions\Handler 来处理
-app('api.exception')->register(function (Exception $exception) {
-    $request = Illuminate\Http\Request::capture();
-    return app('App\Exceptions\Handler')->render($request, $exception);
-});
+
 
 $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', function($api){
@@ -203,6 +196,8 @@ $api->version('v1', [
     $api->post('rider/reg', 'LoginController@reg');
     //骑手忘记密码
     $api->post('rider/password/forget', 'LoginController@forgetPassword');
+    //骑手入驻
+    $api->post('rider/join', 'UserController@join');    //该接口不需要token
 
     $api->group([
         'middleware' => ['jwt.auth.and.refresh']
@@ -217,7 +212,7 @@ $api->version('v1', [
         //骑手本月战绩
         $api->get('rider/month_score', 'UserController@getMonthScore');
         //骑手入驻
-        $api->post('rider/join', 'UserController@join');
+        //$api->post('rider/join', 'UserController@join');
         //骑手实名认证
         $api->post('rider/certificate', 'UserController@certificate');
         //骑手实名信息
@@ -299,29 +294,11 @@ $api->version('v1', [
         //获取短信验证码
         $api->post('rider/get_sms_code', 'MsgController@getSmsCode');
 
-        //************************  测试控制器  ***************************************
-        $api->post('test/index', 'TestController@index');
     });
 
 });
 
-/**
- * **********************************商家后台APP API*****************************************
- * 登录验证待修改
- */
 
-$api->version('v1',[
-    'namespace' => 'App\Http\Controllers\BusinessApp\V1',
-    //'middleware' => 'JwtRider',
-], function ($api) {
-    $api->group(['prefix' => 'business'], function ($api) {
-        //获取验证码
-        $api->post('get_sms_code', 'MsgController@getSmsCode');
-
-
-    });
-
-});
 
 
 
