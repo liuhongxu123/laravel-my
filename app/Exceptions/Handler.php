@@ -63,11 +63,11 @@ class Handler extends ExceptionHandler
                 $message = $exception->getErrors()->first();
             }
 
-            return response()->json([
+            return new Response([
                 'code' => $statusCode,
                 'message' => $message,
                 'data' => []
-            ]);
+            ], $statusCode, $exception instanceof HttpExceptionInterface ? $exception->getHeaders() : []);
         }
 
         return parent::render($request, $exception);

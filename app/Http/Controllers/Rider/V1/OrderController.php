@@ -35,7 +35,7 @@ class OrderController extends Controller {
      *          "final_time": "最后送达时间（即13:00前送达）",
      *          "status": "订单状态，可选值：-1 已取消订单 0 可抢订单 1 待取货 2 待送达 3 进行中 4 完成订单",
      *          "slip_status": "转单状态 slip_status=0 正常状态 slip_status=1 转单中 slip_status=2 转单完成",
-     *          "store_img": "商家图标",
+     *          "store_head": "商家头像",
      *          "store_tel": "商家电话",
      *          "store_name": "商家名称"
      *     }}})
@@ -50,7 +50,7 @@ class OrderController extends Controller {
                         'add_time' => '2018.03.01 12:12:12',
                         'final_time' => '2018.03.01 14:12:12',
                         'status' => -1, //订单状态
-                        'store_img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                        'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
                         'store_name' => '麦当劳'
                     ]
                 ];
@@ -80,7 +80,7 @@ class OrderController extends Controller {
                         'slip_status' => 0, //转单状态
                         'store_tel' => '15622111111',
                         'store_name' => '麦当劳',
-                        'store_img' => '1.jpg',
+                        'store_head' => '1.jpg',
                         'food' => [
                             ['name' => '西红柿炒蛋', 'count' => 2],
                             ['name' => '薯条', 'count' => 1]
@@ -101,7 +101,7 @@ class OrderController extends Controller {
                         'customer_tel' => '13111111111',
                         'store_tel' => '15622111111',
                         'store_name' => '麦当劳',
-                        'store_img' => '1.jpg'
+                        'store_head' => '1.jpg'
                     ]
                 ];
                 return $this->returnJson(0, 'success', $data);
@@ -115,7 +115,7 @@ class OrderController extends Controller {
                         'final_time' => '2018.03.01 14:12:12',
                         'status' => 2, //待取货,
                         'price' => 4,
-                        'store_img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                        'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
                         'store_name' => '麦当劳'
                     ],
                     [
@@ -125,7 +125,7 @@ class OrderController extends Controller {
                         'final_time' => '2018.03.01 14:12:12',
                         'status' => 3, //待送达,
                         'price' => 4,
-                        'store_img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                        'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
                         'store_name' => '麦当劳'
                     ]
                 ];
@@ -141,7 +141,7 @@ class OrderController extends Controller {
                         'final_time' => '2018.03.01 14:12:12',
                         'status' => 4, //订单状态
                         'price' => 4,
-                        'store_img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                        'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
                         'store_name' => '麦当劳'
                     ]
                 ];
@@ -167,7 +167,7 @@ class OrderController extends Controller {
      *          "discount_money": "优惠金额",
      *          "remark": "备注",
      *          "store_name": "商家名称",
-     *          "store_img": "商家图标",
+     *          "store_head": "商家头像",
      *          "store_tel": "商家电话",
      *          "food": {{
      *              "name": "菜品名称",
@@ -191,7 +191,7 @@ class OrderController extends Controller {
            'discount' => 02,
            'remark' => '您好，麻烦多备一份餐具，谢谢',
            'store_name' => '麦当劳',
-           'store_img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+           'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
            "store_tel" => '123456',
            'food' => [
                [

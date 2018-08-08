@@ -64,7 +64,7 @@ class LoginController extends Controller {
      * 骑手忘记密码
      * @Post("/api/rider/password/forget")
      * @Version({"v1"})
-     * @Request({"account":"15611111111","verify_code":"1234","new_password":"123456"})
+     * @Request({"account":"15611111111","verify_code":"1234","password":"123456"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function forgetPassword (PasswordForgetRequest $request) {

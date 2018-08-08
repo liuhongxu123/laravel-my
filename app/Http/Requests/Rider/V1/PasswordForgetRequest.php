@@ -21,7 +21,7 @@ class PasswordForgetRequest extends FormRequest {
         return [
             'account' => 'required|regex:/^\d{10,11}$/',
             'verify_code' => 'required',
-            'new_password' => 'required|regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,32}$/',
+            'password' => 'required|regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,32}$/',
         ];
     }
 }

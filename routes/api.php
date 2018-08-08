@@ -336,11 +336,87 @@ $api->version('v1', [
 
 });
 
+/**
+ * 商家后台APP 接口
+ */
+$api->version('v1', [
+    'namespace' => 'App\Http\Controllers\Business\V1',
+    //'middleware' => 'JwtRider'
+], function ($api) {
+
+    $api->group(['prefix' => 'business'], function ($api) {
+        //注册
+        $api->post('user/reg', 'LoginController@reg');
+        //登录
+        $api->post('user/login', 'LoginController@login');
+        //退出登录
+        $api->post('user/logout', 'LoginController@logout');
+        //忘记密码
+        $api->post('password/forget', 'LoginController@forgetPassword');
 
 
+        //获取银行卡信息
+        $api->get('bank_card_info/get', 'BankCardController@getBankCardInfo');
+        //设置银行卡信息
+        $api->post('bank_card_info/set', 'BankCardController@setBankCardInfo');
+        //获取信用卡信息
+        $api->get('credit_card_info/get', 'BankCardController@getCreditCardInfo');
+        //设置信用卡信息
+        $api->post('credit_card_info/set', 'BankCardController@setCreditCardInfo');
+        //设置店铺信息
+        $api->post('store/info/set', 'StoreController@setInfo');
+        //获取人员规模分类
+        $api->get('staff_size_cat/get', 'StoreController@getStaffSizeCat');
+        //获取营业类别
+        $api->get('business_cat/get', 'StoreController@getBusinessCat');
+        //获取店铺信息
+        $api->get('store/info/get', 'StoreController@getInfo');
+        //获取公司信息
+        $api->get('company/info/get', 'StoreController@getCompanyInfo');
+        //获取店铺营业状态
+        $api->get('store/status/get/{type}', 'StoreController@getStoreStatus')->where(['type' => '[0-9]+']);
+        //获取餐厅业务信息
+        $api->get('store/service/get/{id}', 'StoreController@getService');
+        //开启业务
+        $api->post('store/service/open/{id}/{type}', 'StoreController@openService');
+        //关闭业务
+        $api->post('store/service/close/{id}/$type', 'StoreController@closeService');
+        //修改门店头像
+        $api->post('store/head/edit', 'StoreController@editStoreHead');
+        //修改门店名称
+        $api->post('store/name/edit/{id}', 'StoreController@editStoreName');
+        //修改门店联系电话
+        $api->post('store/tel/edit/{id}', 'StoreController@editStoreTel');
+        //修改门店地址
+        $api->post('store/address/edit', 'StoreController@editStoreAddress');
+        //修改门店公告
+        $api->post('store/notice/edit/{id}', 'StoreController@editStoreNotice');
+        //获取配送信息
+        $api->get('store/delivery/get/{id}', 'StoreController@getDeliveryInfo');
+        //设置配送信息
+        $api->post('store/delivery/edit', 'StoreController@editDeliveryInfo');
+        //设置经营类别
+        $api->post('store/business/edit', 'StoreController@editStoreBusiness');
+        //获取所有服务设施
+        $api->get('installation/get/{id}', 'StoreController@getInstallation');
+        //修改门店服务设施
+        $api->post('store/installation/edit', 'StoreController@editStoreInstalltion');
+        //开启自动接单
+        $api->post('store/auto_take_order/open/{id}', 'StoreController@openAutoTakeOrder');
+        //关闭自动接单
+        $api->get('store/auto_take_order/close/{id}', 'StoreController@closeAutoTakeOrder');
+        //获取验证码
+        $api->get('get_sms_code', 'MsgController@getSmsCode');
+        //获取订单消息列表
+        $api->get('order_msg/get/{store_id}', 'MsgController@getOrderMsgList');
+        //获取系统消息列表
+        $api->get('sys_msg/get/{store_id}', 'MsgController@getSysMsgList');
+        //获取系统消息详情
+        $api->get('sys_msg/details/get/$id', 'MsgController@getSysMsgDetails');
 
+    });
 
-
+});
 
 
 

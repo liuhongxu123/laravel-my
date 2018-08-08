@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Http\Request;
+use Exception;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
+
+        // 将所有的 Exception 全部交给 App\Exceptions\Handler 来处理
+        app('api.exception')->register(function (Exception $exception) {
+            $request = Request::capture();
+            return app('App\Exceptions\Handler')->render($request, $exception);
+        });
     }
 
     /**
