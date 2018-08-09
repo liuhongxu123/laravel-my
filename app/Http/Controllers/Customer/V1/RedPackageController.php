@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 /**
- * @Resource("红包")
+ * @Resource("用户APP-红包")
  */
 class RedPackageController extends Controller
 {
@@ -19,7 +19,7 @@ class RedPackageController extends Controller
      * @Parameters({
      *     @Parameter(
      *         "type",
-     *         description="1/表示正常红包; 0/过期红包"
+     *         description="1/表示正常红包; 0/过期红包",
      *         type="string",
      *         required=true,
      *         default=""

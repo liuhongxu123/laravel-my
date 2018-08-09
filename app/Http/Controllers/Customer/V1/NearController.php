@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+/**
+ * @Resource("用户APP-附近商家")
+ */
 class NearController extends Controller
 {
     /**

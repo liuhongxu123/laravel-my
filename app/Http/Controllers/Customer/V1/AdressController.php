@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("地址")
+ * @Resource("用户APP-地址")
  */
 class AdressController extends Controller
 {

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("协议")
+ * @Resource("用户APP-协议")
  */
 class ProtocolController extends Controller
 {

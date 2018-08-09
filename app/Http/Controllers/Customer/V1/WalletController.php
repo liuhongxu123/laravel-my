@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("电子钱包")
+ * @Resource("用户APP-电子钱包")
  */
 class WalletController extends Controller
 {

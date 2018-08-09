@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("消息通知")
+ * @Resource("用户APP-消息通知")
  */
 class NewsController extends Controller
 {
@@ -98,7 +98,6 @@ class NewsController extends Controller
      *         default=""
      *     )
      * })
-     * @return [type] [description]
      */
     public function systemDetail()
     {

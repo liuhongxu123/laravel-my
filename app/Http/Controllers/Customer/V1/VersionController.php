@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 /**
- * @Resource("版本")
+ * @Resource("用户APP-版本")
  */
 class VersionController extends Controller
 {

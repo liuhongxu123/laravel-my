@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("堂食")
+ * @Resource("用户APP-堂食")
  */
 class StoreController extends Controller
 {

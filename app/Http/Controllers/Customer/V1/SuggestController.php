@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("建议")
+ * @Resource("用户APP-建议")
  */
 class SuggestController extends Controller
 {

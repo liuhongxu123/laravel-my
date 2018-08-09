@@ -61,6 +61,14 @@ DB_PASSWORD=secret
 php artisan lang:publish zh-CN
 ```
 
+### 文档自动生成
+
+生成文档命令
+
+```bash
+php artisan api:docs --name Example  --output-file documentation.md
+```
+
 ## 规范
 
 ### 分支管理规范

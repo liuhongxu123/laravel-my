@@ -8,7 +8,7 @@ use App\V1\Customer;
 
 
 /**
- * @Resource("customers")
+ * @Resource("用户APP-用户")
  */
 
 class CustomerController extends Controller

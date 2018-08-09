@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("收藏")
+ * @Resource("用户APP-收藏")
  */
 class CollectController extends Controller
 {
