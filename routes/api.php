@@ -371,8 +371,6 @@ $api->version('v1', [
         $api->get('business_cat/get', 'StoreController@getBusinessCat');
         //获取店铺信息
         $api->get('store/info/get', 'StoreController@getInfo');
-        //获取公司信息
-        $api->get('company/info/get', 'StoreController@getCompanyInfo');
         //获取店铺营业状态
         $api->get('store/status/get/{type}', 'StoreController@getStoreStatus')->where(['type' => '[0-9]+']);
         //获取餐厅业务信息
@@ -414,6 +412,49 @@ $api->version('v1', [
         //获取系统消息详情
         $api->get('sys_msg/details/get/$id', 'MsgController@getSysMsgDetails');
 
+        //***************************** APP 接口 *************************************
+        //获取app基本信息
+        $api->get('app/get', 'AppController@getInfo');
+        //app检查更新
+        $api->get('app/update', 'AppController@update');
+        //获取app历史版本
+        $api->get('app/version/list/get', 'AppController@getVersionList');
+        //获取app历史版本详情
+        $api->get('app/version/details/get/{id}', 'AppController@getVersionDetails');
+        //获取隐私政策信息
+        $api->get('app/privacy_policy/get', 'AppController@getPrivacyPolicy');
+        //获取商户协议
+        $api->get('app/business_protocol/get', 'AppController@getBusinessProtocol');
+        //获取常见问题列表
+        $api->get('app/faqlist/get', 'AppController@getFAQList');
+        //获取技术联系电话
+        $api->get('app/hotline/get', 'AppController@getHotline');
+
+        //**************************** 用户 接口 *****************************************
+        //获取账户信息
+        $api->get('account_info/get/{id}', 'UserController@getAccountInfo');
+        //修改密码
+        $api->post('password/reset/{id}', 'UserController@resetPassword');
+        //更换绑定手机
+        $api->post('phone/reset', 'UserController@resetPhone');
+        //获取公司信息
+        $api->get('company/info/get', 'UserController@getCompanyInfo');
+
+        //**************************** 意见 接口 ****************************************
+        //意见列表
+        $api->get('suggestion/list/get', 'SuggestionController@getSuggestion');
+        //意见详情
+        $api->get('suggestion/details/get', 'SuggestionController@getSuggestionDetails');
+        //意见提交
+        $api->post('/suggestion/post', 'SuggestionController@PostSuggestion');
+        //获取意见分类
+        $api->get('suggestion/cat/get', 'SuggestionController@getSuggestionCat');
+
+        //**************************** 订单 接口 *******************************************
+        //获取外卖订单列表
+        $api->get('order/take_out/get/{store_id}/{status}', 'OrderController@getTakeOutOrderList');
+        //获取定去订单列表
+        $api->get('order/take_by_yourself/get/{store_id}/{status}', 'OrderController@getTakeByYourselfList');
     });
 
 });

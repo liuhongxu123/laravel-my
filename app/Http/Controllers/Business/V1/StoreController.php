@@ -115,28 +115,6 @@ class StoreController extends Controller {
         return $this->returnJson(0, 'success', $data);
     }
 
-    /**
-     * 获取公司信息
-     * @Get("/company/info/get")
-     * @Versions({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *          "registration_name": "公司注册名",
-     *          "address": "公司地址",
-     *          "tax_registration_certificate": "税务登记号",
-     *          "tax_rate_area": "税率地区",
-     *          "tax_rete_set": "税率设置"
-     *     }})
-     */
-    public function getCompanyInfo () {
-        $data = [
-            'registration_name' => '蚂蚁智慧餐饮有限公司',
-            'address' => '美国纽约xxxxx',
-            'tax_registration_certificate' => '21354521122',
-            'tax_rate_area' => '纽约',
-            'tax_rete_set' => '10%'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
 
     /**
      * 获取店铺营业状态
