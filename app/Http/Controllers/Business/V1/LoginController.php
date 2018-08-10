@@ -13,6 +13,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\ForgetPasswordRequest;
 use App\Http\Requests\Business\V1\LoginRequest;
 
+/**
+ * @Resource("商家后台APP--授权接口")
+ */
 class LoginController extends Controller {
 
     /**

@@ -8,14 +8,15 @@
 
 namespace App\Http\Controllers\Business\V1;
 
-
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\EditStoreBusinessRequest;
 use App\Http\Requests\Business\V1\EditStoreDeliveryRequest;
 use App\Http\Requests\Business\V1\EditStoreHeadRequest;
 use App\Http\Requests\Business\V1\PostStoreInfoRequest;
 
+/**
+ * @Resource("商家后台APP--门店接口")
+ */
 class StoreController extends Controller {
 
     /**
@@ -186,7 +187,7 @@ class StoreController extends Controller {
      * @Parameters({
      *      @Parameter("type", description="服务类型 1=扫码服务 2=外卖服务 3=自取服务 4=堂吃服务")
      *     })
-     * @Response(200, body={"code":0, "message": "","data": })
+     * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
     public function closeService () {

@@ -12,6 +12,9 @@ namespace App\Http\Controllers\Business\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\SetBankCardInfoRequest;
 
+/**
+ * @Resource("商家后台APP--银行卡接口")
+ */
 class BankCardController extends Controller {
 
     /**

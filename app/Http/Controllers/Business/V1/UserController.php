@@ -8,11 +8,13 @@
 
 namespace App\Http\Controllers\Business\V1;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\ResetPasswordRequest;
 use App\Http\Requests\Business\V1\ResetPhoneRequest;
 
+/**
+ * @Resource("商家后台APP--用户接口")
+ */
 class UserController extends Controller {
 
     /**
@@ -51,7 +53,7 @@ class UserController extends Controller {
      *      @Parameter("new_password_confirmation", description="确认新密码", required=true)
      *     })
      * @Versions({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": })
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPassword (ResetPasswordRequest $request) {
         $params = $request->all();

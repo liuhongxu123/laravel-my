@@ -12,11 +12,14 @@ namespace App\Http\Controllers\Business\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\GetSmsCodeRequest;
 
+/**
+ * @Resource("商家后台APP--消息接口")
+ */
 class MsgController extends Controller {
 
     /**
      * 获取验证码
-     * @Post('/get_sms_code')
+     * @Post("/get_sms_code")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("mobile", description="手机号"),

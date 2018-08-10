@@ -17,31 +17,20 @@ use App\Http\Controllers\Controller;
 class AppController extends Controller {
 
     /**
-     * app基本信息
-     * @Get("/app/get")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *     "photo": "app缩略图",
-     *     "version": "版本号"
-     *
-     * }})
-     */
-    public function getInfo () {
-        $data = [
-            'photo' => '1.jpg',
-            'version' => '欧本富商家v1.1.0'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
-
-    /**
      * app检查更新
      * @Get("/app/update")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *      "version": "版本号",
+     *      "download_url": "版本下载地址"
+     *     }})
      */
     public function update () {
-        return $this->returnJson(0, '已是最新版本');
+        $data = [
+            'version' => 'v1.0',
+            'download_url' => 'http://www.aaa.com'
+        ];
+        return $this->returnJson(0, 'success', $data);
     }
 
     /**
@@ -70,42 +59,12 @@ class AppController extends Controller {
      *     })
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
-     *          "content": "更新内容"
+     *          "content": "富文本内容，包含HTML标签，需要解析"
      *     }})
      */
     public function getVersionDetails () {
         $data = [
-            'content' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg')
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
-
-    /**
-     * 获取隐私政策信息
-     * @Get("/app/privacy_policy/get")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *          "content": "政策内容"
-     *     }})
-     */
-    public function getPrivacyPolicy () {
-        $data = [
-            'content' => '这是隐私政策的内容'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
-
-    /**
-     * 获取商户协议
-     * @Get("/app/business_protocol/get")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *          "content": "骑手协议内容"
-     *     }})
-     */
-    public function getBusinessProtocol () {
-        $data = [
-            'content' => '这是商户协议的内容'
+            'content' => '<p>版本详情，版本详情，这是详情</p>'
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -132,7 +91,7 @@ class AppController extends Controller {
      * @Get("/app/hotline/get")
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
-     *
+     *      "mobile": "技术热线电话"
      *     }})
      */
     public function getHotline () {

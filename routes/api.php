@@ -355,6 +355,7 @@ $api->version('v1', [
         $api->post('password/forget', 'LoginController@forgetPassword');
 
 
+        //***************************** 银行卡 接口 **********************************
         //获取银行卡信息
         $api->get('bank_card_info/get', 'BankCardController@getBankCardInfo');
         //设置银行卡信息
@@ -363,6 +364,8 @@ $api->version('v1', [
         $api->get('credit_card_info/get', 'BankCardController@getCreditCardInfo');
         //设置信用卡信息
         $api->post('credit_card_info/set', 'BankCardController@setCreditCardInfo');
+
+        //****************************** 店铺 接口 ************************************
         //设置店铺信息
         $api->post('store/info/set', 'StoreController@setInfo');
         //获取人员规模分类
@@ -403,6 +406,8 @@ $api->version('v1', [
         $api->post('store/auto_take_order/open/{id}', 'StoreController@openAutoTakeOrder');
         //关闭自动接单
         $api->get('store/auto_take_order/close/{id}', 'StoreController@closeAutoTakeOrder');
+
+        //******************************* 消息 接口 **************************************
         //获取验证码
         $api->get('get_sms_code', 'MsgController@getSmsCode');
         //获取订单消息列表
@@ -413,22 +418,23 @@ $api->version('v1', [
         $api->get('sys_msg/details/get/$id', 'MsgController@getSysMsgDetails');
 
         //***************************** APP 接口 *************************************
-        //获取app基本信息
-        $api->get('app/get', 'AppController@getInfo');
         //app检查更新
         $api->get('app/update', 'AppController@update');
         //获取app历史版本
         $api->get('app/version/list/get', 'AppController@getVersionList');
         //获取app历史版本详情
         $api->get('app/version/details/get/{id}', 'AppController@getVersionDetails');
-        //获取隐私政策信息
-        $api->get('app/privacy_policy/get', 'AppController@getPrivacyPolicy');
-        //获取商户协议
-        $api->get('app/business_protocol/get', 'AppController@getBusinessProtocol');
         //获取常见问题列表
         $api->get('app/faqlist/get', 'AppController@getFAQList');
         //获取技术联系电话
         $api->get('app/hotline/get', 'AppController@getHotline');
+
+        //****************************** 协议 接口 ************************************
+        //获取协议列表
+        $api->get('protocol/list/get', 'ProtocolController@getList');
+        //获取协议详情
+        $api->get('protocol/details/get/{id}', 'ProtocolController@getDetails');
+
 
         //**************************** 用户 接口 *****************************************
         //获取账户信息
@@ -455,6 +461,22 @@ $api->version('v1', [
         $api->get('order/take_out/get/{store_id}/{status}', 'OrderController@getTakeOutOrderList');
         //获取定去订单列表
         $api->get('order/take_by_yourself/get/{store_id}/{status}', 'OrderController@getTakeByYourselfList');
+        //获取待处理订单
+        $api->get('order/pending/get/{store_id}/{status}', 'OrderController@getPendingList');
+        //出餐完成
+        $api->post('order/meal/finish/{order_id}', 'OrderController@FinishMeal');
+        //同意退款
+        $api->post('order/refund/approve/{order_id}', 'OrderController@approveRefund');
+        //拒绝退款
+        $api->post('order/refund/refund/{order_id}', 'OrderController@refushRefund');
+        //获取可选拒绝退款理由
+        $api->get('reason/refund/get', 'OrderController@getRefundReasons');
+        //获取可选取消订单理由
+        $api->get('reason/order_cancel/get', 'OrderController@getCancelOrderReasons');
+
+        //***************************** 统计 接口 ***************************************************
+        //获取每日统计
+        $api->get('statistics/day/get/{time}', 'StatisticsController@getStatisticsOfDay');
     });
 
 });

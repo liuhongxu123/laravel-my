@@ -8,12 +8,11 @@
 
 namespace App\Http\Controllers\Business\V1;
 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\PostSuggestionRequest;
 
 /**
- * @Resource("商家后台APP--意见相关接口")
+ * @Resource("商家后台APP--意见接口")
  */
 class SuggestionController extends Controller {
 
