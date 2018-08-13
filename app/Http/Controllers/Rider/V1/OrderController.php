@@ -22,7 +22,7 @@ class OrderController extends Controller {
 
     /**
      * 获取订单列表
-     * @Get("/api/rider/order/get_list")
+     * @Get("/api/rider/order/list/get/$status")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("status", description="订单状态", required=true, type="integer")
@@ -40,8 +40,8 @@ class OrderController extends Controller {
      *          "store_name": "商家名称"
      *     }}})
      */
-    public function getList (GetOrderListRequest $request) {
-        switch (intval($request->input('status'))) {
+    public function getList ($status) {
+        switch ($status) {
             case -1:    //已取消订单
                 $data = [
                     [
@@ -152,7 +152,10 @@ class OrderController extends Controller {
 
     /**
      * 获取订单详情
-     * @Get("/api/rider/order/details")
+     * @Get("/api/rider/order/details/get/$id")
+     * @Parameters({
+     *      @Parameter("id", description="订单id", required=true, type="integer")
+     *     })
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "origin": "取货地址",
@@ -177,7 +180,7 @@ class OrderController extends Controller {
      *     }}
      *     }})
      */
-    public function getDetails (GetOrderDetailsRequest $request) {
+    public function getDetails () {
        $data = [
            'origin' => '广州市天河区东圃镇',
            'dest' => '广州市天河区车陂地铁站',
@@ -213,7 +216,7 @@ class OrderController extends Controller {
 
     /**
      * 获取订单明细
-     * @Get("/api/rider/order/order_statement")
+     * @Get("/api/rider/order/statement/get")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("month", description="月份(传参方式形如：2018-03 的月份)")
@@ -352,7 +355,7 @@ class OrderController extends Controller {
 
     /**
      * 订单异常报备
-     * @Post("/api/rider/order/abnormal_post")
+     * @Post("/api/rider/order/abnormity/post")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("cat_id", description="异常分类id", required=true, type="integer"),
@@ -374,7 +377,7 @@ class OrderController extends Controller {
 
     /**
      * 获取订单异常类型
-     * @Get("/api/rider/order/abnormal_cat")
+     * @Get("/api/rider/order/abnormity_cat/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "id": "订单异常分类id",

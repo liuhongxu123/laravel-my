@@ -19,7 +19,7 @@ class AppController extends Controller {
 
     /**
      * app基本信息
-     * @Get("/api/rider/app/info")
+     * @Get("/api/rider/app/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *     "photo": "app缩略图",
@@ -47,7 +47,7 @@ class AppController extends Controller {
 
     /**
      * app历史版本列表
-     * @Get("/api/rider/app/version")
+     * @Get("/api/rider/app/version/list/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *      "id": "版本id",
@@ -65,13 +65,16 @@ class AppController extends Controller {
 
     /**
      * app历史版本详情
-     * @Get("/api/rider/app/version/details")
+     * @Get("/api/rider/app/version/details/get/$id")
+     * @Parameters({
+     *      @Parameter("id", description="版本id", required=true, type="integer")
+     *     })
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "content": "更新内容"
      *     }})
      */
-    public function getVersionDetails (GetVersionDetailsRequest $request) {
+    public function getVersionDetails () {
         $data = [
             'content' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg')
         ];
@@ -79,38 +82,8 @@ class AppController extends Controller {
     }
 
     /**
-     * 获取隐私政策信息
-     * @Get("/api/rider/app/privacy_policy")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *          "content": "政策内容"
-     *     }})
-     */
-    public function getPrivacyPolicy () {
-        $data = [
-            'content' => '这是隐私政策的内容'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
-
-    /**
-     * 获取骑手协议
-     * @Get("/api/rider/app/rider_protocol")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *          "content": "骑手协议内容"
-     *     }})
-     */
-    public function getRiderProtocol () {
-        $data = [
-            'content' => '这是骑手协议的内容'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
-
-    /**
      * 获取热线
-     * @Get("/api/rider/app/hotline")
+     * @Get("/api/rider/app/hotline/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "name": "热线名称",
@@ -127,7 +100,7 @@ class AppController extends Controller {
 
     /**
      * 获取短信模板
-     * @Get("/api/rider/app/smstmpl")
+     * @Get("/api/rider/app/smstmpl/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "content": "短信模板内容"

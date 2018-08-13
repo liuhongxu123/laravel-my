@@ -2,13 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/8
- * Time: 9:46
+ * Date: 2018/8/13
+ * Time: 17:27
  */
+
 namespace App\Http\Requests\Business\V1;
+
+
 use Dingo\Api\Http\FormRequest;
 
-class GetSmsCodeRequest extends FormRequest {
+class UpdateStoreTimeRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -16,8 +19,9 @@ class GetSmsCodeRequest extends FormRequest {
 
     public function rules () {
         return [
-            'mobile' => 'required|regex:/^\d{10,11}$/',
-            'sms_type' => 'required'
+            'store_id' => 'required|integer',
+            'work_day' => 'required',
+            'work_time' => 'required'
         ];
     }
 }

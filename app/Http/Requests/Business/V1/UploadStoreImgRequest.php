@@ -2,16 +2,15 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/3
- * Time: 17:34
+ * Date: 2018/8/13
+ * Time: 17:43
  */
 
-namespace App\Http\Requests\Rider\V1;
-
+namespace App\Http\Requests\Business\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class GetOrderDetailsRequest extends FormRequest {
+class UploadStoreImgRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,7 +18,8 @@ class GetOrderDetailsRequest extends FormRequest {
 
     public function rules () {
         return [
-            'id' => 'required|integer'
+            'store_id' => 'required|integer',
+            'store_img' => 'required'
         ];
     }
 }

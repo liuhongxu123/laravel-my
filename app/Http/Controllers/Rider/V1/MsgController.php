@@ -20,7 +20,7 @@ class MsgController extends Controller {
 
     /**
      * 获取订单消息列表
-     * @Get("/api/rider/ordermsg")
+     * @Get("/api/rider/ordermsg/list/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "order_id": "订单id",
@@ -38,7 +38,7 @@ class MsgController extends Controller {
 
     /**
      * 获取系统消息列表
-     * @Get("/api/rider/sysmsg")
+     * @Get("/api/rider/sysmsg/list/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "id": "消息id",
@@ -56,11 +56,14 @@ class MsgController extends Controller {
 
     /**
      * 获取系统消息详情
-     * @Get("/api/rider/sysmsg/details")
+     * @Get("/api/rider/sysmsg/details/get/$id")
+     * @Parameters({
+     *      @Parameter("id", description="消息id", required=true, type="integer")
+     *     })
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function getSysMsgDetails (GetSysmsgDetailsRequest $request) {
+    public function getSysMsgDetails () {
         $data = [
             'title' => '爱因斯坦他老人家说，如果你无法简洁的表达你的想法，那只说明你还不够了解它',
             'content' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg'),

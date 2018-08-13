@@ -246,63 +246,63 @@ $api->version('v1', [
         //更换绑定手机
         $api->post('rider/phone/reset', 'UserController@resetPhone');
         //骑手基本信息
-        $api->get('rider/basic_info', 'UserController@getBasicInfo');
+        $api->get('rider/basic_info/get', 'UserController@getBasicInfo');
         //骑手本月战绩
-        $api->get('rider/month_score', 'UserController@getMonthScore');
-        //骑手入驻
-        //$api->post('rider/join', 'UserController@join');
+        $api->get('rider/month_score/get', 'UserController@getMonthScore');
         //骑手实名认证
         $api->post('rider/certificate', 'UserController@certificate');
         //骑手实名信息
-        $api->get('rider/certificate_info', 'UserController@getCertificateInfo');
+        $api->get('rider/certificate_info/get', 'UserController@getCertificateInfo');
         //骑手余额基本信息
-        $api->get('rider/balance', 'UserController@getBalance');
+        $api->get('rider/balance/get', 'UserController@getBalance');
         //获取银行流水
-        $api->get('rider/bank_statement', 'UserController@getBankStatement');
+        $api->get('rider/bank_statement/get', 'UserController@getBankStatement');
         //骑手收款账户信息
-        $api->get('rider/account', 'UserController@getAccountInfo');
+        $api->get('rider/account/get', 'UserController@getAccountInfo');
         //骑手收款账户设置
-        $api->post('rider/account/set', 'UserController@accountSet');
+        $api->post('rider/account/update', 'UserController@accountSet');
         //骑手评价信息
-        $api->get('rider/evaluate', 'UserController@evaluate');
+        $api->get('rider/evaluate/get', 'UserController@evaluate');
         //设置工作状态
-        $api->post('rider/set_work_status', 'UserController@setWorkStatus');
+        $api->post('rider/work_status/update', 'UserController@setWorkStatus');
 
         //************************  骑手意见相关Api  ***************************************
         //骑手意见列表
-        $api->get('rider/suggestion', 'SuggestionController@getSuggestion');
+        $api->get('rider/suggestion/list/get', 'SuggestionController@getSuggestion');
         //骑手意见详情
-        $api->get('rider/suggestion/details', 'SuggestionController@getSuggestionDetails');
+        $api->get('rider/suggestion/details/get/{id}', 'SuggestionController@getSuggestionDetails')->where(['id' => '[0-9]+']);
         //骑手提交意见
         $api->post('rider/suggestion/post', 'SuggestionController@suggestionPost');
         //获取意见分类
-        $api->get('rider/suggestion/cat', 'SuggestionController@getSuggestionCat');
+        $api->get('rider/suggestion/cat/get', 'SuggestionController@getSuggestionCat');
 
-        //************************  App相关Api  ***************************************
+        //************************  App 接口 ***************************************
         //获取app基本信息
-        $api->get('rider/app/info', 'AppController@getInfo');
+        $api->get('rider/app/get', 'AppController@getInfo');
         //更新app
         $api->get('rider/app/update', 'AppController@update');
         //app历史版本
-        $api->get('rider/app/version', 'AppController@getVersionList');
+        $api->get('rider/app/version/list/get', 'AppController@getVersionList');
         //app版本详情
-        $api->get('rider/app/version/details', 'AppController@getVersionDetails');
-        //获取骑手协议
-        $api->get('rider/app/rider_protocol', 'AppController@getRiderProtocol');
-        //获取隐私政策信息
-        $api->get('rider/app/privacy_policy', 'AppController@getPrivacyPolicy');
+        $api->get('rider/app/version/details/get', 'AppController@getVersionDetails');
         //获取客服热线
-        $api->get('rider/app/hotline', 'AppController@getHotline');
+        $api->get('rider/app/hotline/get', 'AppController@getHotline');
         //获取短信模板
-        $api->get('rider/app/smstmpl', 'AppController@getSmsTmpl');
+        $api->get('rider/app/smstmpl/get', 'AppController@getSmsTmpl');
+
+        //************************* 协议 接口 ***************************************
+        //获取协议列表
+        $api->get('rider/protocol/list/get', 'ProtocolController@getList');
+        //获取协议详情
+        $api->get('rider/protocol/details/get/{id}', 'ProtocolController@getDetails')->where(['id' => '[0-9]+']);
 
         //************************  订单相关Api  ***************************************
         //订单列表
-        $api->get('rider/order/get_list', 'OrderController@getList');
+        $api->get('rider/order/list/get/{status}', 'OrderController@getList')->where(['status' => '-?[0-9]+']);
         //获取订单详情
-        $api->get('rider/order/details', 'OrderController@getDetails');
+        $api->get('rider/order/details/get/{id}', 'OrderController@getDetails')->where(['id' => '[0-9]+']);
         //获取订单明细
-        $api->get('rider/order/order_statement', 'OrderController@getOrderStatement');
+        $api->get('rider/order/statement/get', 'OrderController@getOrderStatement');
         //骑手确认接单
         $api->post('rider/order/robbing', 'OrderController@robbing');
         //骑手到店上报
@@ -318,17 +318,17 @@ $api->version('v1', [
         //取消转单
         $api->post('rider/order/cancel_slip', 'OrderController@cancelSlip');
         //获取订单异常类型
-        $api->get('rider/order/abnormal_cat', 'OrderController@getAbnormalCat');
+        $api->get('rider/order/abnormity_cat/get', 'OrderController@getAbnormalCat');
         //订单异常报备
-        $api->post('rider/order/abnormal_post', 'OrderController@abnormalPost');
+        $api->post('rider/order/abnormity/post', 'OrderController@abnormalPost');
 
         //************************  消息相关Api  ***************************************
         //获取订单消息
-        $api->get('rider/ordermsg', 'MsgController@getOrdersMsg');
+        $api->get('rider/ordermsg/list/get', 'MsgController@getOrdersMsg');
         //获取系统消息
-        $api->get('rider/sysmsg', 'MsgController@getSysMsg');
+        $api->get('rider/sysmsg/list/get', 'MsgController@getSysMsg');
         //获取系统消息详情
-        $api->get('rider/sysmsg/details', 'MsgController@getSysMsgDetails');
+        $api->get('rider/sysmsg/details/{id}', 'MsgController@getSysMsgDetails')->where(['id' => '[0-9]+']);
         //获取短信验证码
         $api->post('rider/get_sms_code', 'MsgController@getSmsCode');
 
@@ -341,7 +341,7 @@ $api->version('v1', [
  */
 $api->version('v1', [
     'namespace' => 'App\Http\Controllers\Business\V1',
-    //'middleware' => 'JwtRider'
+    'middleware' => 'jwt.business.app'
 ], function ($api) {
 
     $api->group(['prefix' => 'business'], function ($api) {
@@ -354,129 +354,137 @@ $api->version('v1', [
         //忘记密码
         $api->post('password/forget', 'LoginController@forgetPassword');
 
-
-        //***************************** 银行卡 接口 **********************************
-        //获取银行卡信息
-        $api->get('bank_card_info/get', 'BankCardController@getBankCardInfo');
-        //设置银行卡信息
-        $api->post('bank_card_info/set', 'BankCardController@setBankCardInfo');
-        //获取信用卡信息
-        $api->get('credit_card_info/get', 'BankCardController@getCreditCardInfo');
-        //设置信用卡信息
-        $api->post('credit_card_info/set', 'BankCardController@setCreditCardInfo');
-
-        //****************************** 店铺 接口 ************************************
         //设置店铺信息
-        $api->post('store/info/set', 'StoreController@setInfo');
+        $api->post('store/info/update', 'StoreController@setInfo');
         //获取人员规模分类
         $api->get('staff_size_cat/get', 'StoreController@getStaffSizeCat');
         //获取营业类别
         $api->get('business_cat/get', 'StoreController@getBusinessCat');
-        //获取店铺信息
-        $api->get('store/info/get', 'StoreController@getInfo');
-        //获取店铺营业状态
-        $api->get('store/status/get/{type}', 'StoreController@getStoreStatus')->where(['type' => '[0-9]+']);
-        //获取餐厅业务信息
-        $api->get('store/service/get/{id}', 'StoreController@getService');
-        //开启业务
-        $api->post('store/service/open/{id}/{type}', 'StoreController@openService');
-        //关闭业务
-        $api->post('store/service/close/{id}/$type', 'StoreController@closeService');
-        //修改门店头像
-        $api->post('store/head/edit', 'StoreController@editStoreHead');
-        //修改门店名称
-        $api->post('store/name/edit/{id}', 'StoreController@editStoreName');
-        //修改门店联系电话
-        $api->post('store/tel/edit/{id}', 'StoreController@editStoreTel');
-        //修改门店地址
-        $api->post('store/address/edit', 'StoreController@editStoreAddress');
-        //修改门店公告
-        $api->post('store/notice/edit/{id}', 'StoreController@editStoreNotice');
-        //获取配送信息
-        $api->get('store/delivery/get/{id}', 'StoreController@getDeliveryInfo');
-        //设置配送信息
-        $api->post('store/delivery/edit', 'StoreController@editDeliveryInfo');
-        //设置经营类别
-        $api->post('store/business/edit', 'StoreController@editStoreBusiness');
-        //获取所有服务设施
-        $api->get('installation/get/{id}', 'StoreController@getInstallation');
-        //修改门店服务设施
-        $api->post('store/installation/edit', 'StoreController@editStoreInstalltion');
-        //开启自动接单
-        $api->post('store/auto_take_order/open/{id}', 'StoreController@openAutoTakeOrder');
-        //关闭自动接单
-        $api->get('store/auto_take_order/close/{id}', 'StoreController@closeAutoTakeOrder');
 
-        //******************************* 消息 接口 **************************************
-        //获取验证码
-        $api->get('get_sms_code', 'MsgController@getSmsCode');
-        //获取订单消息列表
-        $api->get('order_msg/get/{store_id}', 'MsgController@getOrderMsgList');
-        //获取系统消息列表
-        $api->get('sys_msg/get/{store_id}', 'MsgController@getSysMsgList');
-        //获取系统消息详情
-        $api->get('sys_msg/details/get/$id', 'MsgController@getSysMsgDetails');
+        $api->group([
+            'middleware' => ['jwt.auth.and.refresh']
+        ], function ($api) {
+            //***************************** 银行卡 接口 **********************************
+            //获取银行卡信息
+            $api->get('bank_card_info/get', 'BankCardController@getBankCardInfo');
+            //设置银行卡信息
+            $api->post('bank_card_info/set', 'BankCardController@setBankCardInfo');
+            //获取信用卡信息
+            $api->get('credit_card_info/get', 'BankCardController@getCreditCardInfo');
+            //设置信用卡信息
+            $api->post('credit_card_info/set', 'BankCardController@setCreditCardInfo');
 
-        //***************************** APP 接口 *************************************
-        //app检查更新
-        $api->get('app/update', 'AppController@update');
-        //获取app历史版本
-        $api->get('app/version/list/get', 'AppController@getVersionList');
-        //获取app历史版本详情
-        $api->get('app/version/details/get/{id}', 'AppController@getVersionDetails');
-        //获取常见问题列表
-        $api->get('app/faqlist/get', 'AppController@getFAQList');
-        //获取技术联系电话
-        $api->get('app/hotline/get', 'AppController@getHotline');
+            //****************************** 店铺 接口 ************************************
+            //获取店铺信息
+            $api->get('store/info/get/{store_id}', 'StoreController@getInfo')->where(['store_id' => '[0-9]+']);
+            //获取店铺营业状态
+            $api->get('store/status/get/{store_id}/{type}', 'StoreController@getStoreStatus')->where(['store_id' => '[0-9]+', 'type' => '[0-9]+']);
+            //设置店铺营业时间
+            $api->post('store/time/update', 'StoreController@updateStoreTime');
+            //上传商家图片
+            $api->post('store/img/upload', 'StoreController@uploadStoreImg');
+            //获取餐厅业务信息
+            $api->get('store/service/get/{store_id}', 'StoreController@getService')->where(['store_id' => '[0-9]+']);
+            //开启业务
+            $api->post('store/service/open/{store_id}/{type}', 'StoreController@openService')->where(['store_id' => '[0-9]+', 'type' => '[0-9]+']);
+            //关闭业务
+            $api->post('store/service/close/{store_id}/{type}', 'StoreController@closeService')->where(['store_id' => '[0-9]+', 'type' => '[0-9]+']);
+            //修改门店头像
+            $api->post('store/head/edit', 'StoreController@editStoreHead');
+            //修改门店名称
+            $api->post('store/name/edit/{id}', 'StoreController@editStoreName');
+            //修改门店联系电话
+            $api->post('store/tel/edit/{id}', 'StoreController@editStoreTel');
+            //修改门店地址
+            $api->post('store/address/edit', 'StoreController@editStoreAddress');
+            //修改门店公告
+            $api->post('store/notice/edit/{id}', 'StoreController@editStoreNotice');
+            //获取配送信息
+            $api->get('store/delivery/get/{id}', 'StoreController@getDeliveryInfo');
+            //设置配送信息
+            $api->post('store/delivery/edit', 'StoreController@editDeliveryInfo');
+            //设置经营类别
+            $api->post('store/business/edit', 'StoreController@editStoreBusiness');
+            //获取所有服务设施
+            $api->get('installation/get/{id}', 'StoreController@getInstallation');
+            //修改门店服务设施
+            $api->post('store/installation/edit', 'StoreController@editStoreInstalltion');
+            //开启自动接单
+            $api->post('store/auto_take_order/open/{id}', 'StoreController@openAutoTakeOrder');
+            //关闭自动接单
+            $api->get('store/auto_take_order/close/{id}', 'StoreController@closeAutoTakeOrder');
 
-        //****************************** 协议 接口 ************************************
-        //获取协议列表
-        $api->get('protocol/list/get', 'ProtocolController@getList');
-        //获取协议详情
-        $api->get('protocol/details/get/{id}', 'ProtocolController@getDetails');
+            //******************************* 消息 接口 **************************************
+            //获取验证码
+            $api->post('get_sms_code', 'MsgController@getSmsCode');
+            //获取订单消息列表
+            $api->get('ordermsg/get/{store_id}', 'MsgController@getOrderMsgList')->where(['store_id' => '[0-9]+']);
+            //获取系统消息列表
+            $api->get('sysmsg/get', 'MsgController@getSysMsgList');
+            //获取系统消息详情
+            $api->get('sysmsg/details/get/{id}', 'MsgController@getSysMsgDetails')->where(['id' => '[0-9]+']);
+
+            //***************************** APP 接口 *************************************
+            //app检查更新
+            $api->get('app/update', 'AppController@update');
+            //获取app历史版本
+            $api->get('app/version/list/get', 'AppController@getVersionList');
+            //获取app历史版本详情
+            $api->get('app/version/details/get/{id}', 'AppController@getVersionDetails');
+            //获取常见问题列表
+            $api->get('app/faqlist/get', 'AppController@getFAQList');
+            //获取技术联系电话
+            $api->get('app/hotline/get', 'AppController@getHotline');
+
+            //****************************** 协议 接口 ************************************
+            //获取协议列表
+            $api->get('protocol/list/get', 'ProtocolController@getList');
+            //获取协议详情
+            $api->get('protocol/details/get/{id}', 'ProtocolController@getDetails')->where(['id' => '[0-9]+']);
 
 
-        //**************************** 用户 接口 *****************************************
-        //获取账户信息
-        $api->get('account_info/get/{id}', 'UserController@getAccountInfo');
-        //修改密码
-        $api->post('password/reset/{id}', 'UserController@resetPassword');
-        //更换绑定手机
-        $api->post('phone/reset', 'UserController@resetPhone');
-        //获取公司信息
-        $api->get('company/info/get', 'UserController@getCompanyInfo');
+            //**************************** 用户 接口 *****************************************
+            //获取账户信息
+            $api->get('account_info/get/{id}', 'UserController@getAccountInfo');
+            //修改密码
+            $api->post('password/reset/{id}', 'UserController@resetPassword');
+            //更换绑定手机
+            $api->post('phone/reset', 'UserController@resetPhone');
+            //获取公司信息
+            $api->get('company/info/get', 'UserController@getCompanyInfo');
 
-        //**************************** 意见 接口 ****************************************
-        //意见列表
-        $api->get('suggestion/list/get', 'SuggestionController@getSuggestion');
-        //意见详情
-        $api->get('suggestion/details/get', 'SuggestionController@getSuggestionDetails');
-        //意见提交
-        $api->post('/suggestion/post', 'SuggestionController@PostSuggestion');
-        //获取意见分类
-        $api->get('suggestion/cat/get', 'SuggestionController@getSuggestionCat');
+            //**************************** 意见 接口 ****************************************
+            //意见列表
+            $api->get('suggestion/list/get', 'SuggestionController@getSuggestion');
+            //意见详情
+            $api->get('suggestion/details/get', 'SuggestionController@getSuggestionDetails');
+            //意见提交
+            $api->post('suggestion/post', 'SuggestionController@PostSuggestion');
+            //获取意见分类
+            $api->get('suggestion/cat/get', 'SuggestionController@getSuggestionCat');
 
-        //**************************** 订单 接口 *******************************************
-        //获取外卖订单列表
-        $api->get('order/take_out/get/{store_id}/{status}', 'OrderController@getTakeOutOrderList');
-        //获取定去订单列表
-        $api->get('order/take_by_yourself/get/{store_id}/{status}', 'OrderController@getTakeByYourselfList');
-        //获取待处理订单
-        $api->get('order/pending/get/{store_id}/{status}', 'OrderController@getPendingList');
-        //出餐完成
-        $api->post('order/meal/finish/{order_id}', 'OrderController@FinishMeal');
-        //同意退款
-        $api->post('order/refund/approve/{order_id}', 'OrderController@approveRefund');
-        //拒绝退款
-        $api->post('order/refund/refund/{order_id}', 'OrderController@refushRefund');
-        //获取可选拒绝退款理由
-        $api->get('reason/refund/get', 'OrderController@getRefundReasons');
-        //获取可选取消订单理由
-        $api->get('reason/order_cancel/get', 'OrderController@getCancelOrderReasons');
+            //**************************** 订单 接口 *******************************************
+            //获取外卖订单列表
+            $api->get('order/take_out/get/{store_id}/{status}', 'OrderController@getTakeOutOrderList');
+            //获取定去订单列表
+            $api->get('order/take_by_yourself/get/{store_id}/{status}', 'OrderController@getTakeByYourselfList');
+            //获取待处理订单
+            $api->get('order/pending/get/{store_id}/{status}', 'OrderController@getPendingList');
+            //出餐完成
+            $api->post('order/meal/finish/{order_id}', 'OrderController@FinishMeal');
+            //同意退款
+            $api->post('order/refund/approve/{order_id}', 'OrderController@approveRefund');
+            //拒绝退款
+            $api->post('order/refund/refund/{order_id}', 'OrderController@refushRefund');
+            //获取可选拒绝退款理由
+            $api->get('reason/refund/get', 'OrderController@getRefundReasons');
+            //获取可选取消订单理由
+            $api->get('reason/order_cancel/get', 'OrderController@getCancelOrderReasons');
 
-        //***************************** 统计 接口 ***************************************************
-        //获取每日统计
-        $api->get('statistics/day/get/{time}', 'StatisticsController@getStatisticsOfDay');
+            //***************************** 统计 接口 ***************************************************
+            //获取每日统计
+            $api->get('statistics/day/get/{time}', 'StatisticsController@getStatisticsOfDay');
+        });
     });
 
 });

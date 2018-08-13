@@ -99,10 +99,10 @@ class UserController extends Controller {
     public function getCompanyInfo () {
         $data = [
             'registration_name' => '蚂蚁智慧餐饮有限公司',
-            'address' => '美国纽约xxxxx',
+            'company_address' => '美国纽约xxxxx',
             'tax_registration_certificate' => '21354521122',
             'tax_rate_area' => '纽约',
-            'tax_rete_set' => '10%'
+            'tax_reta_set' => '10%'
         ];
         return $this->returnJson(0, 'success', $data);
     }

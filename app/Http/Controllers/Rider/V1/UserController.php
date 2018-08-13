@@ -25,7 +25,7 @@ class UserController extends Controller {
 
     /**
      * 骑手基本信息
-     * @Get("/api/rider/basic_info")
+     * @Get("/api/rider/basic_info/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "real_name": "真实姓名",
@@ -86,7 +86,7 @@ class UserController extends Controller {
 
     /**
      * 骑手设置工作状态
-     * @Post("/api/rider/set_work_status")
+     * @Post("/api/rider/work_status/update")
      * @Parameters({
      *      @Parameter("work_status", description="工作状态 work_status=1 开工，work_status=0 休息状态")
      * })
@@ -97,8 +97,8 @@ class UserController extends Controller {
     }
 
     /**
-     * 骑手本月战绩
-     * @Get("/api/rider/month_score")
+     * 获取本月战绩
+     * @Get("/api/rider/month_score/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "date": "日期",
@@ -167,7 +167,7 @@ class UserController extends Controller {
 
     /**
      * 骑手实名信息
-     * @Get("/api/rider/certificate_info")
+     * @Get("/api/rider/certificate_info/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "real_name": "真实姓名",
@@ -196,7 +196,7 @@ class UserController extends Controller {
 
     /**
      * 骑手基本余额信息
-     * @Get("/api/rider/balance")
+     * @Get("/api/rider/balance/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "balance": "余额",
@@ -281,7 +281,7 @@ class UserController extends Controller {
 
     /**
      * 获取银行流水
-     * @Get("api/rider/bank_statement")
+     * @Get("api/rider/bank_statement/get")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("month", description="月份(传参方式形如：2018-03 的月份)")
@@ -338,7 +338,7 @@ class UserController extends Controller {
 
     /**
      * 骑手银行账户信息
-     * @Get("/api/rider/account")
+     * @Get("/api/rider/account/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "bank_code": "银行代码",
@@ -359,7 +359,7 @@ class UserController extends Controller {
 
     /**
      * 骑手收款账户设置
-     * @Post("/api/rider/account/set")
+     * @Post("/api/rider/account/update")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("bank_code", description="银行代码", required=true),
@@ -375,7 +375,7 @@ class UserController extends Controller {
 
     /**
      * 骑手评价信息
-     * @Get("/api/rider/evaluate")
+     * @Get("/api/rider/evaluate/get")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("type",description="类型--type = 1 满意 type =2 不满意",default=0, type="integer")

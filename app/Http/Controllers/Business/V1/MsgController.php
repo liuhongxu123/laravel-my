@@ -40,7 +40,10 @@ class MsgController extends Controller {
 
     /**
      * 获取订单消息列表
-     * @Get("/order_msg/get/$store_id")
+     * @Get("/ordermsg/get/$store_id")
+     * @Parameters({
+     *      @Parameter("store_id", description="门店id", required=true, type="integer")
+     *     })
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "order_id": "订单id",
@@ -71,7 +74,7 @@ class MsgController extends Controller {
 
     /**
      * 获取系统消息列表
-     * @Get("/sys_msg/get/$store_id")
+     * @Get("/sysmsg/get")
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *          "id": "消息id",
@@ -102,21 +105,21 @@ class MsgController extends Controller {
 
     /**
      * 获取系统消息详情
-     * @Get("/sys_msg/details/get/$id")
+     * @Get("/sysmsg/details/get/$id")
      * @Parameters({
      *      @Parameter("id", description="系统消息id", required=true, type="integer")
      *     })
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "title": "标题",
-     *          "content": "富文本内容，图片格式",
+     *          "content": "富文本内容，包含html，需要解析",
      *          "date": "日期"
      *     }})
      */
     public function getSysMsgDetails ($id) {
         $data = [
             'title' => '这是标题',
-            'content' => '1.jpg',
+            'content' => '<p>这是系统消息的内容</p>',
             'date' => '2018-05-05 12:12:12'
         ];
         return $this->returnJson(0, 'success', $data);

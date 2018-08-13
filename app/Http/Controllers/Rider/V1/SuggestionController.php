@@ -21,7 +21,7 @@ class SuggestionController extends Controller {
 
     /**
      * 骑手意见列表
-     * @Get("/api/rider/suggestion")
+     * @Get("/api/rider/suggestion/list/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *      "content": "意见内容",
@@ -41,8 +41,11 @@ class SuggestionController extends Controller {
 
     /**
      * 骑手意见详情
-     * @Get("/api/rider/suggestion/details")
+     * @Get("/api/rider/suggestion/details/get/$id")
      * @Version({"v1"})
+     * @Parameter({
+     *      @Parameter("id", description="意见id", required=true, type="integer")
+     *     })
      * @Response(200, body={"code":0, "message": "","data": {
      *      "cat_id": "意见分类id",
      *      "content": "意见具体内容",
@@ -51,7 +54,7 @@ class SuggestionController extends Controller {
      *     }}
      *     }})
      */
-    public function getSuggestionDetails (GetSuggestionDetailsRequest $request) {
+    public function getSuggestionDetails () {
         $data = [
             'cat_id' => 1,
             'content' => '这是意见的内容，这里有很多的内容，此处省略好多字',
@@ -83,7 +86,7 @@ class SuggestionController extends Controller {
 
     /**
      * 获取意见分类
-     * @Get("/api/rider/suggestion/cat")
+     * @Get("/api/rider/suggestion/cat/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *      "id": "类别ID",

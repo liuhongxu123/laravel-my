@@ -12,6 +12,8 @@ namespace App\Http\Controllers\Business\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\ForgetPasswordRequest;
 use App\Http\Requests\Business\V1\LoginRequest;
+use App\Http\Requests\Business\V1\RegRequest;
+use App\V1\Business;
 
 /**
  * @Resource("商家后台APP--授权接口")
@@ -29,7 +31,7 @@ class LoginController extends Controller {
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function reg () {
+    public function reg (RegRequest $request) {
         return $this->returnJson(0, '注册成功');
     }
 
@@ -45,7 +47,10 @@ class LoginController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function login (LoginRequest $request) {
-        return $this->returnJson(0, '登录成功');
+        $data = [
+            'token' => auth()->login(Business::find(1))
+        ];
+        return $this->returnJson(0, '登录成功', $data);
     }
 
     /**

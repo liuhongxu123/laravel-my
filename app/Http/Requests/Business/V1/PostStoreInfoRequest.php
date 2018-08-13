@@ -29,6 +29,16 @@ class PostStoreInfoRequest extends FormRequest {
             'link_name' => 'required',
             'link_tel' => 'required|regex:/^\d{10,11}$/',
             'email' => 'required|email',
+            'credit_card_name' => 'required',
+            'credit_card_account' => 'required',
+            'bank_card_name' => 'required',
+            'bank_card_account' => 'required',
+            'bank_cat' => 'required',
+            'registration_name' => 'required',
+            'company_address' => 'required',
+            'tax_rate_area' => 'required',
+            'tax_registration_certificate' => 'required',
+            'tax_reta_set' => 'required',
             'read_and_confirm' => 'required|digits:1'
         ];
     }

@@ -10,7 +10,7 @@ class Rider extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    protected $tableName = 'riders';
+    protected $table = 'riders';
     protected $fillable = [
         'id','name','mobile','email'
     ];
