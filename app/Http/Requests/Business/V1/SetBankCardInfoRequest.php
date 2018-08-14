@@ -13,7 +13,7 @@ use Dingo\Api\Http\FormRequest;
 
 class SetBankCardInfoRequest extends FormRequest {
 
-    public function auhtorize () {
+    public function authorize () {
         return true;
     }
 
@@ -21,7 +21,7 @@ class SetBankCardInfoRequest extends FormRequest {
         return [
             'name' => 'required',
             'account' => 'required',
-            'bank_cat' => 'requirednm n '
+            'bank_cat' => 'required'
         ];
     }
 }

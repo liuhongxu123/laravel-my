@@ -16,7 +16,7 @@ use App\Http\Requests\Rider\V1\RegRequest;
 use App\V1\Rider;
 
 /**
- * @Resource("骑手登录授权API")
+ * @Resource("骑手登录授权接口")
  */
 class LoginController extends Controller {
 
@@ -32,7 +32,7 @@ class LoginController extends Controller {
         $password = '123456';
         $params = $request->all();
         if($params['account'] != $account || $params['password'] != $password){
-            return $this->returnJson(1,'用户名或密码错误');
+            return $this->returnJson(1,'用户名或密码错误', new \stdClass());
         }
         return $this->returnJson(0, '登录成功', [
             'token' => auth()->login(Rider::find(1))
@@ -53,7 +53,7 @@ class LoginController extends Controller {
      * 骑手注册
      * @Post("/api/rider/reg")
      * @Version({"v1"})
-     * @Request({"name":"aa","mobile":"15611111111","password":"密码","verify_code":"验证码"})
+     * @Request({"mobile":"15611111111","password":"密码","verify_code":"验证码"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function reg (RegRequest $request) {

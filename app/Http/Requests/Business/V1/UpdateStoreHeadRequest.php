@@ -11,7 +11,7 @@ namespace App\Http\Requests\Business\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class EditStoreNoticeRequest extends FormRequest {
+class UpdateStoreHeadRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,8 +19,8 @@ class EditStoreNoticeRequest extends FormRequest {
 
     public function rules () {
         return [
-            'id' => 'required|integer',
-            'notice' => 'required'
+            'store_id' => 'required|integer',
+            'store_head' => 'required|file|image'
         ];
     }
 }

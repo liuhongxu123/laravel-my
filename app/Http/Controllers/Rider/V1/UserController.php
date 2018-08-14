@@ -19,7 +19,7 @@ use App\Http\Services\Rider\V1\UploadService;
 use Illuminate\Http\Request;
 
 /**
- * @Resource("骑手端用户API")
+ * @Resource("骑手用户接口")
  */
 class UserController extends Controller {
 

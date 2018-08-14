@@ -16,7 +16,7 @@ use App\Http\Requests\Rider\V1\GetOrderListRequest;
 use App\Http\Services\Rider\V1\UploadService;
 
 /**
- * @Resource("骑手端订单API")
+ * @Resource("骑手端订单接口")
  */
 class OrderController extends Controller {
 

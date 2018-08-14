@@ -14,7 +14,7 @@ use App\Http\Requests\Rider\V1\GetSysmsgDetailsRequest;
 use App\Http\Requests\Rider\V1\SmsRequest;
 
 /**
- * @Resource("骑手端消息API")
+ * @Resource("骑手消息接口")
  */
 class MsgController extends Controller {
 

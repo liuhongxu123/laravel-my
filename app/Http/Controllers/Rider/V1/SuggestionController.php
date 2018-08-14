@@ -15,7 +15,7 @@ use App\Http\Requests\Rider\V1\SuggestionPostRequest;
 use App\Http\Services\Rider\V1\UploadService;
 
 /**
- * @Resource("骑手端意见相关API")
+ * @Resource("骑手意见接口")
  */
 class SuggestionController extends Controller {
 
@@ -43,7 +43,7 @@ class SuggestionController extends Controller {
      * 骑手意见详情
      * @Get("/api/rider/suggestion/details/get/$id")
      * @Version({"v1"})
-     * @Parameter({
+     * @Parameters({
      *      @Parameter("id", description="意见id", required=true, type="integer")
      *     })
      * @Response(200, body={"code":0, "message": "","data": {

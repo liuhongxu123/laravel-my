@@ -390,29 +390,29 @@ $api->version('v1', [
             //关闭业务
             $api->post('store/service/close/{store_id}/{type}', 'StoreController@closeService')->where(['store_id' => '[0-9]+', 'type' => '[0-9]+']);
             //修改门店头像
-            $api->post('store/head/edit', 'StoreController@editStoreHead');
+            $api->post('store/head/update', 'StoreController@updateStoreHead');
             //修改门店名称
-            $api->post('store/name/edit/{id}', 'StoreController@editStoreName');
+            $api->post('store/name/update', 'StoreController@updateStoreName');
             //修改门店联系电话
-            $api->post('store/tel/edit/{id}', 'StoreController@editStoreTel');
+            $api->post('store/tel/update', 'StoreController@updateStoreTel');
             //修改门店地址
-            $api->post('store/address/edit', 'StoreController@editStoreAddress');
+            $api->post('store/address/update', 'StoreController@updateStoreAddress');
             //修改门店公告
-            $api->post('store/notice/edit/{id}', 'StoreController@editStoreNotice');
+            $api->post('store/notice/update', 'StoreController@updateStoreNotice');
             //获取配送信息
-            $api->get('store/delivery/get/{id}', 'StoreController@getDeliveryInfo');
+            $api->get('store/delivery/get/{store_id}', 'StoreController@getDeliveryInfo');
             //设置配送信息
-            $api->post('store/delivery/edit', 'StoreController@editDeliveryInfo');
+            $api->post('store/delivery/update', 'StoreController@updateDeliveryInfo');
             //设置经营类别
-            $api->post('store/business/edit', 'StoreController@editStoreBusiness');
+            $api->post('store/business/update', 'StoreController@updateStoreBusiness');
             //获取所有服务设施
-            $api->get('installation/get/{id}', 'StoreController@getInstallation');
+            $api->get('installation/get', 'StoreController@getInstallation');
             //修改门店服务设施
-            $api->post('store/installation/edit', 'StoreController@editStoreInstalltion');
+            $api->post('store/installation/update', 'StoreController@updateStoreInstalltion');
             //开启自动接单
-            $api->post('store/auto_take_order/open/{id}', 'StoreController@openAutoTakeOrder');
+            $api->post('store/auto_take_order/open/{store_id}', 'StoreController@openAutoTakeOrder');
             //关闭自动接单
-            $api->get('store/auto_take_order/close/{id}', 'StoreController@closeAutoTakeOrder');
+            $api->post('store/auto_take_order/close/{store_id}', 'StoreController@closeAutoTakeOrder');
 
             //******************************* 消息 接口 **************************************
             //获取验证码
@@ -445,9 +445,9 @@ $api->version('v1', [
 
             //**************************** 用户 接口 *****************************************
             //获取账户信息
-            $api->get('account_info/get/{id}', 'UserController@getAccountInfo');
+            $api->get('account_info/get', 'UserController@getAccountInfo');
             //修改密码
-            $api->post('password/reset/{id}', 'UserController@resetPassword');
+            $api->post('password/reset', 'UserController@resetPassword');
             //更换绑定手机
             $api->post('phone/reset', 'UserController@resetPhone');
             //获取公司信息
@@ -457,7 +457,7 @@ $api->version('v1', [
             //意见列表
             $api->get('suggestion/list/get', 'SuggestionController@getSuggestion');
             //意见详情
-            $api->get('suggestion/details/get', 'SuggestionController@getSuggestionDetails');
+            $api->get('suggestion/details/get/{id}', 'SuggestionController@getSuggestionDetails');
             //意见提交
             $api->post('suggestion/post', 'SuggestionController@PostSuggestion');
             //获取意见分类

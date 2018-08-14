@@ -13,27 +13,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\V1\GetVersionDetailsRequest;
 
 /**
- * @Resource("骑手APP相关API")
+ * @Resource("骑手APP接口")
  */
 class AppController extends Controller {
-
-    /**
-     * app基本信息
-     * @Get("/api/rider/app/get")
-     * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
-     *     "photo": "app缩略图",
-     *     "version": "版本号"
-     *
-     * }})
-     */
-    public function getInfo () {
-        $data = [
-            'photo' => asset('storage/rider/suggestion/@origin/20180806/dFqTRWtcMV5yd3XLT3OYqnlnzbbC8MRw5KOu004y.jpeg'),
-            'version' => 'v1.1.0'
-        ];
-        return $this->returnJson(0, 'success', $data);
-    }
 
     /**
      * app更新

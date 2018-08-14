@@ -9,10 +9,15 @@
 namespace App\Http\Controllers\Business\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Business\V1\EditStoreBusinessRequest;
-use App\Http\Requests\Business\V1\EditStoreDeliveryRequest;
-use App\Http\Requests\Business\V1\EditStoreHeadRequest;
 use App\Http\Requests\Business\V1\PostStoreInfoRequest;
+use App\Http\Requests\Business\V1\UpdateDeliveryRequest;
+use App\Http\Requests\Business\V1\UpdateStoreAddressRequest;
+use App\Http\Requests\Business\V1\UpdateStoreBusinessRequest;
+use App\Http\Requests\Business\V1\UpdateStoreHeadRequest;
+use App\Http\Requests\Business\V1\UpdateStoreInstallationRequest;
+use App\Http\Requests\Business\V1\UpdateStoreNameRequest;
+use App\Http\Requests\Business\V1\UpdateStoreNoticeRequest;
+use App\Http\Requests\Business\V1\UpdateStoreTelRequest;
 use App\Http\Requests\Business\V1\UpdateStoreTimeRequest;
 use App\Http\Requests\Business\V1\UploadStoreImgRequest;
 
@@ -45,7 +50,7 @@ class StoreController extends Controller {
      *          @Parameter("company_address", description="公司地址", required=true),
      *          @Parameter("tax_rate_area", description="税率地区", required=true),
      *          @Parameter("tax_registration_certificate", description="税率登记号", required=true),
-     *          @Parameter("tax_reta_set", description="税率设置", required=true)
+     *          @Parameter("tax_reta_set", description="税率设置", required=true),
      *          @Parameter("read_and_confirm", description="阅读并接受字段 值必须为 1 才表示接受", required=true, type="integer")
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
@@ -179,7 +184,7 @@ class StoreController extends Controller {
      *      @Parameter("work_day", description="营业日（数组）", required=true, type="integer"),
      *      @Parameter("work_time", description="营业时间（数组）", required=true, type="integer")
      *     })
-     * @Response(200, body={"code":0, "message": "","data": "")
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function updateStoreTime (UpdateStoreTimeRequest $request) {
         return $this->returnJson(0, 'success');
@@ -193,7 +198,7 @@ class StoreController extends Controller {
      *      @Parameter("store_id", description="店铺id", required=true, type="integer"),
      *      @Parameter("store_img", description="门店图片（数组）", required=true, type="integer"),
      *     })
-     * @Response(200, body={"code":0, "message": "","data": "")
+     * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function uploadStoreImg (UploadStoreImgRequest $request) {
         return $this->returnJson(0, 'success');
@@ -255,52 +260,52 @@ class StoreController extends Controller {
 
     /**
      * 修改门店头像
-     * @Post("/store/head/edit/$id")
+     * @Post("/store/head/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("store_head", description="图片", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
-    public function editStoreHead (EditStoreHeadRequest $request) {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreHead (UpdateStoreHeadRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 修改门店名称
-     * @Post("/store/name/edit/$id")
+     * @Post("/store/name/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("store_name", description="门店名称", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
-    public function editStoreName () {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreName (UpdateStoreNameRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 修改门店联系电话
-     * @Post("/store/tel/edit/$id")
+     * @Post("/store/tel/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("link_tel", description="提交一个电话号数组", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
-    public function editStoreTel () {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreTel (UpdateStoreTelRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 修改门店地址
-     * @Post("/store/address/edit/$id")
+     * @Post("/store/address/update")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("id", description="门店id", required=true),
@@ -312,31 +317,31 @@ class StoreController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
-    public function editStoreAddress () {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreAddress (UpdateStoreAddressRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 修改门店公告
-     * @Post("/store/notice/edit/$id")
+     * @Post("/store/notice/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("notice", description="公告内容", required=true),
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      *
      */
-    public function editStoreNotice () {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreNotice (UpdateStoreNoticeRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 获取配送信息
-     * @Get("/store/delivery/get/$id")
+     * @Get("/store/delivery/get/$store_id")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true)
+     *      @Parameter("store_id", description="门店id", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": {
      *      "delivery_team": "配送团队",
@@ -358,21 +363,21 @@ class StoreController extends Controller {
 
     /**
      * 设置配送信息
-     * @Post("/store/delivery/edit/$id")
+     * @Post("/store/delivery/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("district_zip_code", description="地区邮编", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function editDeliveryInfo (EditStoreDeliveryRequest $request) {
-        return $this->returnJson(0, '修改成功');
+    public function updateDeliveryInfo (UpdateDeliveryRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 设置经营类别
-     * @Post("/store/business/edit/$id")
+     * @Post("/store/business/update")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("id", description="门店id", required=true),
@@ -380,13 +385,13 @@ class StoreController extends Controller {
      *      @Parameter("secondary_business", description="辅营品类", required=false)
      *     })
      */
-    public function editStoreBusiness (EditStoreBusinessRequest $request) {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreBusiness (UpdateStoreBusinessRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 获取所有服务设施
-     * @Get("/installation/get/$id")
+     * @Get("/installation/get")
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {{
      *      "id": "设施id",
@@ -404,42 +409,42 @@ class StoreController extends Controller {
 
     /**
      * 修改门店服务设施
-     * @Post("/store/installation/edit")
+     * @Post("/store/installation/update")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true),
+     *      @Parameter("store_id", description="门店id", required=true),
      *      @Parameter("installation", description="设施数组", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function editStoreInstalltion () {
-        return $this->returnJson(0, '修改成功');
+    public function updateStoreInstalltion (UpdateStoreInstallationRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 开启自动接单
-     * @Post("/store/auto_take_order/open/$id")
+     * @Post("/store/auto_take_order/open/$store_id")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true)
+     *      @Parameter("store_id", description="门店id", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function openAutoTakeOrder () {
-        return $this->returnJson(0, '自动接单开启成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 关闭自动接单
-     * @Post("/store/auto_take_order/close/$id")
+     * @Post("/store/auto_take_order/close/$store_id")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("id", description="门店id", required=true)
+     *      @Parameter("store_id", description="门店id", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function closeAutoTakeOrder () {
-        return $this->returnJson(0, '自动接单关闭成功');
+        return $this->returnJson(0, 'success');
     }
 
 }

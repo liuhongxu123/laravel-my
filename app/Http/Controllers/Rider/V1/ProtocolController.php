@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Rider\V1;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("骑手APP--协议接口")
+ * @Resource("骑手协议接口")
  */
 class ProtocolController extends Controller {
 

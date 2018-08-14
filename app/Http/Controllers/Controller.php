@@ -13,7 +13,7 @@ class Controller extends BaseController
 
     public function returnJson($code, $message='success', $data=[])
     {
-        return response()->json([
+        return response([
             'code' => $code,
             'message' => $message,
             'data' => $data
