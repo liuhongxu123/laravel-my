@@ -57,7 +57,10 @@ class LoginController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function reg (RegRequest $request) {
-        return $this->returnJson(0,'注册成功');
+        $data = [
+            'rid' => 1
+        ];
+        return $this->returnJson(0,'注册成功', $data);
     }
 
     /**
@@ -68,12 +71,12 @@ class LoginController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function forgetPassword (PasswordForgetRequest $request) {
-        $params = $request->all();
-        $verify_code = "1234";
+        /*$params = $request->all();
+        $verify_code = "123456";
         if($verify_code != $params['verify_code']){
             return $this->returnJson(1,'验证码输入错误');
-        }
-        return $this->returnJson(0, '密码重置成功');
+        }*/
+        return $this->returnJson(0, 'success');
     }
 
 }

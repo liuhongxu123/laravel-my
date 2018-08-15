@@ -22,16 +22,18 @@ class MsgController extends Controller {
      * 获取订单消息列表
      * @Get("/api/rider/ordermsg/list/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
+     * @Response(200, body={"code":0, "message": "","data": {"list":{
      *          "order_id": "订单id",
      *          "content": "订单消息内容",
      *          "date": "日期"
-     *     }})
+     *     }}})
      */
     public function getOrdersMsg () {
         $data = [
-            ['order_id'=> '1', 'content' => '您好，木道寿司的商家已经准备好餐了', 'date' => '2018-07-03 11:53:32'],
-            ['order_id'=> '2', 'content' => '您好，客户在催单了', 'date' => '2018-07-03 11:53:32']
+            'list' => [
+                ['order_id'=> '1', 'content' => '您好，木道寿司的商家已经准备好餐了', 'date' => '2018-07-03 11:53:32'],
+                ['order_id'=> '2', 'content' => '您好，客户在催单了', 'date' => '2018-07-03 11:53:32']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -40,16 +42,18 @@ class MsgController extends Controller {
      * 获取系统消息列表
      * @Get("/api/rider/sysmsg/list/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
+     * @Response(200, body={"code":0, "message": "","data": {"list":{
      *          "id": "消息id",
      *          "title": "系统消息标题",
      *          "date": "日期"
-     *     }})
+     *     }}})
      */
     public function getSysMsg () {
         $data = [
-            ['id' => 1, 'title' => '如果你无法简洁表达你的想法，那说明你还不够了解它', 'date' => '2018-07-03 11:53:32'],
-            ['id' => 2,'title' => '如果你无法简洁表达你的想法，那说明你还不够了解它', 'date' => '2018-07-03 11:53:32']
+            'list' => [
+                ['id' => 1, 'title' => '如果你无法简洁表达你的想法，那说明你还不够了解它', 'date' => '2018-07-03 11:53:32'],
+                ['id' => 2,'title' => '如果你无法简洁表达你的想法，那说明你还不够了解它', 'date' => '2018-07-03 11:53:32']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }

@@ -21,26 +21,35 @@ class AppController extends Controller {
      * app更新
      * @Get("/api/rider/app/update")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": ""})
+     * @Response(200, body={"code":0, "message": "","data": {
+     *      "version": "版本号",
+     *      "download_url": "版本下载地址"
+     *     }})
      */
     public function update () {
-        return $this->returnJson(0, '已是最新版本');
+        $data = [
+            'version' => '1.1.0',
+            'download_url' => 'http://download_url.com'
+        ];
+        return $this->returnJson(0, 'success', $data);
     }
 
     /**
      * app历史版本列表
      * @Get("/api/rider/app/version/list/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {
+     * @Response(200, body={"code":0, "message": "","data": {"list":{
      *      "id": "版本id",
      *      "title": "版本更新标题信息",
      *      "date": "版本更新日期"
-     * }})
+     * }}})
      */
     public function getVersionList () {
         $data = [
-            ['id' => 1, 'title' => 'v2.1.1版本主要更新', 'date' => '2018-06-06 14:14:12'],
-            ['id' => 2, 'title' => 'v2.1.6版本主要更新', 'date' => '2018-06-06 14:14:12']
+            'list' => [
+                ['id' => 1, 'title' => 'v2.1.1版本主要更新', 'date' => '2018-06-06 14:14:12'],
+                ['id' => 2, 'title' => 'v2.1.6版本主要更新', 'date' => '2018-06-06 14:14:12']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -67,15 +76,17 @@ class AppController extends Controller {
      * 获取热线
      * @Get("/api/rider/app/hotline/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data":{"list": {{
      *          "name": "热线名称",
      *          "tel": "热线电话"
-     *     }}})
+     *     }}}})
      */
     public function getHotline () {
         $data = [
-            ['name' => '服务热线', 'tel' => '2135131667'],
-            ['name' => '客服热线', 'tel' => '1234567882']
+            'list' => [
+                ['name' => '服务热线', 'tel' => '2135131667'],
+                ['name' => '客服热线', 'tel' => '1234567882']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -84,15 +95,17 @@ class AppController extends Controller {
      * 获取短信模板
      * @Get("/api/rider/app/smstmpl/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *          "content": "短信模板内容"
-     *     }}})
+     *     }}}})
      */
     public function getSmsTmpl (){
         $data = [
-            ['content' => '默认/自定义'],
-            ['content' => '货品马上送到(10分钟内)'],
-            ['content' => '由于天气原因要稍晚送到'],
+            'list' => [
+                ['content' => '默认/自定义'],
+                ['content' => '货品马上送到(10分钟内)'],
+                ['content' => '由于天气原因要稍晚送到']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }

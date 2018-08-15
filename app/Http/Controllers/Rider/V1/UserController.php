@@ -30,8 +30,10 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": {
      *          "real_name": "真实姓名",
      *          "score": "综合评分",
-     *          "score_today": "今日战绩",
-     *          "score_month": "本月战绩",
+     *          "today_count": "今日单量",
+     *          "today_income": "今日收入",
+     *          "month_count": "本月单量",
+     *          "month_income": "本月收入",
      *          "work_status": "工作状态 work_status=1 接单状态 work_status=0 休息状态",
      *          "avatar": "头像地址"
      *     }})
@@ -39,11 +41,13 @@ class UserController extends Controller {
     public function getBasicInfo () {
         $data = [
             'real_name' => '小小骑手大大',
-            'score' => '92',
-            'score_today' => '5',
-            'score_month' => '12',
-            'work_status' => '1',    //接单状态
-            'avatar' => asset('storage/rider/certificate/@origin/20180802/HPPx5gNMp10LNeFgCFPplOk9amw4fI1SbQHJnQ9H.jpeg'),
+            'score' => 92,
+            'today_count' => 5,
+            'today_income' => 12,
+            'month_count' => 20,
+            'month_income' => 100,
+            'work_status' => 1,    //接单状态
+            'avatar' => asset('storage/rider/user_head/@origin/20180815/wK2cfpY4EtwEN9iZ2s4Sa8pIIaZlMFpIcM3Q5IEw.jpeg'),
         ];
         return $this->returnJson(0,'success', $data);
     }
@@ -56,12 +60,12 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPassword (PasswordResetRequest $request) {
-        $params = $request->all();
+        /*$params = $request->all();
         $old_password = '123456a';
         if($params['old_password'] != $old_password){
             return $this->returnJson(1, '原密码输入错误');
-        }
-        return $this->returnJson(0, '密码修改成功');
+        }*/
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -72,7 +76,7 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPhone (PhoneResetRequest $request) {
-        $old_mobile = '15611111111';
+        /*$old_mobile = '15611111111';
         $verify_code = '1234';
         $params = $request->all();
         if($params['old_mobile'] != $old_mobile){
@@ -80,8 +84,8 @@ class UserController extends Controller {
         }
         if($params['verify_code'] != $verify_code){
             return $this->returnJson(1, '验证码输入错误');
-        }
-        return $this->returnJson(0, '绑定成功');
+        }*/
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -93,27 +97,29 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function setWorkStatus (SetWorkStatusRequest $request) {
-        return $this->returnJson(0, '设置成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 获取本月战绩
      * @Get("/api/rider/month_score/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *          "date": "日期",
      *          "finish": "完成单量",
      *          "cancel": "取消单量",
      *          "income_sum": "总收入"
-     *     }}})
+     *     }}}})
      */
     public function getMonthScore () {
         $data = [
-            ['date' => '2018.01.02 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
-            ['date' => '2018.01.03 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
-            ['date' => '2018.01.04 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
-            ['date' => '2018.01.05 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
-            ['date' => '2018.01.06 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32]
+            'list' => [
+                ['date' => '2018.01.02 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
+                ['date' => '2018.01.03 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
+                ['date' => '2018.01.04 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
+                ['date' => '2018.01.05 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32],
+                ['date' => '2018.01.06 12:12:00', 'finish' => 25, 'cancel' => 2, 'income_sum' => 32]
+            ]
         ];
         return $this->returnJson(0,'success', $data);
     }
@@ -122,11 +128,11 @@ class UserController extends Controller {
      * 骑手入驻
      * @Post("/api/rider/join")
      * @Version({"v1"})
-     * @Request("name=姓名&mobile=手机号&email=邮箱&desc=简介&read_and_confirm=接受协议&avatar=头像", contentType="multipart/form-data")
+     * @Request("rid=骑手id&name=姓名&mobile=手机号&email=邮箱&desc=简介&avatar=头像", contentType="multipart/form-data")
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function join (JoinRequest $request) {
-        $origin_path = 'rider/user_head/@origin/'.date('Ymd', time());
+       /* $origin_path = 'rider/user_head/@origin/'.date('Ymd', time());
         $cut_path = storage_path('app/public/rider/user_head/@34_34/').date('Ymd',time());  //剪切图保存位置
         $file = $request->file('avatar');
         if (($fres = UploadService::saveOne($file, $origin_path, true, $cut_path))['err'] === 1) {
@@ -134,8 +140,8 @@ class UserController extends Controller {
         }
         $data = [
             'avatar' => $fres['path']
-        ];
-        return $this->returnJson(0, '申请提交成功，请耐心等待审核', $data);
+        ];*/
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -148,8 +154,7 @@ class UserController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function certificate (CertificateRequest $request) {
-        $origin_path = 'rider/certificate/@origin/'.date('Ymd',time());
-        //$cut_path = storage_path('app/public/rider/certificate/@cut/').date('Ymd',time());  //剪切图保存位置
+        /*$origin_path = 'rider/certificate/@origin/'.date('Ymd',time());
         $file = $request->file('driver_permit');
         if (($fres = UploadService::saveOne($file, $origin_path))['err'] === 1) {
             return $this->returnJson(1, '驾驶证 '.$fres['msg']);
@@ -161,8 +166,8 @@ class UserController extends Controller {
         $file = $request->file('car_insurance');
         if (($fres = UploadService::saveOne($file, $origin_path))['err'] === 1) {
             return $this->returnJson(1, '汽车保险证明 '.$fres['msg']);
-        }
-        return $this->returnJson(0, '提交成功，等待审核');
+        }*/
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -228,7 +233,7 @@ class UserController extends Controller {
      * @Parameters({
      *      @Parameter("month", description="月份(传参方式形如：2018-03 的月份)")
      *     })
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *          "date": "日期",
      *          "order_no": "订单号",
      *          "receiver": "收货人",
@@ -238,42 +243,44 @@ class UserController extends Controller {
      *          "origin": "取货",
      *          "dest": "送货",
      *          "type": ""
-     *     }}})
+     *     }}}})
      */
     public function getBalanceDetails () {
         $data = [
-            [
-                "date" => '2018-03-03 12:02:02',
-                'order_no' => 'No1234567',
-                'receiver' => 'ling',   //收货人
-                'receiver_mobile' => '15611111111', //收货人电话
-                'remark' => '您好码放多备一份餐具',
-                'sum' => 25, //金额合计
-                'origin' => '广州市天河区旭景西街商业大厦',
-                'dest' => '广州市天河区员村三横路5号',
-                'type' => '1'
-            ],
-            [
-                "date" => '2018-03-03 12:02:02',
-                'order_no' => 'No1234567',
-                'receiver' => 'ling',   //收货人
-                'receiver_mobile' => '15611111111', //收货人电话
-                'mark' => '您好码放多备一份餐具',
-                'sum' => 25, //金额合计
-                'origin' => '广州市天河区旭景西街商业大厦',
-                'dest' => '广州市天河区员村三横路5号',
-                'type' => '2'
-            ],
-            [
-                "date" => '2018-03-03 12:02:02',
-                'order_no' => 'No1234567',
-                'receiver' => 'ling',   //收货人
-                'receiver_mobile' => '15611111111', //收货人电话
-                'mark' => '您好码放多备一份餐具',
-                'sum' => 25, //金额合计
-                'origin' => '广州市天河区旭景西街商业大厦',
-                'dest' => '广州市天河区员村三横路5号',
-                'type' => '1'
+            'list' => [
+                [
+                    "date" => '2018-03-03 12:02:02',
+                    'order_no' => 'No1234567',
+                    'receiver' => 'ling',   //收货人
+                    'receiver_mobile' => '15611111111', //收货人电话
+                    'remark' => '您好码放多备一份餐具',
+                    'sum' => 25, //金额合计
+                    'origin' => '广州市天河区旭景西街商业大厦',
+                    'dest' => '广州市天河区员村三横路5号',
+                    'type' => '1'
+                ],
+                [
+                    "date" => '2018-03-03 12:02:02',
+                    'order_no' => 'No1234567',
+                    'receiver' => 'ling',   //收货人
+                    'receiver_mobile' => '15611111111', //收货人电话
+                    'mark' => '您好码放多备一份餐具',
+                    'sum' => 25, //金额合计
+                    'origin' => '广州市天河区旭景西街商业大厦',
+                    'dest' => '广州市天河区员村三横路5号',
+                    'type' => '2'
+                ],
+                [
+                    "date" => '2018-03-03 12:02:02',
+                    'order_no' => 'No1234567',
+                    'receiver' => 'ling',   //收货人
+                    'receiver_mobile' => '15611111111', //收货人电话
+                    'mark' => '您好码放多备一份餐具',
+                    'sum' => 25, //金额合计
+                    'origin' => '广州市天河区旭景西街商业大厦',
+                    'dest' => '广州市天河区员村三横路5号',
+                    'type' => '1'
+                ]
             ]
         ];
         return $this->returnJson(0, 'success', $data);
@@ -380,23 +387,30 @@ class UserController extends Controller {
      * @Parameters({
      *      @Parameter("type",description="类型--type = 1 满意 type =2 不满意",default=0, type="integer")
      * })
-     * @Response(200, body={"code":0, "message": "", "data": {{
+     * @Response(200, body={"code":0, "message": "", "data": {"list":{{
      *          "content": "评级内容",
      *          "type": "评价类型--type=1 满意 type=2 不满意",
      *          "date": "评价日期"
-     *     }}})
+     *     }}}})
      */
     public function evaluate (Request $request) {
         $type = intval($request->input('type',"0"));
         $data = [
-            ['content' => '很好', 'type' => 1, 'date' => '2018-03-06 14:12:00'],
-            ['content' => '差评', 'type' => 2, 'date' => '2018-04-06 15:45:12'],
-            ['content' => '不错', 'type' => 1, 'date' => '2018-10-06 10:00:00']
+            'list' => [
+                ['content' => '很好', 'type' => 1, 'date' => '2018-03-06 14:12:00'],
+                ['content' => '差评', 'type' => 2, 'date' => '2018-04-06 15:45:12'],
+                ['content' => '不错', 'type' => 1, 'date' => '2018-10-06 10:00:00']
+            ]
         ];
         if ($type !== 0) {
-            $data = array_filter($data, function ($val) use ($type) {
+            $data = array_filter($data['list'], function ($val) use ($type) {
                 return $val['type'] == $type;
             });
+        }
+        if (empty($data)) {
+            $data = [
+                'list' => []
+            ];
         }
         return $this->returnJson(0, 'success', $data);
     }

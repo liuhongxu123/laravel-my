@@ -23,18 +23,20 @@ class SuggestionController extends Controller {
      * 骑手意见列表
      * @Get("/api/rider/suggestion/list/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *      "content": "意见内容",
      *      "date": "提交意见时间"
-     * }}})
+     * }}}})
      */
     public function getSuggestion () {
         $data = [
-            [
-                'content' => '来单不响，真的是不响，等了好久都不响，来单不响，来单不响，来单不响，来单不响啊，不响啊',
-                'date' => '2018-03-21 12:12:12'
-            ],
-            ['content' => '来单不响', 'date' => '2018-03-21 12:12:12']
+            'list' => [
+                [
+                    'content' => '来单不响，真的是不响，等了好久都不响，来单不响，来单不响，来单不响，来单不响啊，不响啊',
+                    'date' => '2018-03-21 12:12:12'
+                ],
+                ['content' => '来单不响', 'date' => '2018-03-21 12:12:12']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }
@@ -74,29 +76,31 @@ class SuggestionController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function suggestionPost (SuggestionPostRequest $request) {
-        $msg = '意见提交成功';
+        /*$msg = '意见提交成功';
         $origin_path = 'rider/suggestion/@origin/'.date('Ymd',time());
         $files = $request->file('photo');
         $res = UploadService::saveAll($files, $origin_path);
         if ($res['err'] === 1) {
             $msg = $res['msg'];
-        }
-        return $this->returnJson(0, $msg);
+        }*/
+        return $this->returnJson(0, 'success');
     }
 
     /**
      * 获取意见分类
      * @Get("/api/rider/suggestion/cat/get")
      * @Version({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *      "id": "类别ID",
      *      "name": "类别名称"
-     *     }}})
+     *     }}}})
      */
     public function getSuggestionCat () {
         $data = [
-            ["id" => 1, 'name' => '软件使用问题'],
-            ["id" => 2, 'name' => '其他问题']
+            'list' => [
+                ["id" => 1, 'name' => '软件使用问题'],
+                ["id" => 2, 'name' => '其他问题']
+            ]
         ];
         return $this->returnJson(0, 'success', $data);
     }

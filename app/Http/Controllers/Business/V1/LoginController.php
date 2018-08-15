@@ -41,8 +41,7 @@ class LoginController extends Controller {
      * @Versions({"v1"})
      * @Parameters({
      *          @Parameter("mobile", description="手机号(账号)", required=true),
-     *          @Parameter("password", description="登录密码", required=true),
-     *          @Parameter("read_and_confirm", description="阅读并接受", required=true)
+     *          @Parameter("password", description="登录密码", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
