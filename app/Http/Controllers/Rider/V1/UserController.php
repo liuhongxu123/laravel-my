@@ -82,7 +82,7 @@ class UserController extends Controller {
         if($params['old_mobile'] != $old_mobile){
             return $this->returnJson(1, '原手机号输入错误');
         }
-        if($params['verify_code'] != $verify_code){
+            if($params['verify_code'] != $verify_code){
             return $this->returnJson(1, '验证码输入错误');
         }*/
         return $this->returnJson(0, 'success');
