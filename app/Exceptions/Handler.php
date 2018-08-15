@@ -66,7 +66,7 @@ class Handler extends ExceptionHandler
             return new Response([
                 'code' => $statusCode,
                 'message' => $message,
-                'data' => []
+                'data' => new \stdClass()
             ], $statusCode, $exception instanceof HttpExceptionInterface ? $exception->getHeaders() : []);
         }
 

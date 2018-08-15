@@ -13,6 +13,10 @@ class Controller extends BaseController
 
     public function returnJson($code, $message='success', $data=[])
     {
+        if (is_array($data) && empty($data)) {
+            $data = new \stdClass();
+        }
+
         return response([
             'code' => $code,
             'message' => $message,
