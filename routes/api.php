@@ -82,15 +82,6 @@ $api->version('v1', [
     // 附近商家推荐菜品
     $api->get('customer/near/store/recommend/goods', 'NearController@storeGoodsRecommend');
 
-    //************************  店取  *******************************
-
-
-
-
-    //************************  外卖  *******************************
-
-
-
     //************************  订单  *******************************
     // 订单列表(外卖, 堂食, 店取)
     $api->get('customer/orders', 'OrderController@orders');

@@ -24,7 +24,32 @@ class OrderController extends Controller
      */
     public function orders()
     {
-
+        $data = [
+            [
+                "order_id" => "123456789",
+                "store_head" => "1.jpg",
+                "store_name" => "商家姓名",
+                "store_id" => "12"，
+                "goods_list" => [
+                    [
+                        "goods_img" => "1.jpg",
+                        "goods_name" => "商品1",
+                        "goods_num" => 1
+                    ],
+                    [
+                        "goods_img" => "1.jpg",
+                        "goods_name" => "商品1",
+                        "goods_num" => 1
+                    ],
+                    [
+                        "goods_img" => "1.jpg",
+                        "goods_name" => "商品1",
+                        "goods_num" => 1
+                    ],
+                ]
+            ]
+        ];
+        return $this->returnJson(0, 'success', $data);
     }
 
     public function orderInfo()
