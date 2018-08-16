@@ -41,14 +41,14 @@ class AppController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": {"list":{
      *      "id": "版本id",
      *      "title": "版本更新标题信息",
-     *      "date": "版本更新日期"
+     *      "update_date": "版本更新日期"
      * }}})
      */
     public function getVersionList () {
         $data = [
             'list' => [
-                ['id' => 1, 'title' => 'v2.1.1版本主要更新', 'date' => '2018-06-06 14:14:12'],
-                ['id' => 2, 'title' => 'v2.1.6版本主要更新', 'date' => '2018-06-06 14:14:12']
+                ['id' => 1, 'title' => 'v2.1.1版本主要更新', 'update_date' => '2018-06-06 14:14:12'],
+                ['id' => 2, 'title' => 'v2.1.6版本主要更新', 'update_date' => '2018-06-06 14:14:12']
             ]
         ];
         return $this->returnJson(0, 'success', $data);

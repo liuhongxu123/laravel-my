@@ -29,7 +29,7 @@ class OrderController extends Controller {
      * })
      * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *          "origin": "取货",
-     *          "dest": "送货",
+     *          "destination": "送货",
      *          "current_time": "当前时间",
      *          "add_time": "下单时间",
      *          "final_time": "最后送达时间（即13:00前送达）",
@@ -47,7 +47,7 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区化州糖水',
-                            'dest' => '华景新城',
+                            'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
                             'final_time' => '2018.03.01 14:12:12',
                             'status' => -1, //订单状态
@@ -63,7 +63,7 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区化州糖水',
-                            'dest' => '华景新城',
+                            'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
                             'final_time' => '2018.03.01 14:12:12',
                             'status' => 0, //订单状态
@@ -77,7 +77,7 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区化州香油鸡',
-                            'dest' => '棠东180号',
+                            'destination' => '棠东180号',
                             'add_time' => 1533110855,   //下单时间
                             'current_time' => time(), //当前时间
                             'final_time' => '2018-01-05 15:21:00',
@@ -100,7 +100,7 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区食在真湘',
-                            'dest' => '棠东毓桂大街一巷8号',
+                            'destination' => '棠东毓桂大街一巷8号',
                             'add_time' => '2018.03.01 12:12:12',
                             'final_time' => '2018.03.01 14:12:12',
                             'current_time' => time(), //当前时间
@@ -119,7 +119,7 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区化州糖水',
-                            'dest' => '华景新城',
+                            'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
                             'final_time' => '2018.03.01 14:12:12',
                             'status' => 2, //待取货,
@@ -129,7 +129,7 @@ class OrderController extends Controller {
                         ],
                         [
                             'origin' => '广州市天河区化州糖水',
-                            'dest' => '华景新城',
+                            'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
                             'final_time' => '2018.03.01 14:12:12',
                             'status' => 3, //待送达,
@@ -146,9 +146,9 @@ class OrderController extends Controller {
                     'list' => [
                         [
                             'origin' => '广州市天河区化州糖水',
-                            'dest' => '华景新城',
+                            'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
-                            'arrive_time' => '2018.03.01 13:12:12', //送达时间
+                            'rider_delivery_time' => '2018.03.01 13:12:12', //送达时间
                             'final_time' => '2018.03.01 14:12:12',
                             'status' => 4, //订单状态
                             'price' => 4,
@@ -177,14 +177,14 @@ class OrderController extends Controller {
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *          "origin": "取货地址",
-     *          "dest": "送货地址",
+     *          "destination": "送货地址",
      *          "status": "订单状态",
      *          "current_time": "当前时间",
      *          "take_time": "接单时间",
      *          "reach_store_time": "到店时间",
-     *          "take_delivery_time": "取货时间",
-     *          "finish_time": "送达时间",
-     *          "deliver_money": "配送费",
+     *          "pick_up_time": "取货时间",
+     *          "rider_delivery_time": "送达时间",
+     *          "delivery_money": "配送费",
      *          "discount_money": "优惠金额",
      *          "remark": "备注",
      *          "store_name": "商家名称",
@@ -201,15 +201,15 @@ class OrderController extends Controller {
     public function getDetails () {
        $data = [
            'origin' => '广州市天河区东圃镇',
-           'dest' => '广州市天河区车陂地铁站',
+           'destination' => '广州市天河区车陂地铁站',
            'status' => '1', //订单状态
            'current_time' => '2018.03.03 12:00:00', //当前时间
            'take_time' => '2018.03.03 11:12:00', //接单时间,
            'reach_store_time' => '2018.03.03 11:12:00', //到店时间,
-           'take_delivery_time' => '2018.03.03 11:12:00', //取货时间,
-           'finish_time' => '2018.03.03 11:12:00', //送达时间,
-           'deliver_money' => 3,
-           'discount' => 02,
+           'pick_up_time' => '2018.03.03 11:12:00', //取货时间,
+           'rider_delivery_time' => '2018.03.03 11:12:00', //送达时间,
+           'delivery_money' => 3,
+           'discount_money' => 02,
            'remark' => '您好，麻烦多备一份餐具，谢谢',
            'store_name' => '麦当劳',
            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
@@ -247,7 +247,7 @@ class OrderController extends Controller {
      *          "remark": "备注",
      *          "sum": "合计",
      *          "origin": "取货",
-     *          "dest": "送货",
+     *          "destination": "送货",
      *          "type": "类型 type=1 正常 type = 2退款单"
      *     }}}})
      */
@@ -262,7 +262,7 @@ class OrderController extends Controller {
                     'remark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '1'
                 ],
                 [
@@ -273,7 +273,7 @@ class OrderController extends Controller {
                     'mark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '2'
                 ],
                 [
@@ -284,7 +284,7 @@ class OrderController extends Controller {
                     'mark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '1'
                 ]
             ]

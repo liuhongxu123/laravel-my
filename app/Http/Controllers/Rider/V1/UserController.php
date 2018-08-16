@@ -149,7 +149,7 @@ class UserController extends Controller {
      * @Post("/api/rider/certificate")
      * @Version({"v1"})
      * @Request({"name":"ling","mobile":"15611111111","email":"aa@qq.com","address":"东圃米研","safe_code":"222xx",
-     *          "driver_permit":"1.jpg","address_permit":"2.jpg","car_insurance":"3.jpg",
+     *          "driver_permit":"1.jpg","address_permit":"2.jpg","car_insurance":"3.jpg","province": "省","city": "市", "district": "区"
      *          "bank_code":"银行代码","bank_account":"银行账号","cardholder":"持卡人姓名","card_type":"银行卡类型"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
@@ -241,7 +241,7 @@ class UserController extends Controller {
      *          "remark": "备注",
      *          "sum": "合计",
      *          "origin": "取货",
-     *          "dest": "送货",
+     *          "destination": "送货",
      *          "type": ""
      *     }}}})
      */
@@ -256,7 +256,7 @@ class UserController extends Controller {
                     'remark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '1'
                 ],
                 [
@@ -267,7 +267,7 @@ class UserController extends Controller {
                     'mark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '2'
                 ],
                 [
@@ -278,7 +278,7 @@ class UserController extends Controller {
                     'mark' => '您好码放多备一份餐具',
                     'sum' => 25, //金额合计
                     'origin' => '广州市天河区旭景西街商业大厦',
-                    'dest' => '广州市天河区员村三横路5号',
+                    'destination' => '广州市天河区员村三横路5号',
                     'type' => '1'
                 ]
             ]
