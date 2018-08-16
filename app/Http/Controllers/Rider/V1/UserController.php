@@ -17,6 +17,8 @@ use App\Http\Requests\Rider\V1\PhoneResetRequest;
 use App\Http\Requests\Rider\V1\SetWorkStatusRequest;
 use App\Http\Services\Rider\V1\UploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @Resource("骑手用户接口")
@@ -35,6 +37,7 @@ class UserController extends Controller {
      *          "month_count": "本月单量",
      *          "month_income": "本月收入",
      *          "work_status": "工作状态 work_status=1 接单状态 work_status=0 休息状态",
+     *          "is_certificate": "是否实名 1 是 0 否",
      *          "avatar": "头像地址"
      *     }})
      */
@@ -47,6 +50,7 @@ class UserController extends Controller {
             'month_count' => 20,
             'month_income' => 100,
             'work_status' => 1,    //接单状态
+            'is_certificate' => 0,
             'avatar' => asset('storage/rider/user_head/@origin/20180815/wK2cfpY4EtwEN9iZ2s4Sa8pIIaZlMFpIcM3Q5IEw.jpeg'),
         ];
         return $this->returnJson(0,'success', $data);
@@ -56,7 +60,11 @@ class UserController extends Controller {
      * 骑手修改密码
      * @Post("/api/rider/password/reset")
      * @Version({"v1"})
-     * @Request({"old_password":"旧密码","new_password":"新密码","new_password_confirmation":"重复新密码"})
+     * @Parameters({
+     *      @Parameter("old_password", description="旧密码", required=true),
+     *      @Parameter("new_password", description="新密码", required=true),
+     *      @Parameter("new_password_confirmation", description="重复密码", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPassword (PasswordResetRequest $request) {
@@ -72,7 +80,11 @@ class UserController extends Controller {
      * 更换绑定手机
      * @Post("/api/rider/phone/reset")
      * @Version({"v1"})
-     * @Request({"old_mobile":"旧手机号","new_mobile":"新手机号","verify_code":"验证码"})
+     * @Parameters({
+     *      @Parameter("old_mobile", description="旧手机号", required=true),
+     *      @Parameter("new_mobile", description="新手机号", required=true),
+     *      @Parameter("verify_code", description="验证码", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function resetPhone (PhoneResetRequest $request) {
@@ -128,7 +140,14 @@ class UserController extends Controller {
      * 骑手入驻
      * @Post("/api/rider/join")
      * @Version({"v1"})
-     * @Request("rid=骑手id&name=姓名&mobile=手机号&email=邮箱&desc=简介&avatar=头像", contentType="multipart/form-data")
+     * @Parameters({
+     *      @Parameter("rid", description="骑手id", required=true),
+     *      @Parameter("name", description="姓名", required=true),
+     *      @Parameter("mobile", description="手机号", required=true),
+     *      @Parameter("email", description="邮箱", required=true),
+     *      @Parameter("desc", description="个人简介", required=true),
+     *      @Parameter("avatar", description="头像", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function join (JoinRequest $request) {
@@ -148,25 +167,27 @@ class UserController extends Controller {
      * 骑手实名认证
      * @Post("/api/rider/certificate")
      * @Version({"v1"})
-     * @Request({"name":"ling","mobile":"15611111111","email":"aa@qq.com","address":"东圃米研","safe_code":"222xx",
-     *          "driver_permit":"1.jpg","address_permit":"2.jpg","car_insurance":"3.jpg","province": "省","city": "市", "district": "区"
-     *          "bank_code":"银行代码","bank_account":"银行账号","cardholder":"持卡人姓名","card_type":"银行卡类型"})
+     * @Parameters({
+     *      @Parameter("name", description="姓名", required=true),
+     *      @Parameter("mobile", description="手机号", required=true),
+     *      @Parameter("email", description="邮箱", required=true),
+     *      @Parameter("province", description="省", required=true),
+     *      @Parameter("city", description="市", required=true),
+     *      @Parameter("district", description="区", required=true),
+     *      @Parameter("address", description="详细地址", required=true),
+     *      @Parameter("safe_code", description="社会安全码", required=true),
+     *      @Parameter("driver_permit", description="驾驶证图url", required=true),
+     *      @Parameter("address_permit", description="地址证明图url", required=true),
+     *      @Parameter("car_insurance", description="车险证明图", required=true),
+     *      @Parameter("bank_code", description="银行代码", required=true),
+     *      @Parameter("band_account", description="银行账户", required=true),
+     *      @Parameter("cardholder", description="持卡人姓名", required=true),
+     *      @Parameter("card_type", description="银行卡类型", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function certificate (CertificateRequest $request) {
-        /*$origin_path = 'rider/certificate/@origin/'.date('Ymd',time());
-        $file = $request->file('driver_permit');
-        if (($fres = UploadService::saveOne($file, $origin_path))['err'] === 1) {
-            return $this->returnJson(1, '驾驶证 '.$fres['msg']);
-        }
-        $file = $request->file('address_permit');
-        if (($fres = UploadService::saveOne($file, $origin_path))['err'] === 1) {
-            return $this->returnJson(1, '地址证明 '.$fres['msg']);
-        }
-        $file = $request->file('car_insurance');
-        if (($fres = UploadService::saveOne($file, $origin_path))['err'] === 1) {
-            return $this->returnJson(1, '汽车保险证明 '.$fres['msg']);
-        }*/
+        //file_put_contents(storage_path('app/public/aa.jpg'),base64_decode($request->input('driver_permit')));
         return $this->returnJson(0, 'success');
     }
 
@@ -370,7 +391,7 @@ class UserController extends Controller {
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("bank_code", description="银行代码", required=true),
-     *      @Parameter("account", description="银行账户", required=true),
+     *      @Parameter("bank_account", description="银行账户", required=true),
      *      @Parameter("cardholder", description="持卡人姓名", required=true),
      *      @Parameter("card_type", description="银行卡类型--type = 1 支票 type = 2 存储", required=true, type="integer")
      * })

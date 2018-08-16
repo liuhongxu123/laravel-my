@@ -29,7 +29,7 @@ class OrderController extends Controller
                 "order_id" => "123456789",
                 "store_head" => "1.jpg",
                 "store_name" => "商家姓名",
-                "store_id" => "12"，
+                "store_id" => "12",
                 "goods_list" => [
                     [
                         "goods_img" => "1.jpg",

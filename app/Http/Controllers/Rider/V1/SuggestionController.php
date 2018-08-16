@@ -72,7 +72,11 @@ class SuggestionController extends Controller {
      * 骑手意见提交
      * @Post("/api/rider/suggestion/post")
      * @Version({"v1"})
-     * @Request("cat_id=意见类型id&content=意见内容&photo=附加图片", contentType="multipart/form-data")
+     * @Parameters({
+     *      @Parameter("cat_id", description="意见分类", required=true),
+     *      @Parameter("content", description="意见内容", required=true),
+     *      @Parameter("photo", description="附加图片", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function suggestionPost (SuggestionPostRequest $request) {

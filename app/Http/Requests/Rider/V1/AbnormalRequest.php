@@ -21,7 +21,7 @@ class AbnormalRequest extends FormRequest {
         return [
             'cat_id' => 'required',
             'content' => 'required|max:300',
-            'photo.*' => 'required|file|image'
+            'photo.*' => 'required'
         ];
     }
 }

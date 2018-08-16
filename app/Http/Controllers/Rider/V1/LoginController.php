@@ -24,7 +24,7 @@ class LoginController extends Controller {
      * 骑手登录
      * @Post("/api/rider/login")
      * @Version({"v1"})
-     * @Request({"account":"15611111111","password":"123456"})
+     * @Request({"account":"15611111111","password":"123456"}, headers={"contentType": "application/x-www-form-urlencoded"})
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function login (LoginRequest $request) {
@@ -53,7 +53,11 @@ class LoginController extends Controller {
      * 骑手注册
      * @Post("/api/rider/reg")
      * @Version({"v1"})
-     * @Request({"mobile":"15611111111","password":"密码","verify_code":"验证码"})
+     * @Parameters({
+     *      @Parameter("mobile", description="手机号", required=true),
+     *      @Parameter("password", description="密码", required=true),
+     *      @Parameter("verify_code", description="验证码", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function reg (RegRequest $request) {
@@ -67,7 +71,11 @@ class LoginController extends Controller {
      * 骑手忘记密码
      * @Post("/api/rider/password/forget")
      * @Version({"v1"})
-     * @Request({"account":"15611111111","verify_code":"1234","password":"123456"})
+     * @Parameters({
+     *      @Parameter("account", description="手机号", required=true),
+     *      @Parameter("verify_code", description="验证码", required=true),
+     *      @Parameter("password", description="密码", required=true)
+     *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function forgetPassword (PasswordForgetRequest $request) {

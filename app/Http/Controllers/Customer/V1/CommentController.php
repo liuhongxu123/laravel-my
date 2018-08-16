@@ -12,7 +12,7 @@ class CommentController extends Controller
     	$data = [
     		[
     			"comment_id" => 12,
-    			"store_id" => 14，
+    			"store_id" => 14,
     			"store_img" => "1.jpg",
     			"store_name" => "星巴克",
     			""
