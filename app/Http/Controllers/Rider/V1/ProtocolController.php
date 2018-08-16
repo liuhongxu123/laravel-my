@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Rider\V1;
 use App\Http\Controllers\Controller;
 
 /**
- * @Resource("骑手APP--协议接口")
+ * @Resource("骑手协议接口")
  */
 class ProtocolController extends Controller {
 
@@ -19,20 +19,22 @@ class ProtocolController extends Controller {
      * 获取协议列表
      * @Get("/api/rider/protocol/list/get")
      * @Versions({"v1"})
-     * @Response(200, body={"code":0, "message": "","data": {{
+     * @Response(200, body={"code":0, "message": "","data": {"list":{{
      *      "id": "协议id",
      *      "title": "协议标题"
-     *     }}})
+     *     }}}})
      */
     public function getList () {
         $data = [
-            [
-                'id' => 1,
-                'title' => '隐私政策',
-            ],
-            [
-                'id' => 2,
-                'title' => '商户协议',
+            'list' => [
+                [
+                    'id' => 1,
+                    'title' => '隐私政策',
+                ],
+                [
+                    'id' => 2,
+                    'title' => '商户协议',
+                ]
             ]
         ];
         return $this->returnJson(0, 'success', $data);

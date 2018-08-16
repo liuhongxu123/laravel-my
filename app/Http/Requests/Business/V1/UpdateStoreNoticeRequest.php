@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/8
- * Time: 12:00
+ * Date: 2018/8/14
+ * Time: 10:00
  */
 
 namespace App\Http\Requests\Business\V1;
@@ -11,7 +11,7 @@ namespace App\Http\Requests\Business\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class SetBankCardInfoRequest extends FormRequest {
+class UpdateStoreNoticeRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,9 +19,8 @@ class SetBankCardInfoRequest extends FormRequest {
 
     public function rules () {
         return [
-            'name' => 'required',
-            'account' => 'required',
-            'bank_cat' => 'required'
+            'store_id' => 'required|integer',
+            'notice' => 'required'
         ];
     }
 }

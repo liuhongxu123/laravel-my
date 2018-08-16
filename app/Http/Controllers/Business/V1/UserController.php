@@ -19,10 +19,7 @@ class UserController extends Controller {
 
     /**
      * 获取账户信息
-     * @Get("/account_info/get/$id")
-     * @Parameters({
-     *      @Parameter("id", description="用户id", required=true)
-     *     })
+     * @Get("/account_info/get")
      * @Versions({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {
      *      "account": "主账户",
@@ -45,9 +42,8 @@ class UserController extends Controller {
 
     /**
      * 修改密码
-     * @Post("/password/reset/$id")
+     * @Post("/password/reset")
      * @Parameters({
-     *      @Parameter("id", description="用户id", required=true),
      *      @Parameter("old_password", description="原始密码", required=true),
      *      @Parameter("new_password", description="新密码", required=true),
      *      @Parameter("new_password_confirmation", description="确认新密码", required=true)
@@ -61,7 +57,7 @@ class UserController extends Controller {
         if($params['old_password'] != $old_password){
             return $this->returnJson(1, '原密码输入错误');
         }
-        return $this->returnJson(0, '密码修改成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -81,7 +77,7 @@ class UserController extends Controller {
         if($params['verify_code'] != $verify_code){
             return $this->returnJson(1, '验证码输入错误');
         }
-        return $this->returnJson(0, '绑定成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**

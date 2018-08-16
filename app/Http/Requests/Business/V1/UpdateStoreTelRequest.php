@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/8
- * Time: 16:15
+ * Date: 2018/8/14
+ * Time: 9:51
  */
 
 namespace App\Http\Requests\Business\V1;
@@ -11,7 +11,7 @@ namespace App\Http\Requests\Business\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class EditStoreTelRequest extends FormRequest {
+class UpdateStoreTelRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,8 +19,8 @@ class EditStoreTelRequest extends FormRequest {
 
     public function rules () {
         return [
-            'id' => 'required|integer',
-            'link_tel' => 'required'
+            'store_id' => 'required',
+            'store_tel' => 'required'
         ];
     }
 }

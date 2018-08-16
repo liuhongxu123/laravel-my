@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Business\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Business\V1\SetBankCardInfoRequest;
+use App\Http\Requests\Business\V1\SetCreditCardInfoRequest;
 
 /**
  * @Resource("商家后台APP--银行卡接口")
@@ -48,7 +49,7 @@ class BankCardController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function setBankCardInfo (SetBankCardInfoRequest $request) {
-        return $this->returnJson(0, '保存成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**
@@ -78,8 +79,8 @@ class BankCardController extends Controller {
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
-    public function setCreditCardInfo (SetBankCardInfoRequest $request) {
-        return $this->returnJson(0, '保存成功');
+    public function setCreditCardInfo (SetCreditCardInfoRequest $request) {
+        return $this->returnJson(0, 'success');
     }
 
 }

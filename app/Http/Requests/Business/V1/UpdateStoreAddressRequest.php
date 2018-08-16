@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: dev-t
- * Date: 2018/8/8
- * Time: 16:15
+ * Date: 2018/8/14
+ * Time: 9:55
  */
 
 namespace App\Http\Requests\Business\V1;
@@ -11,7 +11,7 @@ namespace App\Http\Requests\Business\V1;
 
 use Dingo\Api\Http\FormRequest;
 
-class EditStoreAddressRequest extends FormRequest {
+class UpdateStoreAddressRequest extends FormRequest {
 
     public function authorize () {
         return true;
@@ -19,7 +19,7 @@ class EditStoreAddressRequest extends FormRequest {
 
     public function rules () {
         return [
-            'id' => 'required|integer',
+            'store_id' => 'required|integer',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',

@@ -32,7 +32,7 @@ class OrderController extends Controller {
      *      "current_time": "当前时间",
      *      "add_time": "下单时间",
      *      "final_time": "最后送达时间",
-     *      "status": "订单状态"，
+     *      "status": "订单状态",
      *      "food": {{
      *          "name": "菜品名称",
      *          "count": "数量",

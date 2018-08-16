@@ -38,7 +38,7 @@ class SuggestionController extends Controller {
 
     /**
      * 意见详情
-     * @Get("/suggestion/details/get")
+     * @Get("/suggestion/details/get/$id")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("id", description="意见id")
@@ -71,7 +71,7 @@ class SuggestionController extends Controller {
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
     public function PostSuggestion (PostSuggestionRequest $request) {
-        return $this->returnJson(0, '意见提交成功');
+        return $this->returnJson(0, 'success');
     }
 
     /**

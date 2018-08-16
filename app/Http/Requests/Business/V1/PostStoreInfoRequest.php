@@ -39,7 +39,6 @@ class PostStoreInfoRequest extends FormRequest {
             'tax_rate_area' => 'required',
             'tax_registration_certificate' => 'required',
             'tax_reta_set' => 'required',
-            'read_and_confirm' => 'required|digits:1'
         ];
     }
 }

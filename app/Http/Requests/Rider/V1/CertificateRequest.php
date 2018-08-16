@@ -31,7 +31,6 @@ class CertificateRequest extends FormRequest {
             'bank_account' => 'required',
             'cardholder' => 'required',
             'card_type' => 'required',
-            'read_and_confirm' => 'required'
         ];
     }
 }

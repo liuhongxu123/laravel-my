@@ -20,10 +20,10 @@ class JoinRequest extends FormRequest {
 
     public function rules () {
         return [
+            'rid' => 'required',
             'name' => 'required',
             'email' => 'required|email',
             'desc' => 'max:50',
-            'read_and_confirm' => 'required',
             'avatar' => 'required'
         ];
     }

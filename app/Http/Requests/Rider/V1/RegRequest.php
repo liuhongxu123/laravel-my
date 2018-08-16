@@ -18,7 +18,6 @@ class RegRequest extends FormRequest {
 
     public function rules () {
         return [
-            'name' => 'required',
             'mobile' => 'required|regex:/^\d{10,11}$/',
             'password' => 'required|regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,32}$/',
             'verify_code' => 'required'
