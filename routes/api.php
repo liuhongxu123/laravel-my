@@ -289,9 +289,9 @@ $api->version('v1', [
 
         //************************  订单相关Api  ***************************************
         //订单列表
-        $api->get('rider/order/list/get/{status}', 'OrderController@getList')->where(['status' => '-?[0-9]+']);
+        $api->get('rider/order/list/get', 'OrderController@getList');
         //获取订单详情
-        $api->get('rider/order/details/get/{id}', 'OrderController@getDetails')->where(['id' => '[0-9]+']);
+        $api->get('rider/order/details/get', 'OrderController@getDetails');
         //获取订单明细
         $api->get('rider/order/statement/get', 'OrderController@getOrderStatement');
         //骑手确认接单

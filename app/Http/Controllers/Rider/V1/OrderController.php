@@ -11,18 +11,31 @@ namespace App\Http\Controllers\Rider\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\V1\AbnormalRequest;
-use App\Http\Requests\Rider\V1\GetOrderDetailsRequest;
-use App\Http\Requests\Rider\V1\GetOrderListRequest;
-use App\Http\Services\Rider\V1\UploadService;
+use App\lib\Code;
+use App\lib\JSON;
+use App\V1\Rider;
+use Dingo\Api\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @Resource("骑手端订单接口")
  */
 class OrderController extends Controller {
 
+    public function __construct(){
+        $this->middleware(function (Request $request, \Closure $next) {
+            $user = auth()->user();
+            $res = Rider::find($user['id']);
+            if ($res['is_certificate'] === 0) {
+                return JSON::jsonFormat(Code::RIDER_UNCERTIFICATE, '骑手未实名');
+            }
+            return $next($request);
+        });
+    }
+
     /**
      * 获取订单列表
-     * @Get("/api/rider/order/list/get/$status")
+     * @Get("/api/rider/order/list/get")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("status", description="订单状态 可选值：-1 已取消订单 0 可抢订单 1 待取货 2 待送达 3 进行中 4 完成订单", required=true, type="integer")
@@ -40,11 +53,42 @@ class OrderController extends Controller {
      *          "store_name": "商家名称"
      *     }}}})
      */
-    public function getList ($status) {
+    public function getList (Request $request) {
+        if (!$request->has('status')) {
+           return $this->returnJson(1, '获取类型不能为空');
+        }
+        $status = $request->input('status');
         switch ($status) {
             case -1:    //已取消订单
                 $data = [
                     'list' => [
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => -1, //订单状态
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => -1, //订单状态
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => -1, //订单状态
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
                         [
                             'origin' => '广州市天河区化州糖水',
                             'destination' => '华景新城',
@@ -62,6 +106,33 @@ class OrderController extends Controller {
                 $data = [
                     'list' => [
                         [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 0, //订单状态
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 0, //订单状态
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 0, //订单状态
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 0, //订单状态
+                        ],[
                             'origin' => '广州市天河区化州糖水',
                             'destination' => '华景新城',
                             'add_time' => '2018.03.01 12:12:12',
@@ -90,6 +161,85 @@ class OrderController extends Controller {
                                 ['name' => '西红柿炒蛋', 'count' => 2],
                                 ['name' => '薯条', 'count' => 1]
                             ]
+                        ],
+                        [
+                            'origin' => '广州市天河区化州香油鸡',
+                            'destination' => '棠东180号',
+                            'add_time' => 1533110855,   //下单时间
+                            'current_time' => time(), //当前时间
+                            'final_time' => '2018-01-05 15:21:00',
+                            'status' => 1,  //订单状态
+                            'slip_status' => 0, //转单状态
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg',
+                            'food' => [
+                                ['name' => '西红柿炒蛋', 'count' => 2],
+                                ['name' => '薯条', 'count' => 1]
+                            ]
+                        ],
+                        [
+                            'origin' => '广州市天河区化州香油鸡',
+                            'destination' => '棠东180号',
+                            'add_time' => 1533110855,   //下单时间
+                            'current_time' => time(), //当前时间
+                            'final_time' => '2018-01-05 15:21:00',
+                            'status' => 1,  //订单状态
+                            'slip_status' => 0, //转单状态
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg',
+                            'food' => [
+                                ['name' => '西红柿炒蛋', 'count' => 2],
+                                ['name' => '薯条', 'count' => 1]
+                            ]
+                        ],
+                        [
+                            'origin' => '广州市天河区化州香油鸡',
+                            'destination' => '棠东180号',
+                            'add_time' => 1533110855,   //下单时间
+                            'current_time' => time(), //当前时间
+                            'final_time' => '2018-01-05 15:21:00',
+                            'status' => 1,  //订单状态
+                            'slip_status' => 0, //转单状态
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg',
+                            'food' => [
+                                ['name' => '西红柿炒蛋', 'count' => 2],
+                                ['name' => '薯条', 'count' => 1]
+                            ]
+                        ],[
+                            'origin' => '广州市天河区化州香油鸡',
+                            'destination' => '棠东180号',
+                            'add_time' => 1533110855,   //下单时间
+                            'current_time' => time(), //当前时间
+                            'final_time' => '2018-01-05 15:21:00',
+                            'status' => 1,  //订单状态
+                            'slip_status' => 0, //转单状态
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg',
+                            'food' => [
+                                ['name' => '西红柿炒蛋', 'count' => 2],
+                                ['name' => '薯条', 'count' => 1]
+                            ]
+                        ]
+                        ,[
+                            'origin' => '广州市天河区化州香油鸡',
+                            'destination' => '棠东180号',
+                            'add_time' => 1533110855,   //下单时间
+                            'current_time' => time(), //当前时间
+                            'final_time' => '2018-01-05 15:21:00',
+                            'status' => 1,  //订单状态
+                            'slip_status' => 0, //转单状态
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg',
+                            'food' => [
+                                ['name' => '西红柿炒蛋', 'count' => 2],
+                                ['name' => '薯条', 'count' => 1]
+                            ]
                         ]
                     ]
                 ];
@@ -98,6 +248,66 @@ class OrderController extends Controller {
             case 2: //待送达订单
                 $data = [
                     'list' => [
+                        [
+                            'origin' => '广州市天河区食在真湘',
+                            'destination' => '棠东毓桂大街一巷8号',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'current_time' => time(), //当前时间
+                            'type' => 2,
+                            'customer_tel' => '13111111111',
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg'
+                        ],
+                        [
+                            'origin' => '广州市天河区食在真湘',
+                            'destination' => '棠东毓桂大街一巷8号',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'current_time' => time(), //当前时间
+                            'type' => 2,
+                            'customer_tel' => '13111111111',
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg'
+                        ],
+                        [
+                            'origin' => '广州市天河区食在真湘',
+                            'destination' => '棠东毓桂大街一巷8号',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'current_time' => time(), //当前时间
+                            'type' => 2,
+                            'customer_tel' => '13111111111',
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg'
+                        ],
+                        [
+                            'origin' => '广州市天河区食在真湘',
+                            'destination' => '棠东毓桂大街一巷8号',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'current_time' => time(), //当前时间
+                            'type' => 2,
+                            'customer_tel' => '13111111111',
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg'
+                        ],
+                        [
+                            'origin' => '广州市天河区食在真湘',
+                            'destination' => '棠东毓桂大街一巷8号',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'current_time' => time(), //当前时间
+                            'type' => 2,
+                            'customer_tel' => '13111111111',
+                            'store_tel' => '15622111111',
+                            'store_name' => '麦当劳',
+                            'store_head' => '1.jpg'
+                        ],
                         [
                             'origin' => '广州市天河区食在真湘',
                             'destination' => '棠东毓桂大街一巷8号',
@@ -136,6 +346,26 @@ class OrderController extends Controller {
                             'price' => 4,
                             'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
                             'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 3, //待送达,
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 3, //待送达,
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
                         ]
                     ]
                 ];
@@ -144,6 +374,50 @@ class OrderController extends Controller {
             case 4: //已完成订单
                 $data = [
                     'list' => [
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'rider_delivery_time' => '2018.03.01 13:12:12', //送达时间
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 4, //订单状态
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'rider_delivery_time' => '2018.03.01 13:12:12', //送达时间
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 4, //订单状态
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'rider_delivery_time' => '2018.03.01 13:12:12', //送达时间
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 4, //订单状态
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
+                        [
+                            'origin' => '广州市天河区化州糖水',
+                            'destination' => '华景新城',
+                            'add_time' => '2018.03.01 12:12:12',
+                            'rider_delivery_time' => '2018.03.01 13:12:12', //送达时间
+                            'final_time' => '2018.03.01 14:12:12',
+                            'status' => 4, //订单状态
+                            'price' => 4,
+                            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
+                            'store_name' => '麦当劳'
+                        ],
                         [
                             'origin' => '广州市天河区化州糖水',
                             'destination' => '华景新城',

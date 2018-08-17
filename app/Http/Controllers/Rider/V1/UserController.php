@@ -37,7 +37,7 @@ class UserController extends Controller {
      *          "month_count": "本月单量",
      *          "month_income": "本月收入",
      *          "work_status": "工作状态 work_status=1 接单状态 work_status=0 休息状态",
-     *          "is_certificate": "是否实名 1 是 0 否",
+     *          "is_certificate": "是否实名 1 是 0 否 -1 实名未通过",
      *          "avatar": "头像地址"
      *     }})
      */
