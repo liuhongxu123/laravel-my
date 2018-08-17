@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\lib\Code;
+use App\lib\JSON;
 use Dingo\Api\Contract\Debug\MessageBagErrors;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -60,14 +62,12 @@ class Handler extends ExceptionHandler
             }
 
             if ($exception instanceof MessageBagErrors && $exception->hasErrors()) {
+                $statusCode = 200;
                 $message = $exception->getErrors()->first();
             }
 
-            return new Response([
-                'code' => $statusCode,
-                'message' => $message,
-                'data' => new \stdClass()
-            ], 200, []);
+            return JSON::jsonFormat($statusCode, $message, [], $statusCode);
+
         }
 
         return parent::render($request, $exception);

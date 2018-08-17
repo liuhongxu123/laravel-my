@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\lib\JSON;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -13,14 +14,6 @@ class Controller extends BaseController
 
     public function returnJson($code, $message='success', $data=[])
     {
-        if (is_array($data) && empty($data)) {
-            $data = new \stdClass();
-        }
-
-        return response([
-            'code' => $code,
-            'message' => $message,
-            'data' => $data
-        ]);
+        return JSON::jsonFormat($code, $message, $data);
     }
 }
