@@ -12,7 +12,7 @@ class Rider extends Authenticatable implements JWTSubject
 
     protected $table = 'riders';
     protected $fillable = [
-        'id','name','mobile','email'
+        'id','name','mobile','email', 'is_certificate'
     ];
     protected $hidden = [
         'pwd','desc'

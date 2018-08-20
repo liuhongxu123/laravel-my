@@ -484,6 +484,7 @@ class OrderController extends Controller {
            'rider_delivery_time' => '2018.03.03 11:12:00', //送达时间,
            'delivery_money' => 3,
            'discount_money' => 02,
+           'customer_tel' => '15622222222',
            'remark' => '您好，麻烦多备一份餐具，谢谢',
            'store_name' => '麦当劳',
            'store_head' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg'),
@@ -496,6 +497,29 @@ class OrderController extends Controller {
                    'img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg')
                ],
                [
+                   'name' => '神奇寿司',
+                   'price' => 9999,
+                   'count' => 2,
+                   'img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg')
+               ],
+               [
+                   'name' => '神奇寿司',
+                   'price' => 9999,
+                   'count' => 2,
+                   'img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg')
+               ],
+               [
+                   'name' => '神奇寿司',
+                   'price' => 9999,
+                   'count' => 2,
+                   'img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg')
+               ],
+               [
+                   'name' => '神奇寿司',
+                   'price' => 9999,
+                   'count' => 2,
+                   'img' => asset('storage/rider/certificate/@origin/20180802/um3MjR7STgWmGFGCwUkFvL8MheWbsU22b2Q44LEw.jpeg')
+               ],[
                    'name' => '神奇寿司',
                    'price' => 9999,
                    'count' => 2,
