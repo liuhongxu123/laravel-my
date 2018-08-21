@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Rider\V1\GetSuggestionDetailsRequest;
 use App\Http\Requests\Rider\V1\SuggestionPostRequest;
 use App\Http\Services\Rider\V1\UploadService;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @Resource("骑手意见接口")
@@ -87,6 +88,8 @@ class SuggestionController extends Controller {
         if ($res['err'] === 1) {
             $msg = $res['msg'];
         }*/
+        /*Log::info("************************接到数据");
+        Log::info($request->input());*/
         return $this->returnJson(0, 'success');
     }
 

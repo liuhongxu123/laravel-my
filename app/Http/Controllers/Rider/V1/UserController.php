@@ -415,24 +415,34 @@ class UserController extends Controller {
      *     }}}})
      */
     public function evaluate (Request $request) {
-        $type = intval($request->input('type',"0"));
-        $data = [
-            'list' => [
-                ['content' => '很好', 'type' => 1, 'date' => '2018-03-06 14:12:00'],
-                ['content' => '差评', 'type' => 2, 'date' => '2018-04-06 15:45:12'],
-                ['content' => '不错', 'type' => 1, 'date' => '2018-10-06 10:00:00']
-            ]
-        ];
-        if ($type !== 0) {
-            $data = array_filter($data['list'], function ($val) use ($type) {
-                return $val['type'] == $type;
-            });
+        $type = intval($request->input('type',0));
+        switch ($type) {
+            case 0:
+                $data = [
+                    'list' => [
+                        ['content' => '很好', 'type' => 1, 'date' => '2018-03-06 14:12:00'],
+                        ['content' => '差评', 'type' => 2, 'date' => '2018-04-06 15:45:12'],
+                        ['content' => '不错', 'type' => 1, 'date' => '2018-10-06 10:00:00']
+                    ]
+                ];
+                break;
+            case 1:
+                $data = [
+                    'list' => [
+                        ['content' => '很好', 'type' => 1, 'date' => '2018-03-06 14:12:00'],
+                        ['content' => '不错', 'type' => 1, 'date' => '2018-10-06 10:00:00']
+                    ]
+                ];
+                break;
+            case 2:
+                $data = [
+                    'list' => [
+                        ['content' => '差评', 'type' => 2, 'date' => '2018-04-06 15:45:12']
+                    ]
+                ];
+                break;
         }
-        if (empty($data)) {
-            $data = [
-                'list' => []
-            ];
-        }
+
         return $this->returnJson(0, 'success', $data);
     }
 }
