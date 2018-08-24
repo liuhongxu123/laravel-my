@@ -42,7 +42,7 @@ class ProtocolController extends Controller {
 
     /**
      * 获取协议内容
-     * @Get("/api/rider/protocol/details/get/$id")
+     * @Get("/api/rider/protocol/details/get")
      * @Parameters({
      *      @Parameter("id", description="协议的id", required=true, type="integer")
      *     })
@@ -55,7 +55,11 @@ class ProtocolController extends Controller {
     public function getDetails () {
         $data = [
             'title' => '协议标题',
-            'content' => '<p>这是协议的内容，这是协议的内容</p>'
+            'content' => <<<html
+<h1>这是骑手协议的标题</h1>
+<p>这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容这是内容，很多很多的内容</p>
+html
+
         ];
         return $this->returnJson(0, 'success', $data);
     }

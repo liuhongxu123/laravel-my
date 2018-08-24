@@ -56,7 +56,7 @@ class AppController extends Controller {
 
     /**
      * app历史版本详情
-     * @Get("/api/rider/app/version/details/get/$id")
+     * @Get("/api/rider/app/version/details/get")
      * @Parameters({
      *      @Parameter("id", description="版本id", required=true, type="integer")
      *     })

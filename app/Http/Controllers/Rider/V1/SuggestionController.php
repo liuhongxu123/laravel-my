@@ -44,7 +44,7 @@ class SuggestionController extends Controller {
 
     /**
      * 骑手意见详情
-     * @Get("/api/rider/suggestion/details/get/$id")
+     * @Get("/api/rider/suggestion/details/get")
      * @Version({"v1"})
      * @Parameters({
      *      @Parameter("id", description="意见id", required=true, type="integer")

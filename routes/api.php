@@ -261,7 +261,7 @@ $api->version('v1', [
         //骑手意见列表
         $api->get('rider/suggestion/list/get', 'SuggestionController@getSuggestion');
         //骑手意见详情
-        $api->get('rider/suggestion/details/get/{id}', 'SuggestionController@getSuggestionDetails')->where(['id' => '[0-9]+']);
+        $api->get('rider/suggestion/details/get', 'SuggestionController@getSuggestionDetails');
         //骑手提交意见
         $api->post('rider/suggestion/post', 'SuggestionController@suggestionPost');
         //获取意见分类
@@ -285,7 +285,7 @@ $api->version('v1', [
         //获取协议列表
         $api->get('rider/protocol/list/get', 'ProtocolController@getList');
         //获取协议详情
-        $api->get('rider/protocol/details/get/{id}', 'ProtocolController@getDetails')->where(['id' => '[0-9]+']);
+        $api->get('rider/protocol/details/get', 'ProtocolController@getDetails');
 
         //************************  订单相关Api  ***************************************
         //订单列表
@@ -319,7 +319,7 @@ $api->version('v1', [
         //获取系统消息
         $api->get('rider/sysmsg/list/get', 'MsgController@getSysMsg');
         //获取系统消息详情
-        $api->get('rider/sysmsg/details/{id}', 'MsgController@getSysMsgDetails')->where(['id' => '[0-9]+']);
+        $api->get('rider/sysmsg/details/get', 'MsgController@getSysMsgDetails');
         //获取短信验证码
         $api->post('rider/get_sms_code', 'MsgController@getSmsCode');
 
@@ -431,7 +431,7 @@ $api->version('v1', [
             //获取协议列表
             $api->get('protocol/list/get', 'ProtocolController@getList');
             //获取协议详情
-            $api->get('protocol/details/get/{id}', 'ProtocolController@getDetails')->where(['id' => '[0-9]+']);
+            $api->get('protocol/details/get', 'ProtocolController@getDetails');
 
 
             //**************************** 用户 接口 *****************************************

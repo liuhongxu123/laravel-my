@@ -60,7 +60,7 @@ class MsgController extends Controller {
 
     /**
      * 获取系统消息详情
-     * @Get("/api/rider/sysmsg/details/get/$id")
+     * @Get("/api/rider/sysmsg/details/get")
      * @Parameters({
      *      @Parameter("id", description="消息id", required=true, type="integer")
      *     })

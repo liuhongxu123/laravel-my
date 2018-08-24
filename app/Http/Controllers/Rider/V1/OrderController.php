@@ -444,7 +444,7 @@ class OrderController extends Controller {
 
     /**
      * 获取订单详情
-     * @Get("/api/rider/order/details/get/$id")
+     * @Get("/api/rider/order/details/get")
      * @Parameters({
      *      @Parameter("id", description="订单id", required=true, type="integer")
      *     })
