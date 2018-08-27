@@ -25,6 +25,7 @@ class SuggestionController extends Controller {
      * @Get("/api/rider/suggestion/list/get")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "","data": {"list":{{
+     *      "id": "意见id",
      *      "content": "意见内容",
      *      "date": "提交意见时间"
      * }}}})
@@ -33,10 +34,11 @@ class SuggestionController extends Controller {
         $data = [
             'list' => [
                 [
+                    'id' => 1,
                     'content' => '来单不响，真的是不响，等了好久都不响，来单不响，来单不响，来单不响，来单不响啊，不响啊',
                     'date' => '2018-03-21 12:12:12'
                 ],
-                ['content' => '来单不响', 'date' => '2018-03-21 12:12:12']
+                ['id' => 2, 'content' => '来单不响', 'date' => '2018-03-21 12:12:12']
             ]
         ];
         return $this->returnJson(0, 'success', $data);
