@@ -49,8 +49,8 @@ class StoreController extends Controller {
      *          @Parameter("registration_name", description="公司注册名", required=true),
      *          @Parameter("company_address", description="公司地址", required=true),
      *          @Parameter("tax_rate_area", description="税率地区", required=true),
-     *          @Parameter("tax_registration_certificate", description="税率登记号", required=true),
-     *          @Parameter("tax_reta_set", description="税率设置", required=true)
+     *          @Parameter("tax_rate_number", description="税率登记号", required=true),
+     *          @Parameter("tax_rate_set", description="税率设置", required=true)
      *     })
      * @Response(200, body={"code":0, "message": "","data": ""})
      */
