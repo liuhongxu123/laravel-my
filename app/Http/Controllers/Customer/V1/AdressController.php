@@ -119,6 +119,7 @@ class AdressController extends Controller
      */
     public function detail()
     {
+        $data = [];
         return $this->returnJson(0, 'success', $data);
         
     }

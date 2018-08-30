@@ -56,9 +56,9 @@ $api->version('v1', function ($api)
 
 });
 
-// app 用户端接口(非登录)
+// app 用户端接口(非登录)（不需要token）
 $api->version('v1', [
-    'middleware' => ['JwtCustomer'],
+   // 'middleware' => ['JwtCustomer'],
     'namespace' => 'App\Http\Controllers\Customer\V1'
 ], function ($api)
 {
@@ -68,6 +68,8 @@ $api->version('v1', [
     $api->post('customer/register', 'CustomerController@register');
     // 找回密码
     $api->post('customer/password/reset', 'CustomerController@resetPassword');
+    //获取短信验证码
+    $api->post('customer/get_sms_code', 'MsgController@getSmsCode');
 
     //************************  附近商家  *******************************
 
@@ -119,9 +121,9 @@ $api->version('v1', [
     
 });
 
-// app 用户端接口(登录)
+// app 用户端接口(登录)(需要token)
 $api->version('v1', [
-//    'middleware' => ['JwtCustomer', 'jwt.auth'],
+    'middleware' => ['JwtCustomer'],
     'namespace' => 'App\Http\Controllers\Customer\V1'
 ], function ($api)
 {
@@ -147,7 +149,6 @@ $api->version('v1', [
     $api->get('customer/collects', 'CollectController@collects');
     // 取消收藏
     $api->post('customer/collect/delete', 'CollectController@destroy');
-    
 
 
     /*-----------------------  我的评价  -----------------------*/

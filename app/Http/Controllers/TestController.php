@@ -30,10 +30,11 @@ class TestController extends Controller
     public function login()
     {
         $User = new User();
-        $User->name = str_random(10);
+        $User->name = "fufufufu";
         $User->password = password_hash('1111111', 1);
-        $User->email = $User->name . '@test.com';
+        $User->email = $User->name . '@666.com';
         $User->save();
+
         $token = auth()->login($User);
         return response()->json([
             'code' => 0,

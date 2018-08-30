@@ -10,7 +10,7 @@ class Customer extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
-    protected $tableName = 'customers';
+    protected $table = 'customer';
 
     public function getJWTIdentifier()
   {

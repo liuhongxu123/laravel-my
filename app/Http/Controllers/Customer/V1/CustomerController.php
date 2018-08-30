@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Customer\V1;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\V1\Customer;
-
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTFactory;
+use App\Http\Requests\Customer\V1\LoginRequest;
 
 /**
  * @Resource("用户APP-用户")
@@ -40,17 +42,20 @@ class CustomerController extends Controller
      * 
      * @Response(200, body={"code":0, "message": "", "data"=""})
      */
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $Customer = new Customer();
-        $Customer->customer_phone = '13800138001';
-        $Customer->customer_password = 'test';
-
-        // $token = auth()->login($Customer->find(1));
-        $token = auth()->login($Customer);
+        $customer_phone = $request->input('customer_phone');
+        $customer_password = $request->input('customer_password');
+        $data = Customer::where('customer_phone',$customer_phone)->find(1);
+        if(!$data){
+            return $this->returnJson(1, 'customer does not exist', ['token' => null]);
+        }
+        if(!password_verify($customer_password,$data['customer_password'])){
+            return $this->returnJson(1, 'password error', ['token' => null]);
+        }
+        $token = auth()->login($data);
 
         return $this->returnJson(0, 'success', ['token' => $token]);
-
     }
 
     /**
@@ -88,7 +93,20 @@ class CustomerController extends Controller
      */
     public function register(Request $request)
     {
-         return $this->returnJson(0, 'success');
+        $Customer = new Customer();
+        $Customer->customer_name = $request->input('customer_name');
+        $Customer->customer_phone = $request->input('customer_phone');
+        $Customer->customer_password = $request->input('customer_password');
+        $Customer->id = 5;
+       // $Customer->asdfas = $Customer->save();
+
+        $customer_password_hash = password_hash($Customer->customer_password,PASSWORD_DEFAULT);
+
+
+        $data['token'] = auth()->login($Customer);
+        $data['Customer'] = $Customer;
+
+         return $this->returnJson(0, 'success',$data);
     }
 
 
@@ -291,7 +309,10 @@ class CustomerController extends Controller
      */
     public function customerInfo(Request $request)
     {
-        return $this->returnJson(0, 'success');
+        $Customer = auth()->user();
+
+
+        return $this->returnJson(0, 'success',$Customer);
     }
 
     /**
@@ -333,15 +354,21 @@ class CustomerController extends Controller
      */
     public function bindFaceBook(Request $request)
     {
-        return $this->returnJson(0, 'success');
+
+        $User = auth()->user();
+
+
+
+
+        return $this->returnJson(0, 'success', $User);
     }
 
     /**
      * 查新新人红包
      *
-     * 用户端APP绑定 Twitter(需要token)
+     * 查新新人红包(需要token)
      *
-     * @Post("/api/customer/bind/twitter")
+     * @Post("/api/customer/redredEnvelope")
      * @Version({"v1"})
      * @Response(200, body={"code":0, "message": "", "data"=""})
      */

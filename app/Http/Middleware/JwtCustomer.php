@@ -15,8 +15,8 @@ class JwtCustomer
      */
     public function handle($request, Closure $next)
     {
-        config(['jwt.user' => '\App\Models\V1\Customer']);
-        config(['auth.providers.users.model' => \App\Models\Customer::class]);
+        config(['jwt.user' => '\App\V1\Customer']);
+        config(['auth.providers.users.model' => \App\V1\Customer::class]);
         return $next($request);
     }
 }
