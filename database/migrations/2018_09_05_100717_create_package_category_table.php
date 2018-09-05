@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCustomersTable extends Migration
+class CreatePackageCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateCustomersTable extends Migration
      */
     public function up()
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('package_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('customer_name')->comment('用户名');
-            $table->string('customer_password')->comment('用户密码');
-            $table->softDeletes();
-            $table->timestamps();
+            $table->integer('store_id')->comment('store.id');
+            $table->string('name', 20)->comment('分类名称');
+            $table->integer('time')->comment('操作时间');
         });
     }
 
@@ -29,6 +28,6 @@ class CreateCustomersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('package_category');
     }
 }
